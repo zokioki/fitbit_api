@@ -1,5 +1,7 @@
 require "fitbyte/helpers"
 require "fitbyte/foods"
+require "fitbyte/water"
+require "fitbyte/sleep"
 
 module Fitbyte
   class Client
@@ -44,11 +46,16 @@ module Fitbyte
       {"Authorization" => ("Basic " + Base64.encode64(@client_id + ":" + @client_secret))}
     end
 
-    def get(path)
-      JSON.parse(token.get(path).response.body)
+    def request_headers
+      {
+        "User-Agent" => "fitbyte-#{Fitbyte::VERSION} gem(#{Fitbyte::REPO_URL})",
+        "Accept-Language" => @unit_system,
+        "Accept-Locale" => @locale
+      }
     end
 
-    # Test API call - get signed in user's profile
-    # JSON.parse(token.get('/1/user/-/profile.json').response.body)
+    def get(path)
+      JSON.parse(token.get(path, headers: request_headers).response.body)
+    end
   end
 end

@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["zoran1991@gmail.com"]
 
   spec.summary       = %q{A simple gem for interacting with the FitBit API}
-  spec.homepage      = "https://github.com/zokioki/fitbyte"
+  spec.homepage      = Fitbyte::REPO_URL
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org by setting 'allowed_push_host', or
