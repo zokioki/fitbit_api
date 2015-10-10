@@ -1,3 +1,6 @@
+require "fitbyte/helpers"
+require "fitbyte/foods"
+
 module Fitbyte
   class Client
     def initialize(options)
@@ -17,7 +20,8 @@ module Fitbyte
       @unit_system = options[:unit_system] || "en_US"
       @locale = options[:locale] || "en_US"
 
-      @client = OAuth2::Client.new(@client_id, @client_secret, site: @site_url, authorize_url: @authorize_url, token_url: @token_url)
+      @client = OAuth2::Client.new(@client_id, @client_secret, site: @site_url,
+                                   authorize_url: @authorize_url, token_url: @token_url)
     end
 
     def authorization_link
@@ -38,6 +42,10 @@ module Fitbyte
 
     def auth_header
       {"Authorization" => ("Basic " + Base64.encode64(@client_id + ":" + @client_secret))}
+    end
+
+    def get(path)
+      JSON.parse(token.get(path).response.body)
     end
 
     # Test API call - get signed in user's profile
