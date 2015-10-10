@@ -26,7 +26,7 @@ module Fitbyte
                                    authorize_url: @authorize_url, token_url: @token_url)
     end
 
-    def authorization_link
+    def auth_page_link
       @client.auth_code.authorize_url(redirect_uri: @redirect_uri, scope: @scope)
     end
 

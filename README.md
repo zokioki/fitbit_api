@@ -1,15 +1,15 @@
 # Fitbyte
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/fitbyte`. To experiment with that code, run `bin/console` for an interactive prompt.
+Fitbyte is a gem that allows interaction with Fitbit's REST API, using the OAuth 2.0 protocol for user authorization.
 
-TODO: Delete this and the text above, and describe your gem
+**Please Note:** Fitbit's API is currently in beta, and is in active/rapid development.
 
 ## Installation
 
-Add this line to your application's Gemfile:
+Add the following line to your application's Gemfile:
 
 ```ruby
-gem 'fitbyte'
+gem "fitbyte"
 ```
 
 And then execute:
@@ -22,18 +22,31 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Create a client instance:
 
-## Development
+```ruby
+client = Fitbyte::Client.new(client_id: my_client_id, client_secret: my_client_secret, redirect_uri: "http://example.com")
+```
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake rspec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+Generate a link for the Fitbit authorization page:
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+```ruby
+client.auth_page_link
+# => https://fitbit.com/oauth2/authorize?client_id=123XYZ&redirect_uri=...
+```
 
-## Contributing
+Follow generated link to Fitbit's authorization page. Once the given permissions prompt has been approved, you're sent to the `redirect_uri`, along with an authorization `code` query param. This authorization code can be exchanged for an access token:
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/zokioki/fitbyte.
+```ruby
+client.get_token(auth_code)
+```
 
+You are now authenticated and can make calls to Fitbit's API:
+
+```ruby
+client.food_logs
+# => returns JSON of today's food logs
+```
 
 ## License
 
