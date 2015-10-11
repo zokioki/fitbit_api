@@ -2,7 +2,7 @@
 
 Fitbyte is a gem that allows interaction with [Fitbit's REST API](https://dev.fitbit.com/docs/basics/), using the OAuth 2.0 protocol for user authorization.
 
-**Please Note:** Fitbit's API is currently in beta, and is in active/rapid development. Early releases of this gem may introduce some breaking changes until Fitbit's API solidifies.
+**Note:** Fitbit's API is currently in beta, and is in active/rapid development. Breaking changes to certain endpoints may be introduced during early development of this gem, until Fitbit's API solidifies.
 
 ## Installation
 
@@ -18,12 +18,14 @@ gem "fitbyte"
 
 ## Usage
 
-To use the Fitbit API, you must register your application at [dev.fitbit.com](https://dev.fitbit.com/apps). After registering, you should have a **CLIENT ID**, **CLIENT SECRET**, and **REDIRECT URI** available for use in instantiating a *Fitbyte::Client* object.
+To use the Fitbit API, you must register your application at [dev.fitbit.com](https://dev.fitbit.com/apps). After registering, you should have access to **CLIENT ID**, **CLIENT SECRET**, and **REDIRECT URI** values for use in instantiating a *Fitbyte::Client* object.
 
 - Create a client instance:
 
 ```ruby
-client = Fitbyte::Client.new(client_id: my_client_id, client_secret: my_client_secret, redirect_uri: "http://example.com")
+client = Fitbyte::Client.new(client_id: my_client_id,
+                             client_secret: my_client_secret,
+                             redirect_uri: "http://example.com")
 ```
 
 - Generate a link for the Fitbit authorization page:
@@ -33,13 +35,13 @@ client.auth_page_link
 # => https://fitbit.com/oauth2/authorize?client_id=123XYZ&redirect_uri=...
 ```
 
-- Follow generated link to Fitbit's authorization page. After approving your app, you're sent to the `redirect_uri`, with an appended authorization `code`, which you'll exchange for an access token:
+- Follow generated link to Fitbit's authorization page. After approving your app, you're sent to the `redirect_uri`, with an appended authorization `code` param, which you'll exchange for an access token:
 
 ```ruby
 client.get_token(auth_code)
 ```
 
-You are now authenticated and can make calls to Fitbit's API:
+You're now authenticated and can make calls to Fitbit's API:
 
 ```ruby
 client.food_logs

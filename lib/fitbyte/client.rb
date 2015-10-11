@@ -11,22 +11,25 @@ require "fitbyte/water"
 
 module Fitbyte
   class Client
+    attr_accessor :api_version, :unit_system, :locale, :scope
+
     def initialize(options)
       missing_args = [:client_id, :client_secret] - options.keys
-      if missing_args.size > 0
-        raise ArgumentError, "Missing required options: #{missing.join(', ')}"
-      end
+
+      raise ArgumentError, "Required arguments: #{missing.join(', ')}" if missing_args.size > 0
+
       @client_id = options[:client_id]
       @client_secret = options[:client_secret]
 
       @redirect_uri = options[:redirect_uri]
-      @site_url = options[:site_url] || "https://api.fitbit.com"
-      @authorize_url = options[:authorize_url] || "https://www.fitbit.com/oauth2/authorize"
-      @token_url = options[:token_url] || "https://api.fitbit.com/oauth2/token"
+      @site_url = options[:site_url] || defaults[:site_url]
+      @authorize_url = options[:authorize_url] || defaults[:authorize_url]
+      @token_url = options[:token_url] defaults[:token_url]
 
-      @scope = options[:scope].join(" ") || "activity nutrition profile settings sleep social weight"
-      @unit_system = options[:unit_system] || "en_US"
-      @locale = options[:locale] || "en_US"
+      @scope = format_scope(options[:scope])
+      @unit_system = options[:unit_system] || defaults[:unit_system]
+      @locale = options[:locale] || defaults[:locale]
+      @api_version = "1"
 
       @client = OAuth2::Client.new(@client_id, @client_secret, site: @site_url,
                                    authorize_url: @authorize_url, token_url: @token_url)
@@ -54,14 +57,24 @@ module Fitbyte
 
     def request_headers
       {
-        "User-Agent" => "fitbyte-#{Fitbyte::VERSION} gem(#{Fitbyte::REPO_URL})",
+        "User-Agent" => "fitbyte-#{Fitbyte::VERSION} gem (#{Fitbyte::REPO_URL})",
         "Accept-Language" => @unit_system,
         "Accept-Locale" => @locale
       }
     end
 
+    def defaults
+      {
+        site_url: "https://api.fitbit.com"
+        authorize_url: "https://www.fitbit.com/oauth2/authorize"
+        token_url: "https://api.fitbit.com/oauth2/token"
+        unit_system: "en_US"
+        locale: "en_US"
+      }
+    end
+
     def get(path)
-      JSON.parse(token.get(path, headers: request_headers).response.body)
+      JSON.parse(token.get(("#{@api_version}/" + path), headers: request_headers).response.body)
     end
   end
 end

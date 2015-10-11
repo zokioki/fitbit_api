@@ -1,23 +1,23 @@
 module Fitbyte
   class Client
     def food_logs(date=Date.today)
-      get("1/user/-/foods/log/date/#{format_date(date)}.json")
+      get("user/-/foods/log/date/#{format_date(date)}.json")
     end
 
     def recent_foods
-      get("1/user/-/foods/recent.json")
+      get("user/-/foods/recent.json")
     end
 
     def frequent_foods
-      get("1/user/-/foods/log/frequent.json")
+      get("user/-/foods/log/frequent.json")
     end
 
     def favorite_foods
-      get("1/user/-/foods/log/favorite.json")
+      get("user/-/foods/log/favorite.json")
     end
 
     def food_goals
-      get("1/user/-/foods/log/goal.json")
+      get("user/-/foods/log/goal.json")
     end
   end
 end

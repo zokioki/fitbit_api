@@ -13,5 +13,9 @@ module Fitbyte
         raise ArgumentError, "Invalid type [#{date.class}] - provide a Date/Time/DateTime or a String(yyyy-MM-dd format)."
       end
     end
+
+    def format_scope(scope="activity nutrition profile settings sleep social weight")
+      scope.is_a? Array ? scope.join(" ") : scope
+    end
   end
 end
