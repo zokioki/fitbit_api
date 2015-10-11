@@ -6,7 +6,7 @@ require 'fitbyte/version'
 Gem::Specification.new do |spec|
   spec.name          = "fitbyte"
   spec.version       = Fitbyte::VERSION
-  spec.authors       = ["Zoran"]
+  spec.authors       = ["Zoran Pesic"]
   spec.email         = ["zoran1991@gmail.com"]
 
   spec.summary       = %q{A gem that allows interaction with Fitbit's REST API, using OAuth2 for user authorization.}
