@@ -14,7 +14,7 @@ module Fitbyte
     attr_accessor :api_version, :unit_system, :locale, :scope
 
     def initialize(options)
-      missing_args = [:client_id, :client_secret] - options.keys
+      missing_args = [:client_id, :client_secret, :redirect_uri] - options.keys
 
       raise ArgumentError, "Required arguments: #{missing.join(', ')}" if missing_args.size > 0
 
@@ -26,7 +26,7 @@ module Fitbyte
       @authorize_url = options[:authorize_url] || defaults[:authorize_url]
       @token_url = options[:token_url] || defaults[:token_url]
 
-      @scope = format_scope(options[:scope])
+      @scope = format_scope(options[:scope]) || defaults[:scope]
       @unit_system = options[:unit_system] || defaults[:unit_system]
       @locale = options[:locale] || defaults[:locale]
       @api_version = "1"
@@ -68,6 +68,7 @@ module Fitbyte
         site_url: "https://api.fitbit.com",
         authorize_url: "https://www.fitbit.com/oauth2/authorize",
         token_url: "https://api.fitbit.com/oauth2/token",
+        scope: "activity nutrition profile settings sleep social weight",
         unit_system: "en_US",
         locale: "en_US"
       }
