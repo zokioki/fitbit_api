@@ -1,7 +1,13 @@
 require "fitbyte/helpers"
-require "fitbyte/foods"
-require "fitbyte/water"
+require "fitbyte/activities"
+require "fitbyte/alarms"
+require "fitbyte/body"
+require "fitbyte/devices"
+require "fitbyte/food"
+require "fitbyte/friends"
 require "fitbyte/sleep"
+require "fitbyte/user"
+require "fitbyte/water"
 
 module Fitbyte
   class Client
