@@ -65,10 +65,10 @@ module Fitbyte
 
     def defaults
       {
-        site_url: "https://api.fitbit.com"
-        authorize_url: "https://www.fitbit.com/oauth2/authorize"
-        token_url: "https://api.fitbit.com/oauth2/token"
-        unit_system: "en_US"
+        site_url: "https://api.fitbit.com",
+        authorize_url: "https://www.fitbit.com/oauth2/authorize",
+        token_url: "https://api.fitbit.com/oauth2/token",
+        unit_system: "en_US",
         locale: "en_US"
       }
     end
