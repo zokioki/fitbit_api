@@ -15,5 +15,9 @@ module Fitbyte
     def favorite_foods
       get("1/user/-/foods/log/favorite.json")
     end
+
+    def food_goals
+      get("1/user/-/foods/log/goal.json")
+    end
   end
 end

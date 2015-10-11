@@ -24,7 +24,7 @@ module Fitbyte
       @authorize_url = options[:authorize_url] || "https://www.fitbit.com/oauth2/authorize"
       @token_url = options[:token_url] || "https://api.fitbit.com/oauth2/token"
 
-      @scope = options[:scope] || "profile weight nutrition sleep"
+      @scope = options[:scope].join(" ") || "activity nutrition profile settings sleep social weight"
       @unit_system = options[:unit_system] || "en_US"
       @locale = options[:locale] || "en_US"
 
