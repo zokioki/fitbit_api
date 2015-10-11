@@ -24,7 +24,7 @@ module Fitbyte
       @redirect_uri = options[:redirect_uri]
       @site_url = options[:site_url] || defaults[:site_url]
       @authorize_url = options[:authorize_url] || defaults[:authorize_url]
-      @token_url = options[:token_url] defaults[:token_url]
+      @token_url = options[:token_url] || defaults[:token_url]
 
       @scope = format_scope(options[:scope])
       @unit_system = options[:unit_system] || defaults[:unit_system]
