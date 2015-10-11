@@ -1,5 +1,7 @@
 # Fitbyte
 
+[![Gem Version](https://badge.fury.io/rb/fitbyte.svg)](https://badge.fury.io/rb/fitbyte)
+
 Fitbyte is a gem that allows interaction with [Fitbit's REST API](https://dev.fitbit.com/docs/basics/), using the OAuth 2.0 protocol for user authorization.
 
 **Note:** Fitbit's API is currently in beta, and is in active/rapid development. Breaking changes to certain endpoints may be introduced during early development of this gem, until Fitbit's API solidifies.
@@ -18,14 +20,14 @@ gem "fitbyte"
 
 ## Usage
 
-To use the Fitbit API, you must register your application at [dev.fitbit.com](https://dev.fitbit.com/apps). After registering, you should have access to **CLIENT ID**, **CLIENT SECRET**, and **REDIRECT URI** values for use in instantiating a *Fitbyte::Client* object.
+To use the Fitbit API, you must register your application at [dev.fitbit.com](https://dev.fitbit.com/apps). After registering, you should have access to **CLIENT ID**, **CLIENT SECRET**, and **REDIRECT URI (Callback URL)** values for use in instantiating a *Fitbyte::Client* object.
 
 - Create a client instance:
 
 ```ruby
 client = Fitbyte::Client.new(client_id: my_client_id,
                              client_secret: my_client_secret,
-                             redirect_uri: "http://example.com")
+                             redirect_uri: "http://example.com/handle/callback")
 ```
 
 - Generate a link for the Fitbit authorization page:
