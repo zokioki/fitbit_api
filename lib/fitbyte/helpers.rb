@@ -15,7 +15,7 @@ module Fitbyte
     end
 
     def format_scope(scope="activity nutrition profile settings sleep social weight")
-      scope.is_a? Array ? scope.join(" ") : scope
+      scope.is_a?(Array) ? scope.join(" ") : scope
     end
   end
 end
