@@ -1,11 +1,11 @@
 module Fitbyte
   class Client
     def friends
-      get("user/-/friends.json")
+      get("user/#{@user_id}/friends.json")
     end
 
     def friends_leaderboard
-      get("user/-/friends/leaderboard.json")
+      get("user/#{@user_id}/friends/leaderboard.json")
     end
   end
 end

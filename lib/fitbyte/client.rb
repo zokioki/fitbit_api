@@ -41,6 +41,8 @@ module Fitbyte
 
     def get_token(auth_code)
       @token = @client.auth_code.get_token(auth_code, redirect_uri: @redirect_uri, headers: auth_header)
+      @user_id = @token.params["user_id"]
+      return @token
     end
 
     def token
@@ -63,6 +65,10 @@ module Fitbyte
       }
     end
 
+    def get(path)
+      JSON.parse(token.get(("#{@api_version}/" + path), headers: request_headers).response.body)
+    end
+
     def defaults
       {
         site_url: "https://api.fitbit.com",
@@ -72,10 +78,6 @@ module Fitbyte
         unit_system: "en_US",
         locale: "en_US"
       }
-    end
-
-    def get(path)
-      JSON.parse(token.get(("#{@api_version}/" + path), headers: request_headers).response.body)
     end
   end
 end

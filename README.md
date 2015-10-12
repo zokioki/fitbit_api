@@ -2,7 +2,7 @@
 
 [![Gem Version](https://badge.fury.io/rb/fitbyte.svg)](https://badge.fury.io/rb/fitbyte)
 
-Fitbyte is a gem that allows interaction with [Fitbit's REST API](https://dev.fitbit.com/docs/basics/), using the OAuth 2.0 protocol for user authorization.
+This gem allows interaction with [Fitbit's REST API](https://dev.fitbit.com/docs/basics/), using the OAuth 2.0 protocol for user authorization.
 
 **Note:** Fitbit's API is currently in beta, and is in active/rapid development. Breaking changes to certain endpoints may be introduced during early development of this gem, until Fitbit's API solidifies.
 

@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Zoran Pesic"]
   spec.email         = ["zoran1991@gmail.com"]
 
-  spec.summary       = %q{A gem that allows interaction with Fitbit's REST API, using OAuth2 for user authorization.}
+  spec.summary       = %q{This gem allows interaction with Fitbit's REST API, using OAuth2 for user authorization.}
   spec.homepage      = Fitbyte::REPO_URL
   spec.license       = "MIT"
 

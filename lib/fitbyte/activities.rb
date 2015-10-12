@@ -1,15 +1,15 @@
 module Fitbyte
   class Client
     def daily_activity_summary(date=Date.today)
-      get("user/-/activities/date/#{format_date(date)}.json")
+      get("user/#{@user_id}/activities/date/#{format_date(date)}.json")
     end
 
     def frequent_activities
-      get("user/-/activities/frequent.json")
+      get("user/#{@user_id}/activities/frequent.json")
     end
 
     def favorite_activities
-      get("user/-/activities/favorite.json")
+      get("user/#{@user_id}/activities/favorite.json")
     end
 
     def all_activities
@@ -17,15 +17,15 @@ module Fitbyte
     end
 
     def lifetime_stats
-      get("user/-/activities.json")
+      get("user/#{@user_id}/activities.json")
     end
 
     def daily_goals
-      get("user/-/activities/goals/daily.json")
+      get("user/#{@user_id}/activities/goals/daily.json")
     end
 
     def weekly_goals
-      get("user/-/activities/goals/weekly.json")
+      get("user/#{@user_id}/activities/goals/weekly.json")
     end
   end
 end
