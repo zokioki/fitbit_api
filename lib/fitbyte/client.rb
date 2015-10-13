@@ -66,7 +66,7 @@ module Fitbyte
     end
 
     def get(path)
-      JSON.parse(token.get(("#{@api_version}/" + path), headers: request_headers).response.body)
+      MultiJson.load(token.get(("#{@api_version}/" + path), headers: request_headers).response.body, symbolize_keys: true)
     end
 
     def defaults
