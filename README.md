@@ -4,7 +4,7 @@
 
 This gem allows interaction with [Fitbit's REST API](https://dev.fitbit.com/docs/basics/), using the OAuth 2.0 protocol for user authorization.
 
-**Note:** Fitbit's API is currently in beta, and is in active/rapid development. Breaking changes to certain endpoints may be introduced during early development of this gem, until Fitbit's API solidifies.
+**NOTE:** Fitbit's API is currently in beta, and is in active/rapid development. Breaking changes to certain endpoints may be introduced during early development of this gem, until Fitbit's API solidifies.
 
 ## Installation
 
@@ -47,7 +47,7 @@ You're now authenticated and can make calls to Fitbit's API:
 
 ```ruby
 client.food_logs
-# => returns JSON of current day's food logs
+# => { :foods => [{ :isFavorite => true, :logDate => "2015-06-26", :logId => 1820, :loggedFood => { :accessLevel => "PUBLIC", :amount => 132.57, :brand => "", :calories => 752, ...}] }
 ```
 
 ## License

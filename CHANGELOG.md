@@ -1,3 +1,7 @@
+0.2.3
+-----
+- Remove `require 'json'`
+
 0.2.2
 -----
 - MultiJson used for parsing JSON (with symbolized keys)
