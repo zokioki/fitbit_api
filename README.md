@@ -47,7 +47,7 @@ You're now authenticated and can make calls to Fitbit's API:
 
 ```ruby
 client.food_logs Date.today
-# => #<FitStruct foods=[#<FitStruct isFavorite=true, logDate="2015-06-26", logId=1820, loggedFood=#<FitStruct accessLevel="PUBLIC", amount=132.57, brand="", calories=752, ...]
+# => #<Fitbyte::FitStruct foods=[#<Fitbyte::FitStruct isFavorite=true, logDate="2015-06-26", logId=1820, loggedFood=#<Fitbyte::FitStruct accessLevel="PUBLIC", amount=132.57, brand="", calories=752, ...]
 ```
 
 If your JSON library allows, the default format for resulting data returns OpenStruct-based FitStruct objects, allowing for more convenient method-like attribute access.

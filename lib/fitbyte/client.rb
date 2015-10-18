@@ -70,7 +70,7 @@ module Fitbyte
     end
 
     def get(path, opts={})
-      raw = opts[:raw] || @raw_response
+      raw = opts[:raw].nil? ? @raw_response : opts[:raw]
       MultiJson.load(token.get(("#{@api_version}/" + path), headers: request_headers).response.body,
                      symbolize_keys: true, object_class: (FitStruct unless raw))
     end
