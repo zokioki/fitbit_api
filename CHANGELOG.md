@@ -1,3 +1,9 @@
+0.2.5
+-----
+- Responses now return FitStruct objects (inherit from OpenStruct).
+
+- Ability to set default data return format by setting `raw_response` on Fitbyte::Client instance (defaults to using FitStruct objects). Can be overridden on each API call by specifying the `raw` boolean option.
+
 0.2.4
 -----
 - Default result format for `get` calls now return OpenStruct objects, allowing for more convenient method-like attribute access. Specifying `raw: true` returns original JSON.

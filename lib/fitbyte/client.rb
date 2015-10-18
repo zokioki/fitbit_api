@@ -12,7 +12,7 @@ require "fitbyte/water"
 
 module Fitbyte
   class Client
-    attr_accessor :api_version, :unit_system, :locale, :scope
+    attr_accessor :api_version, :unit_system, :locale, :scope, :raw_response
 
     def initialize(opts)
       missing_args = [:client_id, :client_secret, :redirect_uri] - opts.keys
@@ -66,7 +66,7 @@ module Fitbyte
       }
     end
 
-    def get(path, opts={})
+    def get(path, opts={raw: @raw_response})
       MultiJson.load(token.get(("#{@api_version}/" + path), headers: request_headers).response.body,
                      symbolize_keys: true, object_class: (FitStruct unless opts[:raw]))
     end
