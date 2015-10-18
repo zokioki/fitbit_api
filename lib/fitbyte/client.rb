@@ -16,23 +16,24 @@ module Fitbyte
 
     def initialize(opts)
       missing_args = [:client_id, :client_secret, :redirect_uri] - opts.keys
-
       raise ArgumentError, "Required arguments: #{missing.join(', ')}" if missing_args.size > 0
+
+      opts = defaults.merge(opts)
 
       @client_id = opts[:client_id]
       @client_secret = opts[:client_secret]
 
       @redirect_uri = opts[:redirect_uri]
-      @site_url = opts[:site_url] || defaults[:site_url]
-      @authorize_url = opts[:authorize_url] || defaults[:authorize_url]
-      @token_url = opts[:token_url] || defaults[:token_url]
+      @site_url = opts[:site_url]
+      @authorize_url = opts[:authorize_url]
+      @token_url = opts[:token_url]
 
-      @scope = format_scope(opts[:scope]) || defaults[:scope]
-      @unit_system = opts[:unit_system] || defaults[:unit_system]
-      @locale = opts[:locale] || defaults[:locale]
-      
-      @api_version = "1"
-      @raw_response = opts[:raw_response] || defaults[:raw_response]
+      @unit_system = opts[:unit_system]
+      @locale = opts[:locale]
+      @scope = format_scope(opts[:scope])
+
+      @api_version = opts[:api_version]
+      @raw_response = opts[:raw_response]
 
       @client = OAuth2::Client.new(@client_id, @client_secret, site: @site_url,
                                    authorize_url: @authorize_url, token_url: @token_url)
@@ -68,9 +69,10 @@ module Fitbyte
       }
     end
 
-    def get(path, opts={raw: @raw_response})
+    def get(path, opts={})
+      raw = opts[:raw] || @raw_response
       MultiJson.load(token.get(("#{@api_version}/" + path), headers: request_headers).response.body,
-                     symbolize_keys: true, object_class: (FitStruct unless opts[:raw]))
+                     symbolize_keys: true, object_class: (FitStruct unless raw))
     end
 
     def defaults
@@ -81,6 +83,7 @@ module Fitbyte
         scope: "activity nutrition profile settings sleep social weight",
         unit_system: "en_US",
         locale: "en_US",
+        api_version: "1",
         raw_response: false
       }
     end
