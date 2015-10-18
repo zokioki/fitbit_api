@@ -1,3 +1,7 @@
+0.2.4
+-----
+- Default result format for `get` calls now return OpenStruct objects, allowing for more convenient method-like attribute access. Specifying `raw: true` returns original JSON.
+
 0.2.3
 -----
 - Remove `require 'json'`

@@ -2,9 +2,9 @@
 
 [![Gem Version](https://badge.fury.io/rb/fitbyte.svg)](https://badge.fury.io/rb/fitbyte)
 
-This gem allows interaction with [Fitbit's REST API](https://dev.fitbit.com/docs/basics/), using the OAuth 2.0 protocol for user authorization.
+This gem allows interaction with [Fitbit's REST API](https://dev.fitbit.com/docs/basics/).
 
-**NOTE:** Fitbit's API is currently in beta, and is in active/rapid development. Breaking changes to certain endpoints may be introduced during early development of this gem, until Fitbit's API solidifies.
+**NOTE:** Fitbit's API is currently in beta, and is in active development. Breaking changes to certain endpoints may be introduced during early development of this gem, until Fitbit's API solidifies.
 
 ## Installation
 
@@ -46,10 +46,19 @@ client.get_token(auth_code)
 You're now authenticated and can make calls to Fitbit's API:
 
 ```ruby
-client.food_logs
+client.food_logs Date.today
+# => #<OpenStruct foods=[#<OpenStruct isFavorite=true, logDate="2015-06-26", logId=1820, loggedFood=#<OpenStruct accessLevel="PUBLIC", amount=132.57, brand="", calories=752, ...]
+```
+
+If your available JSON library allows, the default format for resulting data returns OpenStruct objects, allowing for more convenient method-like attribute access.
+
+To return the original JSON, `raw: true` can be specified as an option:
+
+```ruby
+client.food_logs Date.today, raw: true
 # => { :foods => [{ :isFavorite => true, :logDate => "2015-06-26", :logId => 1820, :loggedFood => { :accessLevel => "PUBLIC", :amount => 132.57, :brand => "", :calories => 752, ...}] }
 ```
 
 ## License
 
-The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+This gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).

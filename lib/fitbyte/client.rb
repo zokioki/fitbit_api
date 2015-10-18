@@ -13,22 +13,22 @@ module Fitbyte
   class Client
     attr_accessor :api_version, :unit_system, :locale, :scope
 
-    def initialize(options)
-      missing_args = [:client_id, :client_secret, :redirect_uri] - options.keys
+    def initialize(opts)
+      missing_args = [:client_id, :client_secret, :redirect_uri] - opts.keys
 
       raise ArgumentError, "Required arguments: #{missing.join(', ')}" if missing_args.size > 0
 
-      @client_id = options[:client_id]
-      @client_secret = options[:client_secret]
+      @client_id = opts[:client_id]
+      @client_secret = opts[:client_secret]
 
-      @redirect_uri = options[:redirect_uri]
-      @site_url = options[:site_url] || defaults[:site_url]
-      @authorize_url = options[:authorize_url] || defaults[:authorize_url]
-      @token_url = options[:token_url] || defaults[:token_url]
+      @redirect_uri = opts[:redirect_uri]
+      @site_url = opts[:site_url] || defaults[:site_url]
+      @authorize_url = opts[:authorize_url] || defaults[:authorize_url]
+      @token_url = opts[:token_url] || defaults[:token_url]
 
-      @scope = format_scope(options[:scope]) || defaults[:scope]
-      @unit_system = options[:unit_system] || defaults[:unit_system]
-      @locale = options[:locale] || defaults[:locale]
+      @scope = format_scope(opts[:scope]) || defaults[:scope]
+      @unit_system = opts[:unit_system] || defaults[:unit_system]
+      @locale = opts[:locale] || defaults[:locale]
       @api_version = "1"
 
       @client = OAuth2::Client.new(@client_id, @client_secret, site: @site_url,
@@ -65,8 +65,9 @@ module Fitbyte
       }
     end
 
-    def get(path)
-      MultiJson.load(token.get(("#{@api_version}/" + path), headers: request_headers).response.body, symbolize_keys: true)
+    def get(path, opts={})
+      MultiJson.load(token.get(("#{@api_version}/" + path), headers: request_headers).response.body,
+                     symbolize_keys: true, object_class: (OpenStruct unless opts[:raw]))
     end
 
     def defaults

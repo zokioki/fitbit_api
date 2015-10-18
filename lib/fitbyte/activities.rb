@@ -1,31 +1,31 @@
 module Fitbyte
   class Client
-    def daily_activity_summary(date=Date.today)
-      get("user/#{@user_id}/activities/date/#{format_date(date)}.json")
+    def daily_activity_summary(date=Date.today, opts={})
+      get("user/#{@user_id}/activities/date/#{format_date(date)}.json", opts)
     end
 
-    def frequent_activities
-      get("user/#{@user_id}/activities/frequent.json")
+    def frequent_activities(opts={})
+      get("user/#{@user_id}/activities/frequent.json", opts)
     end
 
-    def favorite_activities
-      get("user/#{@user_id}/activities/favorite.json")
+    def favorite_activities(opts={})
+      get("user/#{@user_id}/activities/favorite.json", opts)
     end
 
-    def all_activities
-      get("activities.json")
+    def all_activities(opts={})
+      get("activities.json", opts)
     end
 
-    def lifetime_stats
-      get("user/#{@user_id}/activities.json")
+    def lifetime_stats(opts={})
+      get("user/#{@user_id}/activities.json", opts)
     end
 
-    def daily_goals
-      get("user/#{@user_id}/activities/goals/daily.json")
+    def daily_goals(opts={})
+      get("user/#{@user_id}/activities/goals/daily.json", opts)
     end
 
-    def weekly_goals
-      get("user/#{@user_id}/activities/goals/weekly.json")
+    def weekly_goals(opts={})
+      get("user/#{@user_id}/activities/goals/weekly.json", opts)
     end
   end
 end

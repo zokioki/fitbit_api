@@ -1,11 +1,11 @@
 module Fitbyte
   class Client
-    def profile
-      get("user/#{@user_id}/profile.json")
+    def profile(opts={})
+      get("user/#{@user_id}/profile.json", opts)
     end
 
-    def badges
-      get("user/#{@user_id}/badges.json")
+    def badges(opts={})
+      get("user/#{@user_id}/badges.json", opts)
     end
   end
 end
