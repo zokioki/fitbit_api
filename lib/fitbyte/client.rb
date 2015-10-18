@@ -1,3 +1,4 @@
+require "fitbyte/fitstruct"
 require "fitbyte/helpers"
 require "fitbyte/activities"
 require "fitbyte/alarms"
@@ -67,7 +68,7 @@ module Fitbyte
 
     def get(path, opts={})
       MultiJson.load(token.get(("#{@api_version}/" + path), headers: request_headers).response.body,
-                     symbolize_keys: true, object_class: (OpenStruct unless opts[:raw]))
+                     symbolize_keys: true, object_class: (FitStruct unless opts[:raw]))
     end
 
     def defaults

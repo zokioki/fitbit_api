@@ -47,10 +47,10 @@ You're now authenticated and can make calls to Fitbit's API:
 
 ```ruby
 client.food_logs Date.today
-# => #<OpenStruct foods=[#<OpenStruct isFavorite=true, logDate="2015-06-26", logId=1820, loggedFood=#<OpenStruct accessLevel="PUBLIC", amount=132.57, brand="", calories=752, ...]
+# => #<FitStruct foods=[#<FitStruct isFavorite=true, logDate="2015-06-26", logId=1820, loggedFood=#<FitStruct accessLevel="PUBLIC", amount=132.57, brand="", calories=752, ...]
 ```
 
-If your available JSON library allows, the default format for resulting data returns OpenStruct objects, allowing for more convenient method-like attribute access.
+If your JSON library allows, the default format for resulting data returns OpenStruct-based FitStruct objects, allowing for more convenient method-like attribute access.
 
 To return the original JSON, `raw: true` can be specified as an option:
 
