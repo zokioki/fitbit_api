@@ -30,7 +30,9 @@ module Fitbyte
       @scope = format_scope(opts[:scope]) || defaults[:scope]
       @unit_system = opts[:unit_system] || defaults[:unit_system]
       @locale = opts[:locale] || defaults[:locale]
+      
       @api_version = "1"
+      @raw_response = opts[:raw_response] || defaults[:raw_response]
 
       @client = OAuth2::Client.new(@client_id, @client_secret, site: @site_url,
                                    authorize_url: @authorize_url, token_url: @token_url)
@@ -78,7 +80,8 @@ module Fitbyte
         token_url: "https://api.fitbit.com/oauth2/token",
         scope: "activity nutrition profile settings sleep social weight",
         unit_system: "en_US",
-        locale: "en_US"
+        locale: "en_US",
+        raw_response: false
       }
     end
   end
