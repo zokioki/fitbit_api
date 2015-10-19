@@ -59,6 +59,26 @@ client.food_logs Date.today, raw: true
 # => { :foods => [{ :isFavorite => true, :logDate => "2015-06-26", :logId => 1820, :loggedFood => { :accessLevel => "PUBLIC", :amount => 132.57, :brand => "", :calories => 752, ...}] }
 ```
 
+### Options
+
+When initializing a `Fitbyte::Client` instance, you're given access to a handful of options:
+
+- `:api_version` - API version to be used when making requests (default: "1")
+
+---
+- `:unit_system` - The measurement unit system to use for response values (default: "en_US" | available: "en_US", "en_GB", and "any" for metric)
+
+---
+- `:locale` - The locale to use for response values (default: "en_US" | available: "en_US", "fr_FR", "de_DE", "es_ES", "en_GB", "en_AU", "en_NZ" and "ja_JP")
+
+---
+- `:scope` - A space-delimited list of the permissions you are requesting (default: "activity nutrition profile settings sleep social weight" | available: "activity", "heartrate", "location", "nutrition", "profile", "settings" "sleep", "social" and "weight")
+
+---
+- `:raw_response` - Setting this option to `true` returns response values on subsequent calls as parsed JSON; by default, response values use FitStruct objects, for convenient method-like attribute access (default: false | available: true, false)
+
+---
+
 ## License
 
 This gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
