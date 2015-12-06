@@ -1,3 +1,12 @@
+0.2.6
+-----
+- Expand API endpoint support for the following actions:
+  - Add activity to favorites
+  - Retrieve list of activity log entries
+  - Create/update daily/weekly goals
+  - Delete activity
+  - Remove activity from favorites
+
 0.2.5
 -----
 - Responses now return FitStruct objects (inherit from OpenStruct).

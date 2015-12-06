@@ -71,23 +71,20 @@ module Fitbyte
 
     def get(path, opts={})
       raw = opts[:raw].nil? ? @raw_response : opts[:raw]
-      response = token.get(("#{@api_version}/" + path), headers: request_headers).response.body,
-                            symbolize_keys: true, object_class: (FitStruct unless raw)
-      MultiJson.load(response) unless response.status == 204
+      response = token.get(("#{@api_version}/" + path), headers: request_headers).response
+      MultiJson.load(response.body, symbolize_keys: true, object_class: (FitStruct unless raw)) unless response.status == 204
     end
 
     def post(path, opts={})
       raw = opts[:raw].nil? ? @raw_response : opts[:raw]
-      response = token.post(("#{@api_version}/" + path), body: opts, headers: request_headers).response.body,
-                             symbolize_keys: true, object_class: (FitStruct unless raw)
-      MultiJson.load(response) unless response.status == 204
+      response = token.post(("#{@api_version}/" + path), body: opts, headers: request_headers).response
+      MultiJson.load(response.body, symbolize_keys: true, object_class: (FitStruct unless raw)) unless response.status == 204
     end
 
     def delete(path, opts={})
       raw = opts[:raw].nil? ? @raw_response : opts[:raw]
-      response = token.delete(("#{@api_version}/" + path), headers: request_headers).response.body,
-                               symbolize_keys: true, object_class: (FitStruct unless raw)
-      MultiJson.load(response) unless response.status == 204
+      response = token.delete(("#{@api_version}/" + path), headers: request_headers).response
+      MultiJson.load(response.body, symbolize_keys: true, object_class: (FitStruct unless raw)) unless response.status == 204
     end
 
     def defaults
