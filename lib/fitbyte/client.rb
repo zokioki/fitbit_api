@@ -72,19 +72,19 @@ module Fitbyte
     def get(path, opts={})
       raw = opts[:raw].nil? ? @raw_response : opts[:raw]
       MultiJson.load(token.get(("#{@api_version}/" + path), headers: request_headers).response.body,
-                     symbolize_keys: true, object_class: (FitStruct unless raw))
+                     symbolize_keys: true, object_class: (FitStruct unless raw)) rescue nil
     end
 
     def post(path, opts={})
       raw = opts[:raw].nil? ? @raw_response : opts[:raw]
-      MultiJson.load(token.post(("#{@api_version}/" + path), headers: request_headers).response.body,
-                     symbolize_keys: true, object_class: (FitStruct unless raw))
+      MultiJson.load(token.post(("#{@api_version}/" + path), body: opts, headers: request_headers).response.body,
+                     symbolize_keys: true, object_class: (FitStruct unless raw)) rescue nil
     end
 
     def delete(path, opts={})
       raw = opts[:raw].nil? ? @raw_response : opts[:raw]
       MultiJson.load(token.delete(("#{@api_version}/" + path), headers: request_headers).response.body,
-                     symbolize_keys: true, object_class: (FitStruct unless raw))
+                     symbolize_keys: true, object_class: (FitStruct unless raw)) rescue nil
     end
 
     def defaults
