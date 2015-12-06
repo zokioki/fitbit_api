@@ -1,6 +1,7 @@
 # Fitbyte
 
 [![Gem Version](https://badge.fury.io/rb/fitbyte.svg)](https://badge.fury.io/rb/fitbyte)
+[![Build Status](https://travis-ci.org/zokioki/fitbyte.svg?branch=master)](https://travis-ci.org/zokioki/fitbyte)
 
 This gem allows interaction with [Fitbit's REST API](https://dev.fitbit.com/docs/basics/).
 
