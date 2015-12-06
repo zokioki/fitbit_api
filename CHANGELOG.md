@@ -1,3 +1,8 @@
+0.2.7
+-----
+- Set minimum required Ruby version
+- Minor testing tweaks for Travis CI
+
 0.2.6
 -----
 - Expand API endpoint support for the following actions:
