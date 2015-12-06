@@ -75,6 +75,18 @@ module Fitbyte
                      symbolize_keys: true, object_class: (FitStruct unless raw))
     end
 
+    def post(path, opts={})
+      raw = opts[:raw].nil? ? @raw_response : opts[:raw]
+      MultiJson.load(token.post(("#{@api_version}/" + path), headers: request_headers).response.body,
+                     symbolize_keys: true, object_class: (FitStruct unless raw))
+    end
+
+    def delete(path, opts={})
+      raw = opts[:raw].nil? ? @raw_response : opts[:raw]
+      MultiJson.load(token.delete(("#{@api_version}/" + path), headers: request_headers).response.body,
+                     symbolize_keys: true, object_class: (FitStruct unless raw))
+    end
+
     def defaults
       {
         site_url: "https://api.fitbit.com",
