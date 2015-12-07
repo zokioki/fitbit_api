@@ -1,6 +1,7 @@
 require "fitbyte/fitstruct"
 require "fitbyte/helpers"
 require "fitbyte/activities"
+require "fitbyte/goals"
 require "fitbyte/alarms"
 require "fitbyte/body"
 require "fitbyte/devices"
