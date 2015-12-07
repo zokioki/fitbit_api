@@ -5,7 +5,7 @@ describe Fitbyte do
     expect(Fitbyte::VERSION).not_to be nil
   end
 
-  it "does something totally useful" do
-    expect(true).to eq(true)
+  it "has a repository URL" do
+    expect(Fitbyte::REPO_URL).not_to be nil
   end
 end

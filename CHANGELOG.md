@@ -1,3 +1,11 @@
+0.3.0
+-----
+- API endpoint support for the following actions:
+  - Add alarm
+  - Update alarm
+  - Delete alarm
+- File reorganization
+
 0.2.7
 -----
 - Set minimum required Ruby version

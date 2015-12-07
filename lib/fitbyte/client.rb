@@ -17,7 +17,7 @@ module Fitbyte
 
     def initialize(opts)
       missing_args = [:client_id, :client_secret, :redirect_uri] - opts.keys
-      raise ArgumentError, "Required arguments: #{missing.join(', ')}" if missing_args.size > 0
+      raise ArgumentError, "Required arguments: #{missing_args.join(', ')}" if missing_args.size > 0
 
       opts = defaults.merge(opts)
 
