@@ -1,4 +1,3 @@
-require "fitbyte/fitstruct"
 require "fitbyte/helpers"
 require "fitbyte/activities"
 require "fitbyte/goals"
@@ -89,10 +88,10 @@ module Fitbyte
       process_keys!(result, opts)
     end
 
-    def process_keys!(object, opts)
-      return object if opts.empty?
+    def process_keys!(object, opts={})
       deep_keys_to_snake_case!(object) if (opts[:snake_case] || snake_case)
       deep_symbolize_keys!(object) if (opts[:symbolize_keys] || symbolize_keys)
+      return object
     end
 
     def defaults

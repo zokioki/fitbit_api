@@ -38,14 +38,14 @@ module Fitbyte
         end
         object
       when Array
-        object.map! { |e| deep_transform_keys!(e) }
+        object.map! { |e| deep_transform_keys!(e) { |key| yield(key) } }
       else
         object
       end
     end
 
     def snake_case(word)
-      word = word.dup.to_s
+      word = word.to_s.dup
       return word.downcase if word.match(/\A[A-Z]+\z/)
       word.gsub!(/([A-Z]+)([A-Z][a-z])/, '\1_\2')
       word.gsub!(/([a-z])([A-Z])/, '\1_\2')
