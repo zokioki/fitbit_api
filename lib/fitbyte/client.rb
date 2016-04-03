@@ -13,7 +13,7 @@ require "fitbyte/water"
 
 module Fitbyte
   class Client
-    attr_accessor :api_version, :unit_system, :locale, :scope, :raw_response
+    attr_accessor :api_version, :unit_system, :locale, :scope, :snake_case, :symbolize_keys
 
     def initialize(opts)
       missing_args = [:client_id, :client_secret, :redirect_uri] - opts.keys
@@ -34,7 +34,8 @@ module Fitbyte
       @scope = format_scope(opts[:scope])
 
       @api_version = opts[:api_version]
-      @raw_response = opts[:raw_response]
+      @snake_case = opts[:snake_case]
+      @symbolize_keys = opts[:symbolize_keys]
 
       @client = OAuth2::Client.new(@client_id, @client_secret, site: @site_url,
                                    authorize_url: @authorize_url, token_url: @token_url)
@@ -71,21 +72,26 @@ module Fitbyte
     end
 
     def get(path, opts={})
-      raw = opts[:raw].nil? ? @raw_response : opts[:raw]
       response = token.get(("#{@api_version}/" + path), headers: request_headers).response
-      MultiJson.load(response.body, symbolize_keys: true, object_class: (FitStruct unless raw)) unless response.status == 204
+      result = MultiJson.load(response.body) unless response.status == 204
+      process_keys!(result)
     end
 
     def post(path, opts={})
-      raw = opts[:raw].nil? ? @raw_response : opts[:raw]
       response = token.post(("#{@api_version}/" + path), body: opts, headers: request_headers).response
-      MultiJson.load(response.body, symbolize_keys: true, object_class: (FitStruct unless raw)) unless response.status == 204
+      result = MultiJson.load(response.body) unless response.status == 204
+      process_keys!(result)
     end
 
     def delete(path, opts={})
-      raw = opts[:raw].nil? ? @raw_response : opts[:raw]
       response = token.delete(("#{@api_version}/" + path), headers: request_headers).response
-      MultiJson.load(response.body, symbolize_keys: true, object_class: (FitStruct unless raw)) unless response.status == 204
+      result = MultiJson.load(response.body) unless response.status == 204
+      process_keys!(result)
+    end
+
+    def process_keys!(object)
+      deep_keys_to_snake_case!(result) if (opts[:snake_case] || snake_case)
+      deep_symbolize_keys!(result) if (opts[:symbolize_keys] || symbolize_keys)
     end
 
     def defaults
@@ -97,7 +103,8 @@ module Fitbyte
         unit_system: "en_US",
         locale: "en_US",
         api_version: "1",
-        raw_response: false
+        snake_case: false,
+        symbolize_keys: false
       }
     end
   end
