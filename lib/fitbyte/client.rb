@@ -72,20 +72,20 @@ module Fitbyte
 
     def get(path, opts={})
       response = token.get(("#{@api_version}/" + path), headers: request_headers).response
-      result = MultiJson.load(response.body) unless response.status == 204
-      process_keys!(result, opts)
+      object = MultiJson.load(response.body) unless response.status == 204
+      process_keys!(object, opts)
     end
 
     def post(path, opts={})
       response = token.post(("#{@api_version}/" + path), body: opts, headers: request_headers).response
-      result = MultiJson.load(response.body) unless response.status == 204
-      process_keys!(result, opts)
+      object = MultiJson.load(response.body) unless response.status == 204
+      process_keys!(object, opts)
     end
 
     def delete(path, opts={})
       response = token.delete(("#{@api_version}/" + path), headers: request_headers).response
-      result = MultiJson.load(response.body) unless response.status == 204
-      process_keys!(result, opts)
+      object = MultiJson.load(response.body) unless response.status == 204
+      process_keys!(object, opts)
     end
 
     def process_keys!(object, opts={})
