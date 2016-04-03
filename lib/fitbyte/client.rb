@@ -74,22 +74,22 @@ module Fitbyte
     def get(path, opts={})
       response = token.get(("#{@api_version}/" + path), headers: request_headers).response
       result = MultiJson.load(response.body) unless response.status == 204
-      process_keys!(result)
+      process_keys!(result, opts)
     end
 
     def post(path, opts={})
       response = token.post(("#{@api_version}/" + path), body: opts, headers: request_headers).response
       result = MultiJson.load(response.body) unless response.status == 204
-      process_keys!(result)
+      process_keys!(result, opts)
     end
 
     def delete(path, opts={})
       response = token.delete(("#{@api_version}/" + path), headers: request_headers).response
       result = MultiJson.load(response.body) unless response.status == 204
-      process_keys!(result)
+      process_keys!(result, opts)
     end
 
-    def process_keys!(object)
+    def process_keys!(object, opts)
       deep_keys_to_snake_case!(result) if (opts[:snake_case] || snake_case)
       deep_symbolize_keys!(result) if (opts[:symbolize_keys] || symbolize_keys)
     end
