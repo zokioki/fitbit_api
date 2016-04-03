@@ -64,4 +64,16 @@ describe Fitbyte::Client do
       expect(client.deep_symbolize_keys! object).to eq({ keyOne: 1, keyTwo: { keyThree: 3, keyFour: 4 } })
     end
   end
+
+  describe "#to_snake_case" do
+    it "converts camelCased words to snake_case format" do
+      word = "imMrMeeseeksLookAtMe"
+      expect(client.to_snake_case word).to eq "im_mr_meeseeks_look_at_me"
+    end
+
+    it "properly recognizes series of capital letters as single word" do
+      word = "iThinkNASAIsCool"
+      expect(client.to_snake_case word).to eq "i_think_nasa_is_cool"
+    end
+  end
 end

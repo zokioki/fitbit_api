@@ -22,7 +22,7 @@ module Fitbyte
     # Borrowing from Rails
 
     def deep_keys_to_snake_case!(object)
-      deep_transform_keys!(object) { |key| snake_case(key) }
+      deep_transform_keys!(object) { |key| to_snake_case(key) }
     end
 
     def deep_symbolize_keys!(object)
@@ -44,7 +44,7 @@ module Fitbyte
       end
     end
 
-    def snake_case(word)
+    def to_snake_case(word)
       word = word.to_s.dup
       return word.downcase if word.match(/\A[A-Z]+\z/)
       word.gsub!(/([A-Z]+)([A-Z][a-z])/, '\1_\2')
