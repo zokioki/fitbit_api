@@ -43,24 +43,24 @@ describe Fitbyte::Client do
 
   describe "#deep_keys_to_snake_case!" do
     it "converts keys of hash to snake case format" do
-      object = { keyOne: 1, keyTwo: 2, keyThree: 3 }
+      object = { "keyOne" => 1, "keyTwo" => 2, "keyThree" => 3 }
       expect(client.deep_keys_to_snake_case! object).to eq({ "key_one" => 1, "key_two" => 2, "key_three" => 3 })
     end
 
     it "converts nested keys of hash to snake case format" do
-      object = { keyOne: 1, keyTwo: { keyThree: 3, keyFour: 4 } }
+      object = { "keyOne" => 1, "keyTwo" => { "keyThree" => 3, "keyFour" => 4 } }
       expect(client.deep_keys_to_snake_case! object).to eq({ "key_one" => 1, "key_two" => { "key_three" => 3, "key_four" => 4 } })
     end
   end
 
   describe "#deep_symbolize_keys!" do
     it "converts keys of hash to symbol" do
-      object = { keyOne: 1, keyTwo: 2, keyThree: 3 }
+      object = { "keyOne" => 1, "keyTwo" => 2, "keyThree" => 3 }
       expect(client.deep_symbolize_keys! object).to eq({ keyOne: 1, keyTwo: 2, keyThree: 3 })
     end
 
     it "converts nested keys of hash to symbol" do
-      object = { keyOne: 1, keyTwo: { keyThree: 3, keyFour: 4 } }
+      object = { "keyOne" => 1, "keyTwo" => { "keyThree" => 3, "keyFour" => 4 } }
       expect(client.deep_symbolize_keys! object).to eq({ keyOne: 1, keyTwo: { keyThree: 3, keyFour: 4 } })
     end
   end

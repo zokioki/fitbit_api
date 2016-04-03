@@ -5,8 +5,6 @@
 
 This gem allows interaction with [Fitbit's REST API](https://dev.fitbit.com/docs/basics/).
 
-**NOTE:** Fitbit's API is currently in beta, and is in active development. Breaking changes to certain endpoints may be introduced during early development of this gem, until Fitbit's API solidifies.
-
 ## Installation
 
 To install the latest release:
@@ -48,16 +46,14 @@ You're now authenticated and can make calls to Fitbit's API:
 
 ```ruby
 client.food_logs Date.today
-# => #<Fitbyte::FitStruct foods=[#<Fitbyte::FitStruct isFavorite=true, logDate="2015-06-26", logId=1820, loggedFood=#<Fitbyte::FitStruct accessLevel="PUBLIC", amount=132.57, brand="", calories=752, ...]
+# => { "foods" => [{ "isFavorite" => true, "logDate" => "2015-06-26", "logId" => 1820, "loggedFood" => { "accessLevel" => "PUBLIC", "amount" => 132.57, "brand" => "", "calories" => 752, ...}] }
 ```
 
-If your JSON library allows, the default format for resulting data returns OpenStruct-based FitStruct objects, allowing for more convenient method-like attribute access.
-
-To return the original JSON, `raw: true` can be specified as an option:
+To return the hash keys in snake_case format, the `snake_case: true` option can be specified:
 
 ```ruby
-client.food_logs Date.today, raw: true
-# => { :foods => [{ :isFavorite => true, :logDate => "2015-06-26", :logId => 1820, :loggedFood => { :accessLevel => "PUBLIC", :amount => 132.57, :brand => "", :calories => 752, ...}] }
+client.food_logs Date.today, snake_case: true
+# => { "foods" => [{ "is_favorite" => true, "log_date" => "2015-06-26", "log_id" => 1820, "logged_food" => { "access_level" => "PUBLIC", "amount" => 132.57, "brand" => "", "calories" => 752, ...}] }
 ```
 
 ### Options
@@ -76,7 +72,10 @@ When initializing a `Fitbyte::Client` instance, you're given access to a handful
 - `:scope` - A space-delimited list of the permissions you are requesting (default: "activity nutrition profile settings sleep social weight" | available: "activity", "heartrate", "location", "nutrition", "profile", "settings" "sleep", "social" and "weight")
 
 ---
-- `:raw_response` - Setting this option to `true` returns response values on subsequent calls as parsed JSON; by default, response values use FitStruct objects, for convenient method-like attribute access (default: false | available: true, false)
+- `:snake_case` - Transform returned object's keys to snake case format (default: false)
+
+---
+- `:symbolize_keys` - Transform returned object's keys to symbols (default: false)
 
 ---
 
