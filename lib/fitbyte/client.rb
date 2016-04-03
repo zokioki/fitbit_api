@@ -90,8 +90,9 @@ module Fitbyte
     end
 
     def process_keys!(object, opts)
-      deep_keys_to_snake_case!(result) if (opts[:snake_case] || snake_case)
-      deep_symbolize_keys!(result) if (opts[:symbolize_keys] || symbolize_keys)
+      return object if opts.empty?
+      deep_keys_to_snake_case!(object) if (opts[:snake_case] || snake_case)
+      deep_symbolize_keys!(object) if (opts[:symbolize_keys] || symbolize_keys)
     end
 
     def defaults
