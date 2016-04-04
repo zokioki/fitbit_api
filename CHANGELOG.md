@@ -1,3 +1,10 @@
+0.4.0
+-----
+- Remove FitStruct objects
+- The response's hash keys can now be transformed using the following options:
+  - `snake_case` - if set to true, all keys are formatted to snake_case
+  - `symbolize_keys` - if set to true, all keys are converted to symbols
+
 0.3.0
 -----
 - API endpoint support for the following actions:
