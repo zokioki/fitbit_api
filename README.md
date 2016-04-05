@@ -3,7 +3,7 @@
 [![Gem Version](https://badge.fury.io/rb/fitbyte.svg)](https://badge.fury.io/rb/fitbyte)
 [![Build Status](https://travis-ci.org/zokioki/fitbyte.svg?branch=master)](https://travis-ci.org/zokioki/fitbyte)
 
-This gem allows interaction with [Fitbit's REST API](https://dev.fitbit.com/docs/basics/).
+Fitbyte allows interaction with [Fitbit's REST API](https://dev.fitbit.com/docs/basics/) using OAuth2.
 
 ## Installation
 
@@ -62,22 +62,16 @@ When initializing a `Fitbyte::Client` instance, you're given access to a handful
 
 - `:api_version` - API version to be used when making requests (default: "1")
 
----
 - `:unit_system` - The measurement unit system to use for response values (default: "en_US" | available: "en_US", "en_GB", and "any" for metric)
 
----
 - `:locale` - The locale to use for response values (default: "en_US" | available: "en_US", "fr_FR", "de_DE", "es_ES", "en_GB", "en_AU", "en_NZ" and "ja_JP")
 
----
 - `:scope` - A space-delimited list of the permissions you are requesting (default: "activity nutrition profile settings sleep social weight" | available: "activity", "heartrate", "location", "nutrition", "profile", "settings" "sleep", "social" and "weight")
 
----
 - `:snake_case` - Transform returned object's keys to snake case format (default: false)
 
----
 - `:symbolize_keys` - Transform returned object's keys to symbols (default: false)
 
----
 
 ## License
 

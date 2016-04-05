@@ -77,7 +77,7 @@ module Fitbyte
     end
 
     def post(path, opts={})
-      response = token.post(("#{@api_version}/" + path), body: opts, headers: request_headers).response
+      response = token.post(("#{@api_version}/" + path), body: deep_keys_to_camel_case!(opts), headers: request_headers).response
       object = MultiJson.load(response.body) unless response.status == 204
       process_keys!(object, opts)
     end

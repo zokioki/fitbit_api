@@ -53,6 +53,23 @@ describe Fitbyte::Client do
     end
   end
 
+  describe "#deep_keys_to_camel_case!" do
+    it "converts keys of hash to camel case format" do
+      object = { "key_one" => 1, "key_two" => 2, "key_three" => 3 }
+      expect(client.deep_keys_to_camel_case! object).to eq({ "keyOne" => 1, "keyTwo" => 2, "keyThree" => 3 })
+    end
+
+    it "converts nested keys of hash to camel case format" do
+      object = { "key_one" => 1, "key_two" => { "key_three" => 3, "key_four" => 4 } }
+      expect(client.deep_keys_to_camel_case! object).to eq({ "keyOne" => 1, "keyTwo" => { "keyThree" => 3, "keyFour" => 4 } })
+    end
+
+    it "handles mixed input of camel cased and snake cased keys" do
+      object = { "key_one" => 1, "keyTwo" => { "key_three" => 3, keyFour: 4 } }
+      expect(client.deep_keys_to_camel_case! object).to eq({ "keyOne" => 1, "keyTwo" => { "keyThree" => 3, "keyFour" => 4 } })
+    end
+  end
+
   describe "#deep_symbolize_keys!" do
     it "converts keys of hash to symbol" do
       object = { "keyOne" => 1, "keyTwo" => 2, "keyThree" => 3 }
@@ -74,6 +91,28 @@ describe Fitbyte::Client do
     it "properly recognizes series of capital letters as single word" do
       word = "iThinkNASAIsCool"
       expect(client.to_snake_case word).to eq "i_think_nasa_is_cool"
+    end
+  end
+
+  describe "#to_camel_case" do
+    it "returns original string if already camelCased" do
+      word = "AlreadyCamel"
+      expect(client.to_camel_case word).to eq "AlreadyCamel"
+    end
+
+    it "returns original string if already lowerCamelCased" do
+      word = "alreadyLowerCamel"
+      expect(client.to_camel_case word, lower: true).to eq "alreadyLowerCamel"
+    end
+
+    it "converts snake_cased words to CamelCase format" do
+      word = "im_mr_meeseeks_look_at_me"
+      expect(client.to_camel_case word).to eq "ImMrMeeseeksLookAtMe"
+    end
+
+    it "converts snake_cased words to lowerCamelCase format" do
+      word = "lower_camel"
+      expect(client.to_camel_case word, lower: true).to eq "lowerCamel"
     end
   end
 end
