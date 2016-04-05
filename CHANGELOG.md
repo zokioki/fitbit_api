@@ -1,3 +1,7 @@
+0.4.1
+-----
+- Users can now provide either snake_cased or camelCased param attribute keys when POSTing data to Fitbit. Keys are automatically converted to camelCase before a request is sent to Fitbit's API.
+
 0.4.0
 -----
 - Remove FitStruct objects

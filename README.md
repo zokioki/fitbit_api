@@ -3,7 +3,9 @@
 [![Gem Version](https://badge.fury.io/rb/fitbyte.svg)](https://badge.fury.io/rb/fitbyte)
 [![Build Status](https://travis-ci.org/zokioki/fitbyte.svg?branch=master)](https://travis-ci.org/zokioki/fitbyte)
 
-Fitbyte allows interaction with [Fitbit's REST API](https://dev.fitbit.com/docs/basics/) using OAuth2.
+Fitbyte allows interaction with [Fitbit's REST API](https://dev.fitbit.com/docs/basics/).
+
+It was started as a small personal project to provide a Ruby API interface using OAuth2, after Fitbit announced the eventual drop of OAuth1 support for the developer API.
 
 ## Installation
 
@@ -36,7 +38,7 @@ client.auth_page_link
 # => https://fitbit.com/oauth2/authorize?client_id=123XYZ&redirect_uri=...
 ```
 
-- Follow generated link to Fitbit's authorization page. After approving your app, you're sent to the `redirect_uri`, with an appended authorization `code` param, which you'll exchange for an access token:
+- Follow the generated link to Fitbit's authorization page. After approving your app, you're sent to the `redirect_uri`, with an appended authorization `code` param, which you'll exchange for an access token:
 
 ```ruby
 client.get_token(auth_code)
@@ -49,11 +51,21 @@ client.food_logs Date.today
 # => { "foods" => [{ "isFavorite" => true, "logDate" => "2015-06-26", "logId" => 1820, "loggedFood" => { "accessLevel" => "PUBLIC", "amount" => 132.57, "brand" => "", "calories" => 752, ...}] }
 ```
 
-To return the hash keys in snake_case format, the `snake_case: true` option can be specified:
+To make the response more easily suited for attribute-assignment, it can be parsed to return a hash whose keys are in snake_case format. This can be done by setting the `snake_case` option to `true`, like so:
 
 ```ruby
 client.food_logs Date.today, snake_case: true
 # => { "foods" => [{ "is_favorite" => true, "log_date" => "2015-06-26", "log_id" => 1820, "logged_food" => { "access_level" => "PUBLIC", "amount" => 132.57, "brand" => "", "calories" => 752, ...}] }
+```
+
+Similarly, all arguments passed in through a POST request are automatically converted to camelCase before they hit Fitbit's API, making it easy to keep your codebase stylistically consistent. For example, all of the following would result in valid API calls:
+
+```ruby
+client.log_activity activity_id: 12345, duration_millis: "50000"
+client.log_activity activityId: 54321, durationMillis: "44100"
+# If for some reason you had to mix snake and camel case like below,
+# Fitbyte would make sure the result is a validly formatted request
+client.log_activity activity_id: 12345, durationMillis: "683300"
 ```
 
 ### Options
