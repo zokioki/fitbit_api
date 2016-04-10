@@ -55,7 +55,7 @@ To make the response more easily suited for attribute-assignment, it can be pars
 
 ```ruby
 client.snake_case = true
-client.food_logs Date.today, snake_case: true
+client.food_logs Date.today
 # => { "foods" => [{ "is_favorite" => true, "log_date" => "2015-06-26", "log_id" => 1820, "logged_food" => { "access_level" => "PUBLIC", "amount" => 132.57, "brand" => "", "calories" => 752, ...}] }
 ```
 
