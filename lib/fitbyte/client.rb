@@ -1,6 +1,7 @@
 require "fitbyte/helpers"
 require "fitbyte/exceptions"
 require "fitbyte/activities"
+require "fitbyte/heart_rate"
 require "fitbyte/goals"
 require "fitbyte/alarms"
 require "fitbyte/body"
