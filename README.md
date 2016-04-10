@@ -79,7 +79,7 @@ When initializing a `Fitbyte::Client` instance, you're given access to a handful
 
 - `:locale` - The locale to use for response values (default: "en_US" | available: "en_US", "fr_FR", "de_DE", "es_ES", "en_GB", "en_AU", "en_NZ" and "ja_JP")
 
-- `:scope` - A space-delimited list of the permissions you are requesting (default: "activity nutrition profile settings sleep social weight" | available: "activity", "heartrate", "location", "nutrition", "profile", "settings" "sleep", "social" and "weight")
+- `:scope` - A space-delimited list of the permissions you are requesting (default: "activity nutrition profile settings sleep social weight heartrate" | available: "activity", "heartrate", "location", "nutrition", "profile", "settings" "sleep", "social" and "weight")
 
 - `:snake_case` - Transform returned object's keys to snake case format (default: false)
 
