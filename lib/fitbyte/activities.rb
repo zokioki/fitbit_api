@@ -1,5 +1,15 @@
 module Fitbyte
   class Client
+
+    ACTIVITY_PERIODS = %w(1d 7d 30d 1w 1m 3m 6m 1y max)
+    ACTIVITY_RESOURCES = %w(calories caloriesBMR steps distance floors elevation
+                            minutesSedentary minutesLightlyActive minutesFairlyActive
+                            minutesVeryActive activityCalories tracker/calories
+                            tracker/steps tracker/distance tracker/floors
+                            tracker/elevation tracker/minutesSedentary
+                            tracker/minutesLightlyActive tracker/minutesFairlyActive
+                            tracker/minutesVeryActive tracker/activityCalories)
+
     # GET Activities
     # ==============
 
@@ -63,6 +73,38 @@ module Fitbyte
     def lifetime_stats(opts={})
       get("user/#{@user_id}/activities.json", opts)
     end
+
+    def activity_time_series(resource, opts={})
+      start_date = opts[:start_date]
+      end_date   = opts[:end_date] || Date.today
+      period     = opts[:period]
+
+      unless ACTIVITY_RESOURCES.include?(resource)
+        raise Fitbyte::InvalidArgumentError, "Invalid resource: \"#{resource}\". Please provide one of the following: #{ACTIVITY_RESOURCES}."
+      end
+
+      if [period, start_date].none?
+        raise Fitbyte::InvalidArgumentError, "A start_date or period is required."
+      end
+
+      if period && !ACTIVITY_PERIODS.include?(period)
+        raise Fitbyte::InvalidArgumentError, "Invalid period: \"#{period}\". Please provide one of the following: #{ACTIVITY_PERIODS}."
+      end
+
+      if period
+        result = get("user/#{@user_id}/activities/#{resource}/date/#{format_date(end_date)}/#{period}.json", opts)
+      else
+        result = get("user/#{@user_id}/activities/#{resource}/date/#{format_date(start_date)}/#{format_date(end_date)}.json", opts)
+      end
+      # remove root key from response
+      result.values[0]
+    end
+
+    # ACTIVITY_RESOURCES.each do |resource_path|
+    #   define_method("activity_#{to_snake_case(resource_path).gsub('/', '_')}_series") do |opts={}|
+    #     activity_time_series(resource_path, opts={})
+    #   end
+    # end
 
     # POST Activities
     # ===============

@@ -1,3 +1,8 @@
+0.5.0
+-----
+- Add Heart Rate endpoint support. Add support for Time Series endpoints.
+- Minor improvements to some helper functions
+
 0.4.1
 -----
 - Users can now provide either snake_cased or camelCased param attribute keys when POSTing data to Fitbit. Keys are automatically converted to camelCase before a request is sent to Fitbit's API.

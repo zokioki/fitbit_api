@@ -1,4 +1,5 @@
 require "fitbyte/helpers"
+require "fitbyte/exceptions"
 require "fitbyte/activities"
 require "fitbyte/goals"
 require "fitbyte/alarms"
@@ -16,7 +17,7 @@ module Fitbyte
 
     def initialize(opts)
       missing_args = [:client_id, :client_secret, :redirect_uri] - opts.keys
-      raise ArgumentError, "Required arguments: #{missing_args.join(', ')}" if missing_args.size > 0
+      raise Fitbyte::InvalidArgumentError, "Required arguments: #{missing_args.join(', ')}" if missing_args.size > 0
 
       opts = defaults.merge(opts)
 

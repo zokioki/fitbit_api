@@ -1,5 +1,8 @@
 module Fitbyte
   class Client
+    FOOD_PERIODS = %w(1d 7d 30d 1w 1m 3m 6m 1y max)
+    FOOD_RESOURCES = %w(caloriesIn water)
+
     def food_logs(date=Date.today, opts={})
       get("user/#{@user_id}/foods/log/date/#{format_date(date)}.json", opts)
     end
@@ -18,6 +21,32 @@ module Fitbyte
 
     def food_goals(opts={})
       get("user/#{@user_id}/foods/log/goal.json", opts)
+    end
+
+    def food_time_series(resource, opts={})
+      start_date = opts[:start_date]
+      end_date   = opts[:end_date] || Date.today
+      period     = opts[:period]
+
+      unless FOOD_RESOURCES.include?(resource)
+        raise Fitbyte::InvalidArgumentError, "Invalid resource: \"#{resource}\". Please provide one of the following: #{FOOD_RESOURCES}."
+      end
+
+      if [period, start_date].none?
+        raise Fitbyte::InvalidArgumentError, "A start_date or period is required."
+      end
+
+      if period && !FOOD_PERIODS.include?(period)
+        raise Fitbyte::InvalidArgumentError, "Invalid period: \"#{period}\". Please provide one of the following: #{FOOD_PERIODS}."
+      end
+
+      if period
+        result = get("user/#{@user_id}/foods/log/#{resource}/date/#{format_date(end_date)}/#{period}.json", opts)
+      else
+        result = get("user/#{@user_id}/foods/log/#{resource}/date/#{format_date(start_date)}/#{format_date(end_date)}.json", opts)
+      end
+      # remove root key from response
+      result.values[0]
     end
   end
 end

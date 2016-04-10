@@ -20,7 +20,7 @@ describe Fitbyte::Client do
 
     it "verifies string input to be of yyyy-MM-dd format" do
       string = "91-9-21"
-      expect{client.format_date string}.to raise_error(ArgumentError)
+      expect{client.format_date string}.to raise_error(Fitbyte::InvalidArgumentError)
     end
 
     it "returns unaltered argument if argument is properly formatted" do

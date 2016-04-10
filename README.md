@@ -51,9 +51,10 @@ client.food_logs Date.today
 # => { "foods" => [{ "isFavorite" => true, "logDate" => "2015-06-26", "logId" => 1820, "loggedFood" => { "accessLevel" => "PUBLIC", "amount" => 132.57, "brand" => "", "calories" => 752, ...}] }
 ```
 
-To make the response more easily suited for attribute-assignment, it can be parsed to return a hash whose keys are in snake_case format. This can be done by setting the `snake_case` option to `true`, like so:
+To make the response more easily suited for attribute-assignment, it can be parsed to return a hash whose keys are in snake_case format. This can be done by setting the client's `snake_case` option to `true`, like so:
 
 ```ruby
+client.snake_case = true
 client.food_logs Date.today, snake_case: true
 # => { "foods" => [{ "is_favorite" => true, "log_date" => "2015-06-26", "log_id" => 1820, "logged_food" => { "access_level" => "PUBLIC", "amount" => 132.57, "brand" => "", "calories" => 752, ...}] }
 ```

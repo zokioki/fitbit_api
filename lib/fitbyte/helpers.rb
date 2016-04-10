@@ -8,10 +8,10 @@ module Fitbyte
         if date =~ /\d{4}\-\d{2}\-\d{2}/
           date
         else
-          raise ArgumentError, "Invalid argument [\"#{date}\"] - string must follow yyyy-MM-dd format."
+          raise Fitbyte::InvalidArgumentError, "Invalid argument [\"#{date}\"] - string must follow yyyy-MM-dd format."
         end
       else
-        raise ArgumentError, "Invalid type [#{date.class}] - provide a Date/Time/DateTime or a String(yyyy-MM-dd format)."
+        raise Fitbyte::InvalidArgumentError, "Invalid type [#{date.class}] - provide a Date/Time/DateTime or a String(yyyy-MM-dd format)."
       end
     end
 
@@ -20,7 +20,7 @@ module Fitbyte
     end
 
     def deep_keys_to_snake_case!(object)
-      deep_transform_keys!(object) { |key| to_snake_case(key) }
+      deep_transform_keys!(object) { |key| to_snake_case(key, replace_dashes: true) }
     end
 
     def deep_keys_to_camel_case!(object)
@@ -47,11 +47,12 @@ module Fitbyte
       end
     end
 
-    def to_snake_case(word)
+    def to_snake_case(word, opts={})
       string = word.to_s.dup
       return string.downcase if string.match(/\A[A-Z]+\z/)
       string.gsub!(/([A-Z]+)([A-Z][a-z])/, '\1_\2')
       string.gsub!(/([a-z])([A-Z])/, '\1_\2')
+      string.gsub!("-", "_") if opts[:replace_dashes]
       string.downcase
     end
 
