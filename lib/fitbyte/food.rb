@@ -1,6 +1,5 @@
 module Fitbyte
   class Client
-    FOOD_PERIODS = %w(1d 7d 30d 1w 1m 3m 6m 1y max)
     FOOD_RESOURCES = %w(caloriesIn water)
 
     def food_logs(date=Date.today, opts={})
@@ -36,8 +35,8 @@ module Fitbyte
         raise Fitbyte::InvalidArgumentError, "A start_date or period is required."
       end
 
-      if period && !FOOD_PERIODS.include?(period)
-        raise Fitbyte::InvalidArgumentError, "Invalid period: \"#{period}\". Please provide one of the following: #{FOOD_PERIODS}."
+      if period && !PERIODS.include?(period)
+        raise Fitbyte::InvalidArgumentError, "Invalid period: \"#{period}\". Please provide one of the following: #{PERIODS}."
       end
 
       if period

@@ -1,6 +1,5 @@
 module Fitbyte
   class Client
-    SLEEP_PERIODS = %w(1d 7d 30d 1w 1m 3m 6m 1y max)
     SLEEP_RESOURCES = %w(startTime timeInBed minutesAsleep awakeningsCount
                          minutesAwake minutesToFallAsleep minutesAfterWakeup efficiency)
 
@@ -21,8 +20,8 @@ module Fitbyte
         raise Fitbyte::InvalidArgumentError, "A start_date or period is required."
       end
 
-      if period && !SLEEP_PERIODS.include?(period)
-        raise Fitbyte::InvalidArgumentError, "Invalid period: \"#{period}\". Please provide one of the following: #{SLEEP_PERIODS}."
+      if period && !PERIODS.include?(period)
+        raise Fitbyte::InvalidArgumentError, "Invalid period: \"#{period}\". Please provide one of the following: #{PERIODS}."
       end
 
       if period

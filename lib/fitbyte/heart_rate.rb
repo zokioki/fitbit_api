@@ -9,8 +9,8 @@ module Fitbyte
         raise Fitbyte::InvalidArgumentError, "A start_date or period is required."
       end
 
-      if period && !ACTIVITY_PERIODS.include?(period)
-        raise Fitbyte::InvalidArgumentError, "Invalid period: \"#{period}\". Please provide one of the following: #{ACTIVITY_PERIODS}."
+      if period && !PERIODS.include?(period)
+        raise Fitbyte::InvalidArgumentError, "Invalid period: \"#{period}\". Please provide one of the following: #{PERIODS}."
       end
 
       if period

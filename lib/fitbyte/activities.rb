@@ -1,7 +1,6 @@
 module Fitbyte
   class Client
 
-    ACTIVITY_PERIODS = %w(1d 7d 30d 1w 1m 3m 6m 1y max)
     ACTIVITY_RESOURCES = %w(calories caloriesBMR steps distance floors elevation
                             minutesSedentary minutesLightlyActive minutesFairlyActive
                             minutesVeryActive activityCalories tracker/calories
@@ -87,8 +86,8 @@ module Fitbyte
         raise Fitbyte::InvalidArgumentError, "A start_date or period is required."
       end
 
-      if period && !ACTIVITY_PERIODS.include?(period)
-        raise Fitbyte::InvalidArgumentError, "Invalid period: \"#{period}\". Please provide one of the following: #{ACTIVITY_PERIODS}."
+      if period && !PERIODS.include?(period)
+        raise Fitbyte::InvalidArgumentError, "Invalid period: \"#{period}\". Please provide one of the following: #{PERIODS}."
       end
 
       if period

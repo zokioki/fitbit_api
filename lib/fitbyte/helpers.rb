@@ -1,6 +1,8 @@
 module Fitbyte
   class Client
 
+    PERIODS = %w(1d 7d 30d 1w 1m 3m 6m 1y max)
+
     def format_date(date)
       if [Date, Time, DateTime].include?(date.class)
         date.strftime("%Y-%m-%d")
