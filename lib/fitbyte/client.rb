@@ -101,7 +101,7 @@ module Fitbyte
         site_url: "https://api.fitbit.com",
         authorize_url: "https://www.fitbit.com/oauth2/authorize",
         token_url: "https://api.fitbit.com/oauth2/token",
-        scope: "activity nutrition profile settings sleep social weight",
+        scope: "activity nutrition profile settings sleep social weight heartrate",
         unit_system: "en_US",
         locale: "en_US",
         api_version: "1",
