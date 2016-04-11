@@ -92,6 +92,11 @@ describe Fitbyte::Client do
       word = "iThinkNASAIsCool"
       expect(client.to_snake_case word).to eq "i_think_nasa_is_cool"
     end
+
+    it "processes dashes to underscore if :replace_dashes option is provided" do
+      word = "some-dashesAndSnakes"
+      expect(client.to_snake_case word, replace_dashes: true).to eq "some_dashes_and_snakes"
+    end
   end
 
   describe "#to_camel_case" do
