@@ -99,12 +99,6 @@ module Fitbyte
       result.values[0]
     end
 
-    # ACTIVITY_RESOURCES.each do |resource_path|
-    #   define_method("activity_#{to_snake_case(resource_path).gsub('/', '_')}_series") do |opts={}|
-    #     activity_time_series(resource_path, opts={})
-    #   end
-    # end
-
     # POST Activities
     # ===============
 
