@@ -12,9 +12,11 @@ module Fitbyte
   define_setting :site_url,       "https://api.fitbit.com"
   define_setting :authorize_url,  "https://www.fitbit.com/oauth2/authorize"
   define_setting :token_url,      "https://api.fitbit.com/oauth2/token"
-  define_setting :scope,          "activity nutrition profile settings sleep social weight heartrate"
+
   define_setting :unit_system,    "en_US"
   define_setting :locale,         "en_US"
+  define_setting :scope,          "activity nutrition profile settings sleep social weight heartrate"
+
   define_setting :api_version,    "1"
 
   define_setting :snake_case,     false
