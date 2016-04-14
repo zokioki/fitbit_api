@@ -19,9 +19,9 @@ module Fitbyte
       missing_args = [:client_id, :client_secret, :redirect_uri] - opts.keys
       raise Fitbyte::InvalidArgumentError, "Required arguments: #{missing_args.join(', ')}" if missing_args.size > 0
 
-      %i(client_id client_secret redirect_uri site_url authorize_url token_url
+      %w(client_id client_secret redirect_uri site_url authorize_url token_url
       unit_system locale scope api_version snake_case symbolize_keys).each do |attr|
-        instance_variable_set("@#{attr}", (opts[attr] || Fitbyte.send(attr)))
+        instance_variable_set("@#{attr}", (opts[attr.to_sym] || Fitbyte.send(attr)))
       end
 
       @client = OAuth2::Client.new(@client_id, @client_secret, site: @site_url,
