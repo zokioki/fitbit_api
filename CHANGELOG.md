@@ -1,3 +1,8 @@
+0.6.0
+-----
+- A configuration block can now be passed in to Fitbyte, to allow for the setting of default instance attributes.
+- File/code reorganization.
+
 0.5.0
 -----
 - Add Heart Rate endpoint support. Add support for Time Series endpoints.

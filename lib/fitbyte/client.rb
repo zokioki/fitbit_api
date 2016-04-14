@@ -1,5 +1,4 @@
-require "fitbyte/helpers"
-require "fitbyte/exceptions"
+require "fitbyte/base"
 require "fitbyte/activities"
 require "fitbyte/heart_rate"
 require "fitbyte/goals"
@@ -20,23 +19,10 @@ module Fitbyte
       missing_args = [:client_id, :client_secret, :redirect_uri] - opts.keys
       raise Fitbyte::InvalidArgumentError, "Required arguments: #{missing_args.join(', ')}" if missing_args.size > 0
 
-      opts = defaults.merge(opts)
-
-      @client_id = opts[:client_id]
-      @client_secret = opts[:client_secret]
-
-      @redirect_uri = opts[:redirect_uri]
-      @site_url = opts[:site_url]
-      @authorize_url = opts[:authorize_url]
-      @token_url = opts[:token_url]
-
-      @unit_system = opts[:unit_system]
-      @locale = opts[:locale]
-      @scope = format_scope(opts[:scope])
-
-      @api_version = opts[:api_version]
-      @snake_case = opts[:snake_case]
-      @symbolize_keys = opts[:symbolize_keys]
+      %i(client_id client_secret redirect_uri site_url authorize_url token_url
+      unit_system locale scope api_version snake_case symbolize_keys).each do |attr|
+        instance_variable_set("@#{attr}", (opts[attr] || Fitbyte.send(attr)))
+      end
 
       @client = OAuth2::Client.new(@client_id, @client_secret, site: @site_url,
                                    authorize_url: @authorize_url, token_url: @token_url)
@@ -94,20 +80,6 @@ module Fitbyte
       deep_keys_to_snake_case!(object) if (opts[:snake_case] || snake_case)
       deep_symbolize_keys!(object) if (opts[:symbolize_keys] || symbolize_keys)
       return object
-    end
-
-    def defaults
-      {
-        site_url: "https://api.fitbit.com",
-        authorize_url: "https://www.fitbit.com/oauth2/authorize",
-        token_url: "https://api.fitbit.com/oauth2/token",
-        scope: "activity nutrition profile settings sleep social weight heartrate",
-        unit_system: "en_US",
-        locale: "en_US",
-        api_version: "1",
-        snake_case: false,
-        symbolize_keys: false
-      }
     end
   end
 end
