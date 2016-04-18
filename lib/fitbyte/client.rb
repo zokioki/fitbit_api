@@ -17,7 +17,7 @@ module Fitbyte
     attr_reader   :user_id
 
     def initialize(opts)
-      missing_args = [:client_id, :client_secret, :redirect_uri] - opts.keys
+      missing_args = [:client_id, :client_secret] - opts.keys
       raise Fitbyte::InvalidArgumentError, "Required arguments: #{missing_args.join(', ')}" if missing_args.size > 0
 
       %w(client_id client_secret redirect_uri site_url authorize_url token_url
