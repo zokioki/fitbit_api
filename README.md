@@ -23,6 +23,12 @@ gem "fitbyte"
 
 To use the Fitbit API, you must register your application at [dev.fitbit.com](https://dev.fitbit.com/apps). After registering, you should have access to **CLIENT ID**, **CLIENT SECRET**, and **REDIRECT URI (Callback URL)** values for use in instantiating a *Fitbyte::Client* object.
 
+### Rails
+
+Please reference the [fitbyte-rails repo](https://github.com/zokioki/fitbyte-rails) as an example of how to use this gem within Rails.
+
+### Standalone
+
 - Create a client instance:
 
 ```ruby
