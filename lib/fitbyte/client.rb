@@ -14,6 +14,7 @@ require "fitbyte/water"
 module Fitbyte
   class Client
     attr_accessor :api_version, :unit_system, :locale, :scope, :snake_case, :symbolize_keys
+    attr_reader   :user_id
 
     def initialize(opts)
       missing_args = [:client_id, :client_secret, :redirect_uri] - opts.keys
@@ -26,6 +27,8 @@ module Fitbyte
 
       @client = OAuth2::Client.new(@client_id, @client_secret, site: @site_url,
                                    authorize_url: @authorize_url, token_url: @token_url)
+
+      restore_token(opts[:refresh_token]) if opts[:refresh_token]
     end
 
     def auth_page_link
@@ -34,6 +37,12 @@ module Fitbyte
 
     def get_token(auth_code)
       @token = @client.auth_code.get_token(auth_code, redirect_uri: @redirect_uri, headers: auth_header)
+      @user_id = @token.params["user_id"]
+      return @token
+    end
+
+    def restore_token(refresh_token)
+      @token = OAuth2::AccessToken.from_hash(@client, refresh_token: refresh_token).refresh!(headers: auth_header)
       @user_id = @token.params["user_id"]
       return @token
     end

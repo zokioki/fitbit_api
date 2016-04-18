@@ -16,24 +16,24 @@ module Fitbyte
     #   in the format requested using units in the unit system which corresponds to the Accept-Language header provided.
 
     def daily_activity_summary(date=Date.today, opts={})
-      get("user/#{@user_id}/activities/date/#{format_date(date)}.json", opts)
+      get("user/#{user_id}/activities/date/#{format_date(date)}.json", opts)
     end
 
     # Retrieves a list of a user's frequent activities in the format requested using units
     #   in the unit system which corresponds to the Accept-Language header provided.
 
     def frequent_activities(opts={})
-      get("user/#{@user_id}/activities/frequent.json", opts)
+      get("user/#{user_id}/activities/frequent.json", opts)
     end
 
     def recent_activities(opts={})
-      get("user/#{@user_id}/activities/recent.json", opts)
+      get("user/#{user_id}/activities/recent.json", opts)
     end
 
     # Returns a list of a user's favorite activities.
 
     def favorite_activities(opts={})
-      get("user/#{@user_id}/activities/favorite.json", opts)
+      get("user/#{user_id}/activities/favorite.json", opts)
     end
 
     # Gets a tree of all valid Fitbit public activities from
@@ -54,7 +54,7 @@ module Fitbyte
     # * +:limit+ - the max of the number of entries returned (max: 100)
 
     def activity_logs_list(opts={})
-      get("user/#{@user_id}/activities/list.json", opts)
+      get("user/#{user_id}/activities/list.json", opts)
     end
 
     # Returns the details of a specific activity in the Fitbit activities database in the format requested.
@@ -70,7 +70,7 @@ module Fitbyte
     #   My Achievements tile on the website dashboard.
 
     def lifetime_stats(opts={})
-      get("user/#{@user_id}/activities.json", opts)
+      get("user/#{user_id}/activities.json", opts)
     end
 
     def activity_time_series(resource, opts={})
@@ -91,9 +91,9 @@ module Fitbyte
       end
 
       if period
-        result = get("user/#{@user_id}/activities/#{resource}/date/#{format_date(end_date)}/#{period}.json", opts)
+        result = get("user/#{user_id}/activities/#{resource}/date/#{format_date(end_date)}/#{period}.json", opts)
       else
-        result = get("user/#{@user_id}/activities/#{resource}/date/#{format_date(start_date)}/#{format_date(end_date)}.json", opts)
+        result = get("user/#{user_id}/activities/#{resource}/date/#{format_date(start_date)}/#{format_date(end_date)}.json", opts)
       end
       # remove root key from response
       result.values[0]
@@ -116,13 +116,13 @@ module Fitbyte
     # * +:distanceUnit+ - distance measurement unit
 
     def log_activity(opts)
-      post("user/#{@user_id}/activities.json", opts)
+      post("user/#{user_id}/activities.json", opts)
     end
 
     # Adds the activity with the given ID to user's list of favorite activities.
 
     def add_favorite_activity(activity_id)
-      post("user/#{@user_id}/activities/favorite/#{activity_id}.json")
+      post("user/#{user_id}/activities/favorite/#{activity_id}.json")
     end
 
     # DELETE Activities
@@ -131,13 +131,13 @@ module Fitbyte
     # Deletes a user's activity log entry with the given ID.
 
     def delete_activity(activity_log_id)
-      delete("user/#{@user_id}/activities/#{activity_log_id}.json")
+      delete("user/#{user_id}/activities/#{activity_log_id}.json")
     end
 
     # Removes the activity with the given ID from a user's list of favorite activities.
 
     def delete_favorite_activity(activity_id)
-      delete("user/#{@user_id}/activities/favorite/#{activity_id}.json")
+      delete("user/#{user_id}/activities/favorite/#{activity_id}.json")
     end
   end
 end

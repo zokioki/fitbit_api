@@ -6,7 +6,7 @@ module Fitbyte
     # Returns a list of the set alarms connected to a user's account.
 
     def alarms(tracker_id, opts={})
-      get("user/#{@user_id}/devices/tracker/#{tracker_id}/alarms.json", opts)
+      get("user/#{user_id}/devices/tracker/#{tracker_id}/alarms.json", opts)
     end
 
     # POST Alarms
@@ -21,7 +21,7 @@ module Fitbyte
     # * +:weekDays+ - comma separated list of days of the week on which the alarm vibrates (MONDAY,TUESDAY)
 
     def add_alarm(tracker_id, opts={})
-      post("user/#{@user_id}/devices/tracker/#{tracker_id}/alarms.json", opts)
+      post("user/#{user_id}/devices/tracker/#{tracker_id}/alarms.json", opts)
     end
 
     # Updates the alarm entry with a given ID for a given device.
@@ -37,7 +37,7 @@ module Fitbyte
     # * +:vibe+ - vibe pattern; only one value for now (DEFAULT)
 
     def update_alarm(tracker_id, alarm_id, opts={})
-      post("user/#{@user_id}/devices/tracker/#{tracker_id}/alarms/#{alarm_id}.json", opts)
+      post("user/#{user_id}/devices/tracker/#{tracker_id}/alarms/#{alarm_id}.json", opts)
     end
 
     # DELETE Alarms
@@ -46,7 +46,7 @@ module Fitbyte
     # Deletes the user's device alarm entry with the given ID for a given device.
 
     def delete_alarm(tracker_id, alarm_id, opts={})
-      delete("user/#{@user_id}/devices/tracker/#{tracker_id}/alarms/#{alarm_id}.json", opts)
+      delete("user/#{user_id}/devices/tracker/#{tracker_id}/alarms/#{alarm_id}.json", opts)
     end
   end
 end

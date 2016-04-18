@@ -1,5 +1,6 @@
 0.6.0
 -----
+- A `refresh_token` option can be passed in to retrieve an existing access token.
 - A configuration block can now be passed in to Fitbyte, to allow for the setting of default instance attributes.
 - File/code reorganization.
 

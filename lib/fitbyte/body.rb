@@ -36,9 +36,9 @@ module Fitbyte
       end
 
       if period
-        result = get("user/#{@user_id}/body/#{resource}/date/#{format_date(end_date)}/#{period}.json", opts)
+        result = get("user/#{user_id}/body/#{resource}/date/#{format_date(end_date)}/#{period}.json", opts)
       else
-        result = get("user/#{@user_id}/body/#{resource}/date/#{format_date(start_date)}/#{format_date(end_date)}.json", opts)
+        result = get("user/#{user_id}/body/#{resource}/date/#{format_date(start_date)}/#{format_date(end_date)}.json", opts)
       end
       # remove root key from response
       result.values[0]
