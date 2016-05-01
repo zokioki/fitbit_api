@@ -21,5 +21,32 @@ module Fitbyte
       # remove root key from response
       result.values[0]
     end
+
+    def heart_rate_intraday_time_series(opts={})
+      date         = opts[:date] || Date.today
+      detail_level = opts[:detail_level]
+      start_time   = opts[:start_time]
+      end_time     = opts[:end_time]
+
+      if [detail_level, date].any?(&:nil?)
+        raise Fitbyte::InvalidArgumentError, "A date and detail_level are required."
+      end
+
+      if %(1sec 1min).include? detail_level
+        raise Fitbyte::InvalidArgumentError, "Invalid detail_level: \"#{detail_level}\". Please provide one of the following: \"1sec\" or \"1min\"."
+      end
+
+      if (start_time || end_time) && !(start_time && end_time)
+        raise Fitbyte::InvalidArgumentError, "Both start_time and end_time are required if time is being specified."
+      end
+
+      if (start_time && end_time)
+        result = get("user/-/activities/heart/date/#{format_date(date)}/1d/#{detail_level}/time/#{format_time(start_time)}/#{format_time(end_time)}.json")
+      else
+        result = get("user/-/activities/heart/date/#{format_date(date)}/1d/#{detail_level}.json")
+      end
+      # remove root key from response
+      result.values[0]
+    end
   end
 end

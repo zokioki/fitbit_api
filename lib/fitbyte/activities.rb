@@ -116,11 +116,11 @@ module Fitbyte
       end
 
       if %(1min 15min).include? detail_level
-        raise Fitbyte::InvalidArgumentError, "Invalid detail_level: \"#{detail_level}\". Please provide one of the following: #{PERIODS}."
+        raise Fitbyte::InvalidArgumentError, "Invalid detail_level: \"#{detail_level}\". Please provide one of the following: \"1min\" or \"15min\"."
       end
 
       if (start_time || end_time) && !(start_time && end_time)
-        raise Fitbyte::InvalidArgumentError, "Both start_time and end_time are required if times is being specified."
+        raise Fitbyte::InvalidArgumentError, "Both start_time and end_time are required if time is being specified."
       end
 
       if (start_time && end_time)
