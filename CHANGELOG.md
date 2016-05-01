@@ -1,3 +1,8 @@
+0.7.0
+-----
+- Add support for Activity and Heart Rate Intraday Time Series endpoints.
+- Add support for weight and fat logging and deletion endpoints.
+
 0.6.0
 -----
 - A `refresh_token` option can be passed in to retrieve an existing access token.
