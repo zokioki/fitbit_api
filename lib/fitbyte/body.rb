@@ -44,6 +44,14 @@ module Fitbyte
       result.values[0]
     end
 
+    def log_weight(opts)
+      post("user/#{user_id}/body/log/weight.json", opts)
+    end
+
+    def delete_weight_log(weight_log_id, opts={})
+      delete("user/#{user_id}/body/log/weight/#{weight_log_id}.json", opts)
+    end
+
     def log_body_fat(opts)
       post("user/#{user_id}/body/log/fat.json", opts)
     end
