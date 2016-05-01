@@ -29,6 +29,27 @@ describe Fitbyte::Client do
     end
   end
 
+  describe "#format_time" do
+    it "formats Time, and DateTime objects to HH:mm string" do
+      time = Time.parse("12:45")
+      date_time = DateTime.parse("12:45")
+
+      [time, date_time].each do |obj|
+        expect(client.format_time obj).to eq("12:45")
+      end
+    end
+
+    it "verifies string input to be of HH:mm format" do
+      string = "2:45"
+      expect{client.format_time string}.to raise_error(Fitbyte::InvalidArgumentError)
+    end
+
+    it "returns unaltered argument if argument is properly formatted" do
+      string = "12:45"
+      expect(client.format_time string).to eq(string)
+    end
+  end
+
   describe "#format_scope" do
     it "returns elements of an Array as single space delimited string" do
       scope = ["one", "two", "three"]

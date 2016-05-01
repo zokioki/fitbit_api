@@ -9,6 +9,8 @@ module Fitbyte
                             tracker/minutesLightlyActive tracker/minutesFairlyActive
                             tracker/minutesVeryActive tracker/activityCalories)
 
+    ACTIVITY_INTRADAY_RESOURCES = %w(calories steps distance floors elevation)
+
     # GET Activities
     # ==============
 
@@ -94,6 +96,37 @@ module Fitbyte
         result = get("user/#{user_id}/activities/#{resource}/date/#{format_date(end_date)}/#{period}.json", opts)
       else
         result = get("user/#{user_id}/activities/#{resource}/date/#{format_date(start_date)}/#{format_date(end_date)}.json", opts)
+      end
+      # remove root key from response
+      result.values[0]
+    end
+
+    def activity_intraday_time_series(resource, opts={})
+      date         = opts[:date] || Date.today
+      detail_level = opts[:detail_level]
+      start_time   = opts[:start_time]
+      end_time     = opts[:end_time]
+
+      unless ACTIVITY_INTRADAY_RESOURCES.include?(resource)
+        raise Fitbyte::InvalidArgumentError, "Invalid resource: \"#{resource}\". Please provide one of the following: #{ACTIVITY_RESOURCES}."
+      end
+
+      if [detail_level, date].any?(&:nil?)
+        raise Fitbyte::InvalidArgumentError, "A date and detail_level are required."
+      end
+
+      if %(1min 15min).include? detail_level
+        raise Fitbyte::InvalidArgumentError, "Invalid detail_level: \"#{detail_level}\". Please provide one of the following: #{PERIODS}."
+      end
+
+      if (start_time || end_time) && !(start_time && end_time)
+        raise Fitbyte::InvalidArgumentError, "Both start_time and end_time are required if times is being specified."
+      end
+
+      if (start_time && end_time)
+        result = get("user/-/#{resource}/date/#{date}/1d/#{detail_level}/time/#{start_time}/#{end_time}.json")
+      else
+        result = get("user/-/#{resource}/date/#{date}/1d/#{detail_level}.json")
       end
       # remove root key from response
       result.values[0]

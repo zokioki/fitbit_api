@@ -43,5 +43,13 @@ module Fitbyte
       # remove root key from response
       result.values[0]
     end
+
+    def log_body_fat(opts)
+      post("user/#{user_id}/body/log/fat.json", opts)
+    end
+
+    def delete_body_fat_log(body_fat_log_id, opts={})
+      delete("user/#{user_id}/body/log/fat/#{body_fat_log_id}.json", opts)
+    end
   end
 end

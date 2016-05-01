@@ -17,6 +17,20 @@ module Fitbyte
       end
     end
 
+    def format_time(time)
+      if [Time, DateTime].include?(time.class)
+        time.strftime("%H:%M")
+      elsif time.is_a? String
+        if time =~ /\d{2}\:\d{2}/
+          time
+        else
+          raise Fitbyte::InvalidArgumentError, "Invalid argument [\"#{time}\"] - string must follow HH:mm format."
+        end
+      else
+        raise Fitbyte::InvalidArgumentError, "Invalid type [#{time.class}] - provide a Time/DateTime or a String(HH:mm format)."
+      end
+    end
+
     def format_scope(scope)
       scope.is_a?(Array) ? scope.join(" ") : scope
     end
