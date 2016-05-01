@@ -3,6 +3,18 @@ module Fitbyte
     # GET Goals
     # =========
 
+    # Retrieves a user's current weight goal.
+
+    def weight_goal(opts={})
+      get("user/-/body/log/weight/goal.json", opts)
+    end
+
+    # Retrieves a user's current body fat percentage goal.
+
+    def body_fat_goal(opts={})
+      get("user/-/body/log/fat/goal.json", opts)
+    end
+
     # Retrieves a user's current daily activity goals.
 
     def daily_goals(opts={})

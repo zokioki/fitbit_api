@@ -10,14 +10,6 @@ module Fitbyte
       get("user/-/body/log/fat/date/#{format_date(date)}.json", opts)
     end
 
-    def weight_goals(opts={})
-      get("user/-/body/log/weight/goal.json", opts)
-    end
-
-    def body_fat_goals(opts={})
-      get("user/-/body/log/fat/goal.json", opts)
-    end
-
     def body_time_series(resource, opts={})
       start_date = opts[:start_date]
       end_date   = opts[:end_date] || Date.today

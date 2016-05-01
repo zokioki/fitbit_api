@@ -2,6 +2,7 @@
 -----
 - Add support for Activity and Heart Rate Intraday Time Series endpoints.
 - Add support for weight and fat logging and deletion endpoints.
+- Renamed `#weight_goals` and `#body_fat_goals` to `#weight_goal` and `#body_fat_goal`.
 
 0.6.0
 -----
