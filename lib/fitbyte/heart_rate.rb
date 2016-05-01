@@ -28,11 +28,11 @@ module Fitbyte
       start_time   = opts[:start_time]
       end_time     = opts[:end_time]
 
-      if [detail_level, date].any?(&:nil?)
+      if [date, detail_level].any?(&:nil?)
         raise Fitbyte::InvalidArgumentError, "A date and detail_level are required."
       end
 
-      if %(1sec 1min).include? detail_level
+      unless %(1sec 1min).include? detail_level
         raise Fitbyte::InvalidArgumentError, "Invalid detail_level: \"#{detail_level}\". Please provide one of the following: \"1sec\" or \"1min\"."
       end
 
@@ -41,12 +41,10 @@ module Fitbyte
       end
 
       if (start_time && end_time)
-        result = get("user/-/activities/heart/date/#{format_date(date)}/1d/#{detail_level}/time/#{format_time(start_time)}/#{format_time(end_time)}.json")
+        get("user/-/activities/heart/date/#{format_date(date)}/1d/#{detail_level}/time/#{format_time(start_time)}/#{format_time(end_time)}.json")
       else
-        result = get("user/-/activities/heart/date/#{format_date(date)}/1d/#{detail_level}.json")
+        get("user/-/activities/heart/date/#{format_date(date)}/1d/#{detail_level}.json")
       end
-      # remove root key from response
-      result.values[0]
     end
   end
 end

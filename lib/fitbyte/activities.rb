@@ -84,7 +84,7 @@ module Fitbyte
         raise Fitbyte::InvalidArgumentError, "Invalid resource: \"#{resource}\". Please provide one of the following: #{ACTIVITY_RESOURCES}."
       end
 
-      if [period, start_date].none?
+      if [start_date, period].none?
         raise Fitbyte::InvalidArgumentError, "A start_date or period is required."
       end
 
@@ -111,11 +111,11 @@ module Fitbyte
         raise Fitbyte::InvalidArgumentError, "Invalid resource: \"#{resource}\". Please provide one of the following: #{ACTIVITY_RESOURCES}."
       end
 
-      if [detail_level, date].any?(&:nil?)
+      if [date, detail_level].any?(&:nil?)
         raise Fitbyte::InvalidArgumentError, "A date and detail_level are required."
       end
 
-      if %(1min 15min).include? detail_level
+      unless %(1min 15min).include? detail_level
         raise Fitbyte::InvalidArgumentError, "Invalid detail_level: \"#{detail_level}\". Please provide one of the following: \"1min\" or \"15min\"."
       end
 
@@ -124,12 +124,10 @@ module Fitbyte
       end
 
       if (start_time && end_time)
-        result = get("user/-/#{resource}/date/#{format_date(date)}/1d/#{detail_level}/time/#{format_time(start_time)}/#{format_time(end_time)}.json")
+        get("user/-/activities/#{resource}/date/#{format_date(date)}/1d/#{detail_level}/time/#{format_time(start_time)}/#{format_time(end_time)}.json")
       else
-        result = get("user/-/#{resource}/date/#{format_date(date)}/1d/#{detail_level}.json")
+        get("user/-/activities/#{resource}/date/#{format_date(date)}/1d/#{detail_level}.json")
       end
-      # remove root key from response
-      result.values[0]
     end
 
     # POST Activities
