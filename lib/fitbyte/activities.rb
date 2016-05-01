@@ -124,9 +124,9 @@ module Fitbyte
       end
 
       if (start_time && end_time)
-        result = get("user/-/#{resource}/date/#{date}/1d/#{detail_level}/time/#{start_time}/#{end_time}.json")
+        result = get("user/-/#{resource}/date/#{format_date(date)}/1d/#{detail_level}/time/#{format_time(start_time)}/#{format_time(end_time)}.json")
       else
-        result = get("user/-/#{resource}/date/#{date}/1d/#{detail_level}.json")
+        result = get("user/-/#{resource}/date/#{format_date(date)}/1d/#{detail_level}.json")
       end
       # remove root key from response
       result.values[0]
