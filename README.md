@@ -3,6 +3,8 @@
 [![Gem Version](https://badge.fury.io/rb/fitbyte.svg)](https://badge.fury.io/rb/fitbyte)
 [![Build Status](https://travis-ci.org/zokioki/fitbyte.svg?branch=master)](https://travis-ci.org/zokioki/fitbyte)
 
+**NOTE: This library is no longer being actively maintained. Check out [fitgem_oauth2](https://github.com/gupta-ankit/fitgem_oauth2) as an alternative option.**
+
 Fitbyte allows interaction with [Fitbit's REST API](https://dev.fitbit.com/docs/basics/).
 
 It was started as a small personal project to provide a Ruby API interface using OAuth2, after Fitbit announced the eventual drop of OAuth1 support for the developer API.
