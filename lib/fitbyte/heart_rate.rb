@@ -1,4 +1,4 @@
-module Fitbyte
+module FitbitAPI
   class Client
     def heart_rate_time_series(opts={})
       start_date = opts[:start_date]
@@ -6,11 +6,11 @@ module Fitbyte
       period     = opts[:period]
 
       if [period, start_date].none?
-        raise Fitbyte::InvalidArgumentError, 'A start_date or period is required.'
+        raise FitbitAPI::InvalidArgumentError, 'A start_date or period is required.'
       end
 
       if period && !PERIODS.include?(period)
-        raise Fitbyte::InvalidArgumentError, "Invalid period: \"#{period}\". Please provide one of the following: #{PERIODS}."
+        raise FitbitAPI::InvalidArgumentError, "Invalid period: \"#{period}\". Please provide one of the following: #{PERIODS}."
       end
 
       if period
@@ -29,15 +29,15 @@ module Fitbyte
       end_time     = opts[:end_time]
 
       if [date, detail_level].any?(&:nil?)
-        raise Fitbyte::InvalidArgumentError, 'A date and detail_level are required.'
+        raise FitbitAPI::InvalidArgumentError, 'A date and detail_level are required.'
       end
 
       unless %(1sec 1min).include? detail_level
-        raise Fitbyte::InvalidArgumentError, "Invalid detail_level: \"#{detail_level}\". Please provide one of the following: \"1sec\" or \"1min\"."
+        raise FitbitAPI::InvalidArgumentError, "Invalid detail_level: \"#{detail_level}\". Please provide one of the following: \"1sec\" or \"1min\"."
       end
 
       if (start_time || end_time) && !(start_time && end_time)
-        raise Fitbyte::InvalidArgumentError, 'Both start_time and end_time are required if time is being specified.'
+        raise FitbitAPI::InvalidArgumentError, 'Both start_time and end_time are required if time is being specified.'
       end
 
       if (start_time && end_time)

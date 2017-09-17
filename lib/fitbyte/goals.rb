@@ -1,4 +1,4 @@
-module Fitbyte
+module FitbitAPI
   class Client
     # GET Goals
     # =========

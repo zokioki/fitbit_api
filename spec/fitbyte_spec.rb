@@ -1,11 +1,11 @@
 require 'spec_helper'
 
-describe Fitbyte do
+describe FitbitAPI do
   it 'has a version number' do
-    expect(Fitbyte::VERSION).not_to be nil
+    expect(FitbitAPI::VERSION).not_to be nil
   end
 
   it 'has a repository URL' do
-    expect(Fitbyte::REPO_URL).not_to be nil
+    expect(FitbitAPI::REPO_URL).not_to be nil
   end
 end

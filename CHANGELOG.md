@@ -13,7 +13,7 @@
 0.6.0
 -----
 - A `refresh_token` option can be passed in to retrieve an existing access token.
-- A configuration block can now be passed in to Fitbyte, to allow for the setting of default instance attributes.
+- A configuration block can now be passed in to FitbitAPI, to allow for the setting of default instance attributes.
 - File/code reorganization.
 
 0.5.0
@@ -58,7 +58,7 @@
 -----
 - Responses now return FitStruct objects (inherit from OpenStruct).
 
-- Ability to set default data return format by setting `raw_response` on Fitbyte::Client instance (defaults to using FitStruct objects). Can be overridden on each API call by specifying the `raw` boolean option.
+- Ability to set default data return format by setting `raw_response` on FitbitAPI::Client instance (defaults to using FitStruct objects). Can be overridden on each API call by specifying the `raw` boolean option.
 
 0.2.4
 -----

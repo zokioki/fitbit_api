@@ -1,4 +1,4 @@
-module Fitbyte
+module FitbitAPI
   class Client
     def profile(opts={})
       get("user/#{user_id}/profile.json", opts)

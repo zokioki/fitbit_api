@@ -1,4 +1,4 @@
-module Fitbyte
+module FitbitAPI
   class Client
     FOOD_RESOURCES = %w(caloriesIn water)
 
@@ -28,15 +28,15 @@ module Fitbyte
       period     = opts[:period]
 
       unless FOOD_RESOURCES.include?(resource)
-        raise Fitbyte::InvalidArgumentError, "Invalid resource: \"#{resource}\". Please provide one of the following: #{FOOD_RESOURCES}."
+        raise FitbitAPI::InvalidArgumentError, "Invalid resource: \"#{resource}\". Please provide one of the following: #{FOOD_RESOURCES}."
       end
 
       if [period, start_date].none?
-        raise Fitbyte::InvalidArgumentError, 'A start_date or period is required.'
+        raise FitbitAPI::InvalidArgumentError, 'A start_date or period is required.'
       end
 
       if period && !PERIODS.include?(period)
-        raise Fitbyte::InvalidArgumentError, "Invalid period: \"#{period}\". Please provide one of the following: #{PERIODS}."
+        raise FitbitAPI::InvalidArgumentError, "Invalid period: \"#{period}\". Please provide one of the following: #{PERIODS}."
       end
 
       if period

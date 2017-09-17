@@ -1,36 +1,36 @@
-# Fitbyte
+# FitbitAPI
 
-[![Gem Version](https://badge.fury.io/rb/fitbyte.svg)](https://badge.fury.io/rb/fitbyte)
-[![Build Status](https://travis-ci.org/zokioki/fitbyte.svg?branch=master)](https://travis-ci.org/zokioki/fitbyte)
+[![Gem Version](https://badge.fury.io/rb/fitbit_api.svg)](https://badge.fury.io/rb/fitbit_api)
+[![Build Status](https://travis-ci.org/zokioki/fitbit_api.svg?branch=master)](https://travis-ci.org/zokioki/fitbit_api)
 
-Fitbyte provides a Ruby interface to the [Fitbit Web API](https://dev.fitbit.com/reference/web-api/quickstart).
+FitbitAPI provides a Ruby interface to the [Fitbit Web API](https://dev.fitbit.com/reference/web-api/quickstart).
 
 ## Installation
 
 To install the latest release:
 
-    $ gem install fitbyte
+    $ gem install fitbit_api
 
 To include in a Rails project, add it to the Gemfile:
 
 ```ruby
-gem 'fitbyte'
+gem 'fitbit_api'
 ```
 
 ## Usage
 
-To use the Fitbit API, you must register your application at [dev.fitbit.com](https://dev.fitbit.com/apps). After registering, you should have access to **CLIENT ID**, **CLIENT SECRET**, and **REDIRECT URI (Callback URL)** values for use in instantiating a *Fitbyte::Client* object.
+To use the Fitbit API, you must register your application at [dev.fitbit.com](https://dev.fitbit.com/apps). After registering, you should have access to **CLIENT ID**, **CLIENT SECRET**, and **REDIRECT URI (Callback URL)** values for use in instantiating a *FitbitAPI::Client* object.
 
 ### Rails
 
-Please reference the [fitbyte-rails repo](https://github.com/zokioki/fitbyte-rails) as an example of how to use this gem within Rails.
+Please reference the [fitbit_api-rails repo](https://github.com/zokioki/fitbit_api-rails) as an example of how to use this gem within Rails.
 
 ### Standalone
 
 - Create a client instance:
 
 ```ruby
-client = Fitbyte::Client.new(client_id: 'XXXXXX',
+client = FitbitAPI::Client.new(client_id: 'XXXXXX',
                              client_secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
                              redirect_uri: 'http://example.com/handle/callback')
 ```
@@ -69,13 +69,13 @@ Similarly, all arguments passed in through a POST request are automatically conv
 client.log_activity activity_id: 12345, duration_millis: '50000'
 client.log_activity activityId: 54321, durationMillis: '44100'
 # If for some reason you had to mix snake and camel case like below,
-# Fitbyte would make sure the result is a validly formatted request
+# FitbitAPI would make sure the result is a validly formatted request
 client.log_activity activity_id: 12345, durationMillis: '683300'
 ```
 
 ### Options
 
-When initializing a `Fitbyte::Client` instance, you're given access to a handful of options:
+When initializing a `FitbitAPI::Client` instance, you're given access to a handful of options:
 
 - `:api_version` - API version to be used when making requests (default: "1")
 

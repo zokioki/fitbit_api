@@ -1,4 +1,4 @@
-module Fitbyte
+module FitbitAPI
   class Client
     def friends(opts={})
       get("user/#{user_id}/friends.json", opts)

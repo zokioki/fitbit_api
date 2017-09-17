@@ -1,28 +1,28 @@
-require 'fitbyte/base'
-require 'fitbyte/activities'
-require 'fitbyte/heart_rate'
-require 'fitbyte/goals'
-require 'fitbyte/alarms'
-require 'fitbyte/body'
-require 'fitbyte/devices'
-require 'fitbyte/food'
-require 'fitbyte/friends'
-require 'fitbyte/sleep'
-require 'fitbyte/user'
-require 'fitbyte/water'
+require 'fitbit_api/base'
+require 'fitbit_api/activities'
+require 'fitbit_api/heart_rate'
+require 'fitbit_api/goals'
+require 'fitbit_api/alarms'
+require 'fitbit_api/body'
+require 'fitbit_api/devices'
+require 'fitbit_api/food'
+require 'fitbit_api/friends'
+require 'fitbit_api/sleep'
+require 'fitbit_api/user'
+require 'fitbit_api/water'
 
-module Fitbyte
+module FitbitAPI
   class Client
     attr_accessor :api_version, :unit_system, :locale, :scope, :snake_case_keys, :symbolize_keys
     attr_reader   :user_id
 
     def initialize(opts)
       missing_args = [:client_id, :client_secret] - opts.keys
-      raise Fitbyte::InvalidArgumentError, "Required arguments: #{missing_args.join(', ')}" if missing_args.size > 0
+      raise FitbitAPI::InvalidArgumentError, "Required arguments: #{missing_args.join(', ')}" if missing_args.size > 0
 
       %w(client_id client_secret redirect_uri site_url authorize_url token_url
       unit_system locale scope api_version snake_case_keys symbolize_keys).each do |attr|
-        instance_variable_set("@#{attr}", (opts[attr.to_sym] || Fitbyte.send(attr)))
+        instance_variable_set("@#{attr}", (opts[attr.to_sym] || FitbitAPI.send(attr)))
       end
 
       @client = OAuth2::Client.new(@client_id, @client_secret, site: @site_url,
@@ -61,7 +61,7 @@ module Fitbyte
 
     def request_headers
       {
-        'User-Agent' => "fitbyte-#{Fitbyte::VERSION} gem (#{Fitbyte::REPO_URL})",
+        'User-Agent' => "fitbit_api-#{FitbitAPI::VERSION} gem (#{FitbitAPI::REPO_URL})",
         'Accept-Language' => @unit_system,
         'Accept-Locale' => @locale
       }

@@ -1,6 +1,6 @@
 require 'oauth2'
 require 'date'
-require 'fitbyte/version'
-require 'fitbyte/client'
+require 'fitbit_api/version'
+require 'fitbit_api/client'
 
-module Fitbyte; end
+module FitbitAPI; end

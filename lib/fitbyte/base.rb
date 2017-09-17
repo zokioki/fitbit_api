@@ -1,8 +1,8 @@
-require 'fitbyte/helpers/configuration'
-require 'fitbyte/helpers/utils'
-require 'fitbyte/helpers/exceptions'
+require 'fitbit_api/helpers/configuration'
+require 'fitbit_api/helpers/utils'
+require 'fitbit_api/helpers/exceptions'
 
-module Fitbyte
+module FitbitAPI
   extend Configuration
 
   define_setting :client_id
