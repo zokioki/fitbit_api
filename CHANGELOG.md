@@ -1,3 +1,9 @@
+0.7.1
+-----
+- Rename `#auth_page_link` to `#auth_url`
+- Rename `snake_case` option to `snake_case_keys`
+- Code cleanup
+
 0.7.0
 -----
 - Add support for Activity and Heart Rate Intraday Time Series endpoints.
