@@ -17,45 +17,59 @@ To include in a Rails project, add it to the Gemfile:
 gem 'fitbit_api'
 ```
 
-## Usage
+## Getting Started
 
-To use the Fitbit API, you must register your application at [dev.fitbit.com](https://dev.fitbit.com/apps). After registering, you should have access to **CLIENT ID**, **CLIENT SECRET**, and **REDIRECT URI (Callback URL)** values for use in instantiating a *FitbitAPI::Client* object.
+To use the Fitbit API, you must register your application at [dev.fitbit.com](https://dev.fitbit.com/apps). After registering, you should have access to the **CLIENT ID** and **CLIENT SECRET** values for use in instantiating a *FitbitAPI::Client* object.
 
 ### Rails
 
-Please reference the [fitbit_api_rails repo](https://github.com/zokioki/fitbit_api_rails) as an example of how to use this gem within Rails.
+You can reference the [fitbit_api_rails](https://github.com/zokioki/fitbit_api_rails) repo as a simple example of how to use this gem within a Rails project.
 
-### Standalone
+### Quickstart
 
-- Create a client instance:
+If you already have access to a user's stored refresh token, you can instantiate a client instance like so:
 
 ```ruby
 client = FitbitAPI::Client.new(client_id: 'XXXXXX',
-                             client_secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-                             redirect_uri: 'http://example.com/handle/callback')
+                               client_secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+                               refresh_token: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
 ```
 
-- Generate a link for the Fitbit authorization page:
+### OAuth 2.0 Authorization Flow
+
+- Create a client instance (ensure that `redirect_uri` is passed in):
+
+```ruby
+client = FitbitAPI::Client.new(client_id: 'XXXXXX',
+                               client_secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+                               redirect_uri: 'http://example.com/handle/callback')
+```
+
+- Generate a link for your app's Fitbit authorization page:
 
 ```ruby
 client.auth_url
 # => https://fitbit.com/oauth2/authorize?client_id=123XYZ&redirect_uri=...
 ```
 
-- Follow the generated link to Fitbit's authorization page. After approving your app, you're sent to the `redirect_uri`, with an appended authorization `code` param, which you'll exchange for an access token:
+- Follow the generated link to Fitbit's authorization page. After granting permission for your app, you're sent to the `redirect_uri`, with an appended authorization `code` param, which you'll exchange for an access token:
 
 ```ruby
 client.get_token(auth_code)
 ```
 
-You're now authenticated and can make calls to Fitbit's API:
+You're now authorized and can make calls to Fitbit's API.
+
+### Interacting with the API
+
+Once a valid token has been generated, you're able to make API calls from the client object, like so:
 
 ```ruby
 client.food_logs Date.today
 # => { "foods" => [{ "isFavorite" => true, "logDate" => "2015-06-26", "logId" => 1820, "loggedFood" => { "accessLevel" => "PUBLIC", "amount" => 132.57, "brand" => "", "calories" => 752, ...}] }
 ```
 
-To make the response more easily suited for attribute-assignment, it can be parsed to return a hash whose keys are in snake_case format. This can be done by setting the client's `snake_case_keys` option to `true`, like so:
+To make responses more easily suited for attribute-assignment, they can be parsed to return a hash whose keys are in snake_case format. This can be done by setting the client's `snake_case_keys` option to `true`, like so:
 
 ```ruby
 client.snake_case_keys = true
@@ -68,8 +82,8 @@ Similarly, all arguments passed in through a POST request are automatically conv
 ```ruby
 client.log_activity activity_id: 12345, duration_millis: '50000'
 client.log_activity activityId: 54321, durationMillis: '44100'
-# If for some reason you had to mix snake and camel case like below,
-# FitbitAPI would make sure the result is a validly formatted request
+# You can even mix snake and camel case like in the example below,
+# FitbitAPI will make sure the result is a validly formatted request
 client.log_activity activity_id: 12345, durationMillis: '683300'
 ```
 
@@ -88,7 +102,6 @@ When initializing a `FitbitAPI::Client` instance, you're given access to a handf
 - `:snake_case_keys` - Transform returned object's keys to snake case format (default: false)
 
 - `:symbolize_keys` - Transform returned object's keys to symbols (default: false)
-
 
 ## License
 
