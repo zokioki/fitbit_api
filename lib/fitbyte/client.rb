@@ -13,7 +13,7 @@ require 'fitbyte/water'
 
 module Fitbyte
   class Client
-    attr_accessor :api_version, :unit_system, :locale, :scope, :snake_case, :symbolize_keys
+    attr_accessor :api_version, :unit_system, :locale, :scope, :snake_case_keys, :symbolize_keys
     attr_reader   :user_id
 
     def initialize(opts)
@@ -21,7 +21,7 @@ module Fitbyte
       raise Fitbyte::InvalidArgumentError, "Required arguments: #{missing_args.join(', ')}" if missing_args.size > 0
 
       %w(client_id client_secret redirect_uri site_url authorize_url token_url
-      unit_system locale scope api_version snake_case symbolize_keys).each do |attr|
+      unit_system locale scope api_version snake_case_keys symbolize_keys).each do |attr|
         instance_variable_set("@#{attr}", (opts[attr.to_sym] || Fitbyte.send(attr)))
       end
 
@@ -86,7 +86,7 @@ module Fitbyte
     end
 
     def process_keys!(object, opts={})
-      deep_keys_to_snake_case!(object) if (opts[:snake_case] || snake_case)
+      deep_keys_to_snake_case!(object) if (opts[:snake_case_keys] || snake_case_keys)
       deep_symbolize_keys!(object) if (opts[:symbolize_keys] || symbolize_keys)
       return object
     end
