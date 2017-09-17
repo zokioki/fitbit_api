@@ -31,7 +31,7 @@ module Fitbyte
       restore_token(opts[:refresh_token]) if opts[:refresh_token]
     end
 
-    def auth_page_link
+    def auth_url
       @client.auth_code.authorize_url(redirect_uri: @redirect_uri, scope: @scope)
     end
 

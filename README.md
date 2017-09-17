@@ -38,7 +38,7 @@ client = Fitbyte::Client.new(client_id: 'XXXXXX',
 - Generate a link for the Fitbit authorization page:
 
 ```ruby
-client.auth_page_link
+client.auth_url
 # => https://fitbit.com/oauth2/authorize?client_id=123XYZ&redirect_uri=...
 ```
 
