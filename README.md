@@ -23,7 +23,7 @@ To use the Fitbit API, you must register your application at [dev.fitbit.com](ht
 
 ### Rails
 
-Please reference the [fitbit_api-rails repo](https://github.com/zokioki/fitbit_api-rails) as an example of how to use this gem within Rails.
+Please reference the [fitbit_api_rails repo](https://github.com/zokioki/fitbit_api_rails) as an example of how to use this gem within Rails.
 
 ### Standalone
 
