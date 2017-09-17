@@ -6,7 +6,7 @@ module Fitbyte
       period     = opts[:period]
 
       if [period, start_date].none?
-        raise Fitbyte::InvalidArgumentError, "A start_date or period is required."
+        raise Fitbyte::InvalidArgumentError, 'A start_date or period is required.'
       end
 
       if period && !PERIODS.include?(period)
@@ -29,7 +29,7 @@ module Fitbyte
       end_time     = opts[:end_time]
 
       if [date, detail_level].any?(&:nil?)
-        raise Fitbyte::InvalidArgumentError, "A date and detail_level are required."
+        raise Fitbyte::InvalidArgumentError, 'A date and detail_level are required.'
       end
 
       unless %(1sec 1min).include? detail_level
@@ -37,7 +37,7 @@ module Fitbyte
       end
 
       if (start_time || end_time) && !(start_time && end_time)
-        raise Fitbyte::InvalidArgumentError, "Both start_time and end_time are required if time is being specified."
+        raise Fitbyte::InvalidArgumentError, 'Both start_time and end_time are required if time is being specified.'
       end
 
       if (start_time && end_time)

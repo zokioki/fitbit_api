@@ -20,7 +20,7 @@ module Fitbyte
       end
 
       if [period, start_date].none?
-        raise Fitbyte::InvalidArgumentError, "A start_date or period is required."
+        raise Fitbyte::InvalidArgumentError, 'A start_date or period is required.'
       end
 
       if period && !PERIODS.include?(period)

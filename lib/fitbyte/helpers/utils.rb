@@ -19,7 +19,7 @@ module Fitbyte
 
     def format_time(time)
       if [Time, DateTime].include?(time.class)
-        time.strftime("%H:%M")
+        time.strftime('%H:%M')
       elsif time.is_a? String
         if time =~ /\d{2}\:\d{2}/
           time
@@ -32,7 +32,7 @@ module Fitbyte
     end
 
     def format_scope(scope)
-      scope.is_a?(Array) ? scope.join(" ") : scope
+      scope.is_a?(Array) ? scope.join(' ') : scope
     end
 
     def deep_keys_to_snake_case!(object)
@@ -68,14 +68,14 @@ module Fitbyte
       return string.downcase if string.match(/\A[A-Z]+\z/)
       string.gsub!(/([A-Z]+)([A-Z][a-z])/, '\1_\2')
       string.gsub!(/([a-z])([A-Z])/, '\1_\2')
-      string.gsub!("-", "_") if opts[:replace_dashes]
+      string.gsub!('-', '_') if opts[:replace_dashes]
       string.downcase
     end
 
     def to_camel_case(word, opts={})
       string = word.to_s
       return string if string.match(/[A-Z]|[a-z]([A-Z0-9]*[a-z][a-z0-9]*[A-Z]|[a-z0-9]*[A-Z][A-Z0-9]*[a-z])[A-Za-z0-9]*/)
-      string = word.to_s.split("_").collect(&:capitalize).join
+      string = word.to_s.split('_').collect(&:capitalize).join
       string.gsub!(/^\w{1}/) { |word| word.downcase } if opts[:lower]
       return string
     end

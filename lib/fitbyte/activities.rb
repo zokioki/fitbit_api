@@ -42,7 +42,7 @@ module Fitbyte
     #   the activities catalog as well as private custom activities the user created.
 
     def all_activities(opts={})
-      get("activities.json", opts)
+      get('activities.json', opts)
     end
 
     # Retrieves a list of a user's activity log entries before or after a given day with
@@ -85,7 +85,7 @@ module Fitbyte
       end
 
       if [start_date, period].none?
-        raise Fitbyte::InvalidArgumentError, "A start_date or period is required."
+        raise Fitbyte::InvalidArgumentError, 'A start_date or period is required.'
       end
 
       if period && !PERIODS.include?(period)
@@ -112,7 +112,7 @@ module Fitbyte
       end
 
       if [date, detail_level].any?(&:nil?)
-        raise Fitbyte::InvalidArgumentError, "A date and detail_level are required."
+        raise Fitbyte::InvalidArgumentError, 'A date and detail_level are required.'
       end
 
       unless %(1min 15min).include? detail_level
@@ -120,7 +120,7 @@ module Fitbyte
       end
 
       if (start_time || end_time) && !(start_time && end_time)
-        raise Fitbyte::InvalidArgumentError, "Both start_time and end_time are required if time is being specified."
+        raise Fitbyte::InvalidArgumentError, 'Both start_time and end_time are required if time is being specified.'
       end
 
       if (start_time && end_time)

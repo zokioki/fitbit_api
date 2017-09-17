@@ -1,15 +1,15 @@
-require "fitbyte/base"
-require "fitbyte/activities"
-require "fitbyte/heart_rate"
-require "fitbyte/goals"
-require "fitbyte/alarms"
-require "fitbyte/body"
-require "fitbyte/devices"
-require "fitbyte/food"
-require "fitbyte/friends"
-require "fitbyte/sleep"
-require "fitbyte/user"
-require "fitbyte/water"
+require 'fitbyte/base'
+require 'fitbyte/activities'
+require 'fitbyte/heart_rate'
+require 'fitbyte/goals'
+require 'fitbyte/alarms'
+require 'fitbyte/body'
+require 'fitbyte/devices'
+require 'fitbyte/food'
+require 'fitbyte/friends'
+require 'fitbyte/sleep'
+require 'fitbyte/user'
+require 'fitbyte/water'
 
 module Fitbyte
   class Client
@@ -37,13 +37,13 @@ module Fitbyte
 
     def get_token(auth_code)
       @token = @client.auth_code.get_token(auth_code, redirect_uri: @redirect_uri, headers: auth_header)
-      @user_id = @token.params["user_id"]
+      @user_id = @token.params['user_id']
       return @token
     end
 
     def restore_token(refresh_token)
       @token = OAuth2::AccessToken.from_hash(@client, refresh_token: refresh_token).refresh!(headers: auth_header)
-      @user_id = @token.params["user_id"]
+      @user_id = @token.params['user_id']
       return @token
     end
 
@@ -56,14 +56,14 @@ module Fitbyte
     end
 
     def auth_header
-      {"Authorization" => ("Basic " + Base64.encode64(@client_id + ":" + @client_secret))}
+      { 'Authorization' => ('Basic ' + Base64.encode64(@client_id + ':' + @client_secret)) }
     end
 
     def request_headers
       {
-        "User-Agent" => "fitbyte-#{Fitbyte::VERSION} gem (#{Fitbyte::REPO_URL})",
-        "Accept-Language" => @unit_system,
-        "Accept-Locale" => @locale
+        'User-Agent' => "fitbyte-#{Fitbyte::VERSION} gem (#{Fitbyte::REPO_URL})",
+        'Accept-Language' => @unit_system,
+        'Accept-Locale' => @locale
       }
     end
 
