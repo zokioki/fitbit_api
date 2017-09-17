@@ -1,3 +1,12 @@
+0.8.1
+-----
+- Post install cleanup
+
+0.8.0
+-----
+- Gem renamed from `fitbyte` to `fitbit_api`
+  - Make sure to change `Fitbyte::Client` to `FitbitAPI::Client` in your code, no other changes should be necessary.
+
 0.7.1
 -----
 - Rename `#auth_page_link` to `#auth_url`

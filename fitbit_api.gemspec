@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.version       = FitbitAPI::VERSION
   spec.authors       = ['Zoran']
 
-  spec.summary       = %q{A Ruby interface to the Fitbit API, using OAuth2 (renamed to fitbit_api)}
+  spec.summary       = %q{A Ruby interface to the Fitbit Web API.}
   spec.homepage      = FitbitAPI::REPO_URL
   spec.license       = 'MIT'
 
@@ -24,9 +24,4 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'bundler', '~> 1.10'
   spec.add_development_dependency 'rake', '~> 10.0'
   spec.add_development_dependency 'rspec'
-
-  spec.post_install_message = %q{
-    The fitbit_api gem has been renamed to fitbit_api and will no longer be supported.
-    Please switch to using fitbit_api for all versions greater than 0.7.1.
-  }
 end
