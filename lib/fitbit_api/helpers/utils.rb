@@ -5,7 +5,7 @@ module FitbitAPI
 
     def format_date(date)
       if [Date, Time, DateTime].include?(date.class)
-        date.strftime("%Y-%m-%d")
+        date.strftime('%Y-%m-%d')
       elsif date.is_a? String
         if date =~ /\d{4}\-\d{2}\-\d{2}/
           date

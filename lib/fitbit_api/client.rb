@@ -67,8 +67,8 @@ module FitbitAPI
       }
     end
 
-    def get(path, opts={})
-      response = token.get(("#{@api_version}/" + path), headers: request_headers).response
+    def get(path, opts={}, params: {})
+      response = token.get(("#{@api_version}/" + path), params: deep_keys_to_camel_case!(params), headers: request_headers).response
       object = MultiJson.load(response.body) unless response.status == 204
       process_keys!(object, opts)
     end

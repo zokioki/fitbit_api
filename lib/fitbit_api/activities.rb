@@ -48,15 +48,22 @@ module FitbitAPI
     # Retrieves a list of a user's activity log entries before or after a given day with
     #   offset and limit using units in the unit system which corresponds to the Accept-Language header provided.
 
-    # ==== Parameters
+    # ==== URL Parameters
     # * +:beforeDate+ - the date; formatted in yyyy-MM-ddTHH:mm:ss
     # * +:afterDate+ - the date; formatted in yyyy-MM-ddTHH:mm:ss
     # * +:sort+ - the sort order of entries by date (asc or desc)
-    # * +:offset+ - the offset number of entries
-    # * +:limit+ - the max of the number of entries returned (max: 100)
+    # * +:offset+ - the offset number of entries. Must always be 0
+    # * +:limit+ - the max of the number of entries returned (max: 20)
 
     def activity_logs_list(opts={})
-      get("user/#{user_id}/activities/list.json", opts)
+      params = {}
+      param_defaults = { before_date: Date.today, after_date: nil, sort: 'desc', limit: 20, offset: 0 }
+
+      # merge defaults without overwriting specified values, then split params from options
+      opts.merge!(param_defaults) { |_key, val, _default| val }
+      param_defaults.keys.each { |i| params[i] = opts.delete(i) }
+
+      get("user/#{user_id}/activities/list.json", opts, params: params)
     end
 
     # Returns the details of a specific activity in the Fitbit activities database in the format requested.

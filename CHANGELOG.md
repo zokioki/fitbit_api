@@ -1,5 +1,9 @@
 0.8.1
 -----
+- Fix `#activity_logs_list` to allow passing in expected URL params.
+
+0.8.1
+-----
 - Post install cleanup
 
 0.8.0
