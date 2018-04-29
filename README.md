@@ -80,10 +80,11 @@ client.food_logs Date.today
 Similarly, all arguments passed in through a POST request are automatically converted to camelCase before they hit Fitbit's API, making it easy to keep your codebase stylistically consistent. For example, all of the following would result in valid API calls:
 
 ```ruby
+# options with snake_cased keys
 client.log_activity activity_id: 12345, duration_millis: '50000'
+# options with camelCased keys
 client.log_activity activityId: 54321, durationMillis: '44100'
-# You can even mix snake and camel case like in the example below,
-# FitbitAPI will make sure the result is a validly formatted request
+# options with mixed snake and camel cased keys
 client.log_activity activity_id: 12345, durationMillis: '683300'
 ```
 
