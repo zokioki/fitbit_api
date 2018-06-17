@@ -1,3 +1,7 @@
+0.8.3
+-----
+- Fix bug regarding optional `params` parsing for GET requests.
+
 0.8.2
 -----
 - Fix `#activity_logs_list` to allow passing in expected URL params.

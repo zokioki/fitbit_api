@@ -56,14 +56,15 @@ module FitbitAPI
     # * +:limit+ - the max of the number of entries returned (max: 20)
 
     def activity_logs_list(opts={})
-      params = {}
+      opts[:params] = {}
       param_defaults = { before_date: Date.today, after_date: nil, sort: 'desc', limit: 20, offset: 0 }
 
-      # merge defaults without overwriting specified values, then split params from options
-      opts.merge!(param_defaults) { |_key, val, _default| val }
-      param_defaults.keys.each { |i| params[i] = opts.delete(i) }
+      # move param values from top-level opts into :params sub-hash
+      param_defaults.each do |key, default_val|
+        opts[:params][key] = opts.delete(key) || default_val
+      end
 
-      get("user/#{user_id}/activities/list.json", opts, params: params)
+      get("user/#{user_id}/activities/list.json", opts)
     end
 
     # Returns the details of a specific activity in the Fitbit activities database in the format requested.
