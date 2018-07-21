@@ -48,10 +48,10 @@ module FitbitAPI
     end
 
     def token
-      @token.expired? ? refresh_token : @token
+      @token.expired? ? refresh_token! : @token
     end
 
-    def refresh_token
+    def refresh_token!
       @token = @token.refresh!(headers: auth_header)
     end
 
