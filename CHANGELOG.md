@@ -1,3 +1,7 @@
+0.9.0
+-----
+- Fixes to argument parsing in `FitbitAPI::Client`, respecting fallback values passed to `#configure` block.
+
 0.8.3
 -----
 - Fix bug regarding optional `params` parsing for GET requests.
