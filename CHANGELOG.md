@@ -1,6 +1,8 @@
 0.9.0
 -----
-- Fixes to argument parsing in `FitbitAPI::Client`, respecting fallback values passed to `#configure` block.
+- Rework client to accept existing access tokens.
+- Fix argument parsing in `FitbitAPI::Client` to respect fallback values passed to `#configure`.
+- Add `byebug` as development dependency.
 
 0.8.3
 -----
