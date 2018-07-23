@@ -35,7 +35,7 @@ module FitbitAPI
         headers: auth_header
       )
       @user_id = @token.params['user_id']
-      return @token
+      @token
     end
 
     def token
@@ -44,6 +44,8 @@ module FitbitAPI
 
     def refresh_token!
       @token = @token.refresh!(headers: auth_header)
+      @user_id ||= @token.params['user_id']
+      @token
     end
 
     def auth_header
@@ -106,6 +108,8 @@ module FitbitAPI
       attrs.each do |attr|
         instance_variable_set("@#{attr}", (opts[attr] || FitbitAPI.send(attr)))
       end
+
+      @user_id = opts[:user_id]
     end
 
     def set_client
@@ -125,8 +129,6 @@ module FitbitAPI
         raise FitbitAPI::InvalidArgumentError,
               'user_id is required if using existing access token'
       end
-
-      @user_id = opts[:user_id]
 
       @token = OAuth2::AccessToken.new(
         @client,
