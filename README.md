@@ -27,12 +27,15 @@ You can reference the [fitbit_api_rails](https://github.com/zokioki/fitbit_api_r
 
 ### Quickstart
 
-If you already have access to a user's stored refresh token, you can instantiate a client instance like so:
+If you already have a user's token data and Fitbit user_id:
 
 ```ruby
 client = FitbitAPI::Client.new(client_id: 'XXXXXX',
                                client_secret: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-                               refresh_token: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
+                               access_token: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+                               refresh_token: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+                               expires_at: 1234567890,
+                               user_id: 'XXXXXX')
 ```
 
 ### OAuth 2.0 Authorization Flow
@@ -62,14 +65,14 @@ You're now authorized and can make calls to Fitbit's API.
 
 ### Interacting with the API
 
-Once a valid token has been generated, you're able to make API calls from the client object, like so:
+Once a valid token has been generated, you're able to make API calls via the client object:
 
 ```ruby
 client.food_logs Date.today
 # => { "foods" => [{ "isFavorite" => true, "logDate" => "2015-06-26", "logId" => 1820, "loggedFood" => { "accessLevel" => "PUBLIC", "amount" => 132.57, "brand" => "", "calories" => 752, ...}] }
 ```
 
-To make responses more easily suited for attribute-assignment, they can be parsed to return a hash whose keys are in snake_case format. This can be done by setting the client's `snake_case_keys` option to `true`, like so:
+To make responses more easily suited for attribute-assignment, they can be parsed to return a hash whose keys are in snake_case format. This can be done by setting the client's `snake_case_keys` option to `true`:
 
 ```ruby
 client.snake_case_keys = true
@@ -103,6 +106,19 @@ When initializing a `FitbitAPI::Client` instance, you're given access to a handf
 - `:snake_case_keys` - Transform returned object's keys to snake case format (default: false)
 
 - `:symbolize_keys` - Transform returned object's keys to symbols (default: false)
+
+If using this library in Rails, you can configure your options using an initializer:
+
+```ruby
+# config/initializers/fitbit_api.rb
+
+FitbitAPI.configure do |config|
+  config.client_id       = 'XXXX'
+  config.client_secret   = 'xxxx'
+  config.snake_case_keys = true
+  config.symbolize_keys  = true
+end
+```
 
 ## License
 

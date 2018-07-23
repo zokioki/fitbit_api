@@ -1,7 +1,7 @@
 module FitbitAPI
   class Client
 
-    PERIODS = %w(1d 7d 30d 1w 1m 3m 6m 1y max)
+    PERIODS = %w(1d 7d 30d 1w 1m 3m 6m 1y max).freeze
 
     def format_date(date)
       if [Date, Time, DateTime].include?(date.class)

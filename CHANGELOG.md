@@ -1,3 +1,9 @@
+0.9.0
+-----
+- Rework client to accept existing access tokens.
+- Fix argument parsing in `FitbitAPI::Client` to respect fallback values passed to `#configure`.
+- Add `byebug` as development dependency.
+
 0.8.3
 -----
 - Fix bug regarding optional `params` parsing for GET requests.

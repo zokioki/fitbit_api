@@ -13,22 +13,15 @@ require 'fitbit_api/water'
 
 module FitbitAPI
   class Client
-    attr_accessor :api_version, :unit_system, :locale, :scope, :snake_case_keys, :symbolize_keys
+    attr_accessor :api_version, :unit_system, :locale, :scope,
+                  :snake_case_keys, :symbolize_keys
     attr_reader   :user_id
 
-    def initialize(opts)
-      missing_args = [:client_id, :client_secret] - opts.keys
-      raise FitbitAPI::InvalidArgumentError, "Required arguments: #{missing_args.join(', ')}" if missing_args.size > 0
-
-      %w(client_id client_secret redirect_uri site_url authorize_url token_url
-      unit_system locale scope api_version snake_case_keys symbolize_keys).each do |attr|
-        instance_variable_set("@#{attr}", (opts[attr.to_sym] || FitbitAPI.send(attr)))
-      end
-
-      @client = OAuth2::Client.new(@client_id, @client_secret, site: @site_url,
-                                   authorize_url: @authorize_url, token_url: @token_url)
-
-      restore_token(opts[:refresh_token]) if opts[:refresh_token]
+    def initialize(opts={})
+      validate_args(opts)
+      assign_attrs(opts)
+      set_client
+      establish_token(opts)
     end
 
     def auth_url
@@ -36,23 +29,23 @@ module FitbitAPI
     end
 
     def get_token(auth_code)
-      @token = @client.auth_code.get_token(auth_code, redirect_uri: @redirect_uri, headers: auth_header)
+      @token = @client.auth_code.get_token(
+        auth_code,
+        redirect_uri: @redirect_uri,
+        headers: auth_header
+      )
       @user_id = @token.params['user_id']
-      return @token
-    end
-
-    def restore_token(refresh_token)
-      @token = OAuth2::AccessToken.from_hash(@client, refresh_token: refresh_token).refresh!(headers: auth_header)
-      @user_id = @token.params['user_id']
-      return @token
+      @token
     end
 
     def token
-      @token.expired? ? refresh_token : @token
+      @token.expired? ? refresh_token! : @token
     end
 
-    def refresh_token
+    def refresh_token!
       @token = @token.refresh!(headers: auth_header)
+      @user_id ||= @token.params['user_id']
+      @token
     end
 
     def auth_header
@@ -90,6 +83,61 @@ module FitbitAPI
       deep_keys_to_snake_case!(object) if (opts[:snake_case_keys] || snake_case_keys)
       deep_symbolize_keys!(object) if (opts[:symbolize_keys] || symbolize_keys)
       return object
+    end
+
+    private
+
+    def validate_args(opts)
+      required_args = %i[client_id client_secret].freeze
+      missing_args = []
+
+      required_args.each do |arg|
+        missing_args << arg if (opts[arg] || FitbitAPI.send(arg)).nil?
+      end
+
+      return if missing_args.empty?
+      raise FitbitAPI::InvalidArgumentError,
+            "Required arguments: #{missing_args.join(', ')}"
+    end
+
+    def assign_attrs(opts)
+      attrs = %i[client_id client_secret redirect_uri site_url
+                 authorize_url token_url unit_system locale scope
+                 api_version snake_case_keys symbolize_keys].freeze
+
+      attrs.each do |attr|
+        instance_variable_set("@#{attr}", (opts[attr] || FitbitAPI.send(attr)))
+      end
+
+      @user_id = opts[:user_id]
+    end
+
+    def set_client
+      @client = OAuth2::Client.new(
+        @client_id,
+        @client_secret,
+        site: @site_url,
+        authorize_url: @authorize_url,
+        token_url: @token_url
+      )
+    end
+
+    def establish_token(opts)
+      return unless opts[:access_token] || opts[:refresh_token]
+
+      if opts[:access_token] && !opts[:user_id]
+        raise FitbitAPI::InvalidArgumentError,
+              'user_id is required if using existing access token'
+      end
+
+      @token = OAuth2::AccessToken.new(
+        @client,
+        opts[:access_token],
+        refresh_token: opts[:refresh_token],
+        expires_at: opts[:expires_at]
+      )
+
+      refresh_token! if @token.token.empty?
     end
   end
 end
