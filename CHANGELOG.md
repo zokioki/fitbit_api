@@ -1,3 +1,8 @@
+0.9.1
+-----
+- Fix `sleep_time_series` endpoint
+- Tweak user-agent string in request headers
+
 0.9.0
 -----
 - Rework client to accept existing access tokens.

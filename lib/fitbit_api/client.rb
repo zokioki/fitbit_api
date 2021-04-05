@@ -54,7 +54,7 @@ module FitbitAPI
 
     def request_headers
       {
-        'User-Agent' => "fitbit_api-#{FitbitAPI::VERSION} gem (#{FitbitAPI::REPO_URL})",
+        'User-Agent' => "fitbit_api gem (v#{FitbitAPI::VERSION})",
         'Accept-Language' => @unit_system,
         'Accept-Locale' => @locale
       }

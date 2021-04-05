@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Zoran']
 
   spec.summary       = %q{A Ruby interface to the Fitbit Web API.}
-  spec.homepage      = FitbitAPI::REPO_URL
+  spec.homepage      = 'https://github.com/zokioki/fitbit_api'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
