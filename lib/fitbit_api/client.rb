@@ -24,8 +24,8 @@ module FitbitAPI
       establish_token(opts)
     end
 
-    def auth_url
-      @client.auth_code.authorize_url(redirect_uri: @redirect_uri, scope: @scope)
+    def auth_url(response_type: :code)
+      @client.auth_code.authorize_url(redirect_uri: @redirect_uri, scope: @scope, response_type: response_type)
     end
 
     def get_token(auth_code)
