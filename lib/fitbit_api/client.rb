@@ -32,7 +32,7 @@ module FitbitAPI
       @token = @client.auth_code.get_token(
         auth_code,
         redirect_uri: @redirect_uri,
-        headers: auth_header
+        headers: auth_headers
       )
       @user_id = @token.params['user_id']
       @token
@@ -43,7 +43,7 @@ module FitbitAPI
     end
 
     def refresh_token!
-      @token = @token.refresh!(headers: auth_header)
+      @token = @token.refresh!(headers: auth_headers)
       @user_id ||= @token.params['user_id']
       @token
     end
@@ -122,7 +122,7 @@ module FitbitAPI
       refresh_token! if @token.token.empty?
     end
 
-    def auth_header
+    def auth_headers
       { 'Authorization' => ('Basic ' + Base64.encode64(@client_id + ':' + @client_secret)) }
     end
 
