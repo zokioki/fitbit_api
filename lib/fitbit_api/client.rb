@@ -15,7 +15,7 @@ module FitbitAPI
   class Client
     attr_accessor :api_version, :unit_system, :locale, :scope,
                   :snake_case_keys, :symbolize_keys, :auto_refresh_token
-    attr_reader   :user_id
+    attr_reader   :token, :user_id
 
     def initialize(opts={})
       validate_args(opts)
@@ -38,10 +38,6 @@ module FitbitAPI
       @token
     end
 
-    def token
-      auto_refresh_token && @token.expired? ? refresh_token! : @token
-    end
-
     def refresh_token!
       @token = @token.refresh!(headers: auth_headers)
       @user_id ||= @token.params['user_id']
@@ -49,22 +45,15 @@ module FitbitAPI
     end
 
     def get(path, opts={})
-      params = opts.delete(:params) || {}
-      response = token.get(("#{@api_version}/" + path), params: deep_keys_to_camel_case!(params), headers: request_headers).response
-      object = MultiJson.load(response.body) unless response.status == 204
-      process_keys!(object, opts)
+      request(:get, path, opts)
     end
 
     def post(path, opts={})
-      response = token.post(("#{@api_version}/" + path), body: deep_keys_to_camel_case!(opts), headers: request_headers).response
-      object = MultiJson.load(response.body) unless response.status == 204
-      process_keys!(object, opts)
+      request(:post, path, opts)
     end
 
     def delete(path, opts={})
-      response = token.delete(("#{@api_version}/" + path), headers: request_headers).response
-      object = MultiJson.load(response.body) unless response.status == 204
-      process_keys!(object, opts)
+      request(:delete, path, opts)
     end
 
     private
@@ -120,6 +109,21 @@ module FitbitAPI
       )
 
       refresh_token! if @token.token.empty?
+    end
+
+    def request(verb, path, opts={})
+      request_path = "#{@api_version}/#{path}"
+      request_options = opts.merge(headers: request_headers)
+
+      deep_keys_to_camel_case!(request_options[:params])
+      deep_keys_to_camel_case!(request_options[:body])
+
+      refresh_token! if auto_refresh_token && token.expired?
+
+      response = token.public_send(verb, request_path, request_options).response
+      object = MultiJson.load(response.body) unless response.status == 204
+
+      process_keys!(object, opts)
     end
 
     def auth_headers
