@@ -48,18 +48,6 @@ module FitbitAPI
       @token
     end
 
-    def auth_header
-      { 'Authorization' => ('Basic ' + Base64.encode64(@client_id + ':' + @client_secret)) }
-    end
-
-    def request_headers
-      {
-        'User-Agent' => "fitbit_api gem (v#{FitbitAPI::VERSION})",
-        'Accept-Language' => @unit_system,
-        'Accept-Locale' => @locale
-      }
-    end
-
     def get(path, opts={})
       params = opts.delete(:params) || {}
       response = token.get(("#{@api_version}/" + path), params: deep_keys_to_camel_case!(params), headers: request_headers).response
@@ -77,12 +65,6 @@ module FitbitAPI
       response = token.delete(("#{@api_version}/" + path), headers: request_headers).response
       object = MultiJson.load(response.body) unless response.status == 204
       process_keys!(object, opts)
-    end
-
-    def process_keys!(object, opts={})
-      deep_keys_to_snake_case!(object) if (opts[:snake_case_keys] || snake_case_keys)
-      deep_symbolize_keys!(object) if (opts[:symbolize_keys] || symbolize_keys)
-      return object
     end
 
     private
@@ -138,6 +120,24 @@ module FitbitAPI
       )
 
       refresh_token! if @token.token.empty?
+    end
+
+    def auth_header
+      { 'Authorization' => ('Basic ' + Base64.encode64(@client_id + ':' + @client_secret)) }
+    end
+
+    def request_headers
+      {
+        'User-Agent' => "fitbit_api gem (v#{FitbitAPI::VERSION})",
+        'Accept-Language' => @unit_system,
+        'Accept-Locale' => @locale
+      }
+    end
+
+    def process_keys!(object, opts={})
+      deep_keys_to_snake_case!(object) if (opts[:snake_case_keys] || snake_case_keys)
+      deep_symbolize_keys!(object) if (opts[:symbolize_keys] || symbolize_keys)
+      return object
     end
   end
 end
