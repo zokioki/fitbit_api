@@ -107,6 +107,8 @@ When initializing a `FitbitAPI::Client` instance, you're given access to a handf
 
 - `:symbolize_keys` - Transform returned object's keys to symbols (default: false)
 
+- `:auto_refresh_token` - Automatically refreshes the access token once expired (default: true).
+
 If using this library in Rails, you can configure your options using an initializer:
 
 ```ruby

@@ -21,4 +21,6 @@ module FitbitAPI
 
   define_setting :snake_case_keys, false
   define_setting :symbolize_keys,  false
+
+  define_setting :auto_refresh_token, true
 end

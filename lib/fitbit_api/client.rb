@@ -14,7 +14,7 @@ require 'fitbit_api/water'
 module FitbitAPI
   class Client
     attr_accessor :api_version, :unit_system, :locale, :scope,
-                  :snake_case_keys, :symbolize_keys
+                  :snake_case_keys, :symbolize_keys, :auto_refresh_token
     attr_reader   :user_id
 
     def initialize(opts={})
@@ -39,7 +39,7 @@ module FitbitAPI
     end
 
     def token
-      @token.expired? ? refresh_token! : @token
+      auto_refresh_token && @token.expired? ? refresh_token! : @token
     end
 
     def refresh_token!
