@@ -96,22 +96,15 @@ client.log_activity activity_id: 12345, durationMillis: '683300'
 When initializing a `FitbitAPI::Client` instance, you're given access to a handful of options:
 
 - `:api_version` - API version to be used when making requests (default: "1")
-
 - `:unit_system` - The measurement unit system to use for response values (default: "en_US" | available: "en_US", "en_GB", and "any" for metric)
-
 - `:locale` - The locale to use for response values (default: "en_US" | available: "en_US", "fr_FR", "de_DE", "es_ES", "en_GB", "en_AU", "en_NZ" and "ja_JP")
-
 - `:scope` - A space-delimited list of the permissions you are requesting (default: "activity nutrition profile settings sleep social weight heartrate" | available: "activity", "heartrate", "location", "nutrition", "profile", "settings" "sleep", "social" and "weight")
-
 - `:snake_case_keys` - Transform returned object's keys to snake case format (default: false)
-
 - `:symbolize_keys` - Transform returned object's keys to symbols (default: false)
+- `:auto_refresh_token` - Automatically refreshes the access token once expired (default: true)
+- `:on_token_refresh` - A callback to be invoked whenever the access token is refreshed (default: nil)
 
-- `:auto_refresh_token` - Automatically refreshes the access token once expired (default: true).
-
-- `:on_token_refresh` - A callback to be invoked whenever the access token is refreshed (default: nil).
-
-If using this library in Rails, you can configure your options using an initializer:
+If using this library in Rails, you can configure these options in an initializer:
 
 ```ruby
 # config/initializers/fitbit_api.rb
