@@ -23,4 +23,5 @@ module FitbitAPI
   define_setting :symbolize_keys,  false
 
   define_setting :auto_refresh_token, true
+  define_setting :on_token_refresh
 end

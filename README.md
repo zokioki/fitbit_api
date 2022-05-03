@@ -109,6 +109,8 @@ When initializing a `FitbitAPI::Client` instance, you're given access to a handf
 
 - `:auto_refresh_token` - Automatically refreshes the access token once expired (default: true).
 
+- `:on_token_refresh` - A callback to be invoked whenever the access token is refreshed (default: nil).
+
 If using this library in Rails, you can configure your options using an initializer:
 
 ```ruby

@@ -14,7 +14,7 @@ require 'fitbit_api/water'
 module FitbitAPI
   class Client
     attr_accessor :api_version, :unit_system, :locale, :scope,
-                  :snake_case_keys, :symbolize_keys, :auto_refresh_token
+                  :snake_case_keys, :symbolize_keys, :auto_refresh_token, :on_token_refresh
     attr_reader   :token, :user_id
 
     def initialize(opts={})
@@ -41,6 +41,8 @@ module FitbitAPI
     def refresh_token!
       @token = @token.refresh!(headers: auth_headers)
       @user_id ||= @token.params['user_id']
+      on_token_refresh.call(@token) if on_token_refresh.respond_to?(:call)
+
       @token
     end
 
@@ -74,7 +76,8 @@ module FitbitAPI
     def assign_attrs(opts)
       attrs = %i[client_id client_secret redirect_uri site_url
                  authorize_url token_url unit_system locale scope
-                 api_version snake_case_keys symbolize_keys auto_refresh_token].freeze
+                 api_version snake_case_keys symbolize_keys
+                 auto_refresh_token on_token_refresh].freeze
 
       attrs.each do |attr|
         instance_variable_set("@#{attr}", (opts[attr] || FitbitAPI.send(attr)))
