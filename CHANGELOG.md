@@ -1,3 +1,7 @@
+0.10.1
+------
+- Fix docs for listed options
+
 0.10.0
 ------
 - Add `auto_refresh_token` config to make token auto-refreshing configurable (defaults to true).
