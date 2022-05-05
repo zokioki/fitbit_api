@@ -16,7 +16,7 @@ module FitbitAPI
 
     # Adds the alarm settings to a given ID for a given device.
     #
-    #   add_alarm(body: { time: "07:15-08:00", enabled: true, recurring: true, week_days: "MONDAY,FRIDAY,SATURDAY" })
+    #   add_alarm(123, body: { time: "07:15-08:00", recurring: true, week_days: "MONDAY,FRIDAY,SATURDAY" })
     #
     # @param tracker_id [Integer] The ID of the tracker for which the alarm is created
     #
@@ -30,6 +30,8 @@ module FitbitAPI
     end
 
     # Updates the alarm entry with a given ID for a given device.
+    #
+    #   update_alarm(123, 987, body: { week_days: "TUESDAY,SUNDAY" })
     #
     # @param tracker_id [Integer] The ID of the tracker for which the alarm is created
     # @param alarm_id [Integer] The ID of the alarm to be updated
@@ -51,6 +53,8 @@ module FitbitAPI
     # =============
 
     # Deletes the user's device alarm entry with the given ID for a given device.
+    #
+    #   delete_alarm(123, 987)
     #
     # @param tracker_id [Integer] The ID of the tracker for which the alarm is to be deleted
     # @param alarm_id [Integer] The ID of the alarm to be deleted
