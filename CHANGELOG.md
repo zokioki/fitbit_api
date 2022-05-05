@@ -1,3 +1,10 @@
+0.10.0
+------
+- Add `auto_refresh_token` config to make token auto-refreshing configurable (defaults to true).
+- Add `on_token_refresh` config to specify callback to execute on token refresh (optional).
+- Bump `bundler` development dependency
+- Clean up documentation formatting
+
 0.9.1
 -----
 - Fix `sleep_time_series` endpoint
