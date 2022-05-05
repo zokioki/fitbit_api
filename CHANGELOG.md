@@ -1,3 +1,7 @@
+0.10.2
+------
+- Fix docs for examples
+
 0.10.1
 ------
 - Fix docs for listed options
