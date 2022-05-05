@@ -35,11 +35,11 @@ module FitbitAPI
     #
     #   create_or_update_daily_goals(body: {calories_out: 2000, active_minutes: 90, floors: 5})
     #
-    # @option calories_out [Integer] Calories output goal value
-    # @option active_minutes [Integer] Active minutes goal value
-    # @option floors [Integer] Floor goal value
-    # @option distance [Integer, Float] Distance goal value
-    # @option steps [Integer] Steps goal value
+    # @param calories_out [Integer] Calories output goal value
+    # @param active_minutes [Integer] Active minutes goal value
+    # @param floors [Integer] Floor goal value
+    # @param distance [Integer, Float] Distance goal value
+    # @param steps [Integer] Steps goal value
 
     def create_or_update_daily_goals(opts={})
       post("user/#{user_id}/activities/goals/daily.json", opts)
@@ -50,11 +50,11 @@ module FitbitAPI
     #
     #   create_or_update_weekly_goals(body: { active_minutes: 300, floors: 20 })
     #
-    # @option calories_out [Integer] Calories output goal value
-    # @option active_minutes [Integer] Active minutes goal value
-    # @option floors [Integer] Floor goal value
-    # @option distance [Integer, Float] Distance goal value
-    # @option steps [Integer] Steps goal value
+    # @param calories_out [Integer] Calories output goal value
+    # @param active_minutes [Integer] Active minutes goal value
+    # @param floors [Integer] Floor goal value
+    # @param distance [Integer, Float] Distance goal value
+    # @param steps [Integer] Steps goal value
 
     def create_or_update_weekly_goals(opts={})
       post("user/#{user_id}/activities/goals/weekly.json", opts)

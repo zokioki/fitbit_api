@@ -54,11 +54,11 @@ module FitbitAPI
     #
     #   activity_logs_list(before_date: Date.parse('2021-05-24'), limit: 5)
     #
-    # @option before_date [Date] Specify when filtering entries that occured before the given date
-    # @option after_date [Date] Specify when filtering entries that occured after the given date
-    # @option sort [String] the Sort order of entries by date (asc or desc)
-    # @option offset [Integer] The offset number of entries. Must always be 0
-    # @option limit [Integer] The max of the number of entries returned (max: 20)
+    # @param before_date [Date] Specify when filtering entries that occured before the given date
+    # @param after_date [Date] Specify when filtering entries that occured after the given date
+    # @param sort [String] the Sort order of entries by date (asc or desc)
+    # @param offset [Integer] The offset number of entries. Must always be 0
+    # @param limit [Integer] The max of the number of entries returned (max: 20)
 
     def activity_logs_list(opts={})
       opts[:params] = {}
@@ -153,14 +153,14 @@ module FitbitAPI
     #
     #   log_activity(body: { activity_id: 90013, manual_calories: 300, duration_millis: 6000000 })
     #
-    # @option activity_id [Integer, String] The activity ID
-    # @option activity_name [String] Custom activity name. Either activity ID or activity_name must be provided
-    # @option manual_calories [Integer] Calories burned, specified manually. Required with activity_name, otherwise optional
-    # @option start_time [String] Activity start time; formatted in HH:mm:ss
-    # @option duration_millis [Integer] Duration in milliseconds
-    # @option date [String] Log entry date; formatted in yyyy-MM-dd
-    # @option distance [Integer] Distance; required for logging directory activity
-    # @option distance_unit [String] Distance measurement unit
+    # @param activity_id [Integer, String] The activity ID
+    # @param activity_name [String] Custom activity name. Either activity ID or activity_name must be provided
+    # @param manual_calories [Integer] Calories burned, specified manually. Required with activity_name, otherwise optional
+    # @param start_time [String] Activity start time; formatted in HH:mm:ss
+    # @param duration_millis [Integer] Duration in milliseconds
+    # @param date [String] Log entry date; formatted in yyyy-MM-dd
+    # @param distance [Integer] Distance; required for logging directory activity
+    # @param distance_unit [String] Distance measurement unit
 
     def log_activity(opts)
       post("user/#{user_id}/activities.json", opts)
