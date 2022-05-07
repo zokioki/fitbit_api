@@ -20,32 +20,32 @@ module FitbitAPI
     #
     # @param date [Date] The date for which to retrieve the activity data.
 
-    def daily_activity_summary(date=Date.today, opts={})
-      get("user/#{user_id}/activities/date/#{format_date(date)}.json", opts)
+    def daily_activity_summary(date=Date.today)
+      get("user/#{user_id}/activities/date/#{format_date(date)}.json")
     end
 
     # Retrieves a list of a user's frequent activities in the format requested using
     # units in the unit system which corresponds to the Accept-Language header provided.
 
-    def frequent_activities(opts={})
-      get("user/#{user_id}/activities/frequent.json", opts)
+    def frequent_activities
+      get("user/#{user_id}/activities/frequent.json")
     end
 
-    def recent_activities(opts={})
-      get("user/#{user_id}/activities/recent.json", opts)
+    def recent_activities
+      get("user/#{user_id}/activities/recent.json")
     end
 
     # Returns a list of a user's favorite activities.
 
-    def favorite_activities(opts={})
-      get("user/#{user_id}/activities/favorite.json", opts)
+    def favorite_activities
+      get("user/#{user_id}/activities/favorite.json")
     end
 
-    # Gets a tree of all valid Fitbit public activities from the activities catalog
+    # Gets a list of all valid Fitbit public activities from the activities catalog
     # as well as private custom activities the user created.
 
-    def all_activities(opts={})
-      get('activities.json', opts)
+    def all_activities
+      get('activities.json')
     end
 
     # Retrieves a list of a user's activity log entries before or after a given day
@@ -79,8 +79,8 @@ module FitbitAPI
     # Activity statistics includes Lifetime and Best achievement values from the
     # My Achievements tile on the website dashboard.
 
-    def lifetime_stats(opts={})
-      get("user/#{user_id}/activities.json", opts)
+    def lifetime_stats
+      get("user/#{user_id}/activities.json")
     end
 
     def activity_time_series(resource, opts={})
@@ -101,10 +101,11 @@ module FitbitAPI
       end
 
       if period
-        result = get("user/#{user_id}/activities/#{resource}/date/#{format_date(end_date)}/#{period}.json", opts)
+        result = get("user/#{user_id}/activities/#{resource}/date/#{format_date(end_date)}/#{period}.json")
       else
-        result = get("user/#{user_id}/activities/#{resource}/date/#{format_date(start_date)}/#{format_date(end_date)}.json", opts)
+        result = get("user/#{user_id}/activities/#{resource}/date/#{format_date(start_date)}/#{format_date(end_date)}.json")
       end
+
       # remove root key from response
       result.values[0]
     end

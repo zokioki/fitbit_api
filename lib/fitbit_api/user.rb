@@ -1,15 +1,15 @@
 module FitbitAPI
   class Client
-    def profile(opts={})
-      get("user/#{user_id}/profile.json", opts)
+    def profile
+      get("user/#{user_id}/profile.json")
     end
 
-    def badges(opts={})
-      get("user/#{user_id}/badges.json", opts)
+    def badges
+      get("user/#{user_id}/badges.json")
     end
 
-    def update_profile(opts)
-      post("user/#{user_id}/profile.json", opts)
+    def update_profile(body)
+      post("user/#{user_id}/profile.json", body)
     end
   end
 end

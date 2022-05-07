@@ -5,26 +5,26 @@ module FitbitAPI
 
     # Retrieves a user's current weight goal.
 
-    def weight_goal(opts={})
-      get("user/-/body/log/weight/goal.json", opts)
+    def weight_goal
+      get("user/-/body/log/weight/goal.json")
     end
 
     # Retrieves a user's current body fat percentage goal.
 
-    def body_fat_goal(opts={})
-      get("user/-/body/log/fat/goal.json", opts)
+    def body_fat_goal
+      get("user/-/body/log/fat/goal.json")
     end
 
     # Retrieves a user's current daily activity goals.
 
-    def daily_goals(opts={})
-      get("user/#{user_id}/activities/goals/daily.json", opts)
+    def daily_goals
+      get("user/#{user_id}/activities/goals/daily.json")
     end
 
     # Retrieves a user's current weekly activity goals.
 
-    def weekly_goals(opts={})
-      get("user/#{user_id}/activities/goals/weekly.json", opts)
+    def weekly_goals
+      get("user/#{user_id}/activities/goals/weekly.json")
     end
 
     # POST Goals

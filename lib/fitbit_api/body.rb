@@ -2,12 +2,12 @@ module FitbitAPI
   class Client
     BODY_RESOURCES = %w(bmi fat weight)
 
-    def weight_logs(date=Date.today, opts={})
-      get("user/-/body/log/weight/date/#{format_date(date)}.json", opts)
+    def weight_logs(date=Date.today)
+      get("user/-/body/log/weight/date/#{format_date(date)}.json")
     end
 
-    def body_fat_logs(date=Date.today, opts={})
-      get("user/-/body/log/fat/date/#{format_date(date)}.json", opts)
+    def body_fat_logs(date=Date.today)
+      get("user/-/body/log/fat/date/#{format_date(date)}.json")
     end
 
     def body_time_series(resource, opts={})
@@ -28,28 +28,29 @@ module FitbitAPI
       end
 
       if period
-        result = get("user/#{user_id}/body/#{resource}/date/#{format_date(end_date)}/#{period}.json", opts)
+        result = get("user/#{user_id}/body/#{resource}/date/#{format_date(end_date)}/#{period}.json")
       else
-        result = get("user/#{user_id}/body/#{resource}/date/#{format_date(start_date)}/#{format_date(end_date)}.json", opts)
+        result = get("user/#{user_id}/body/#{resource}/date/#{format_date(start_date)}/#{format_date(end_date)}.json")
       end
+
       # remove root key from response
       result.values[0]
     end
 
-    def log_weight(opts)
-      post("user/#{user_id}/body/log/weight.json", opts)
+    def log_weight(body)
+      post("user/#{user_id}/body/log/weight.json", body)
     end
 
-    def delete_weight_log(weight_log_id, opts={})
-      delete("user/#{user_id}/body/log/weight/#{weight_log_id}.json", opts)
+    def delete_weight_log(weight_log_id)
+      delete("user/#{user_id}/body/log/weight/#{weight_log_id}.json")
     end
 
-    def log_body_fat(opts)
-      post("user/#{user_id}/body/log/fat.json", opts)
+    def log_body_fat(body)
+      post("user/#{user_id}/body/log/fat.json", body)
     end
 
-    def delete_body_fat_log(body_fat_log_id, opts={})
-      delete("user/#{user_id}/body/log/fat/#{body_fat_log_id}.json", opts)
+    def delete_body_fat_log(body_fat_log_id)
+      delete("user/#{user_id}/body/log/fat/#{body_fat_log_id}.json")
     end
   end
 end

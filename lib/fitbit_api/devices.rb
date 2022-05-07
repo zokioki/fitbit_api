@@ -1,7 +1,7 @@
 module FitbitAPI
   class Client
-    def devices(opts={})
-      get("user/#{user_id}/devices.json", opts)
+    def devices
+      get("user/#{user_id}/devices.json")
     end
   end
 end

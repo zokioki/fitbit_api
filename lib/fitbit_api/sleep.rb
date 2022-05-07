@@ -3,8 +3,8 @@ module FitbitAPI
     SLEEP_RESOURCES = %w(startTime timeInBed minutesAsleep awakeningsCount
                          minutesAwake minutesToFallAsleep minutesAfterWakeup efficiency)
 
-    def sleep_logs(date=Date.today, opts={})
-      get("user/#{user_id}/sleep/date/#{format_date(date)}.json", opts)
+    def sleep_logs(date=Date.today)
+      get("user/#{user_id}/sleep/date/#{format_date(date)}.json")
     end
 
     def sleep_time_series(resource, opts={})
@@ -25,10 +25,11 @@ module FitbitAPI
       end
 
       if period
-        result = get("user/#{user_id}/sleep/#{resource}/date/#{format_date(end_date)}/#{period}.json", opts)
+        result = get("user/#{user_id}/sleep/#{resource}/date/#{format_date(end_date)}/#{period}.json")
       else
-        result = get("user/#{user_id}/sleep/#{resource}/date/#{format_date(start_date)}/#{format_date(end_date)}.json", opts)
+        result = get("user/#{user_id}/sleep/#{resource}/date/#{format_date(start_date)}/#{format_date(end_date)}.json")
       end
+
       # remove root key from response
       result.values[0]
     end

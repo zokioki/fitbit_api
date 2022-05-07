@@ -7,8 +7,8 @@ module FitbitAPI
     #
     # @params tracker_id [Integer] The ID of the tracker for which the data is returned
 
-    def alarms(tracker_id, opts={})
-      get("user/#{user_id}/devices/tracker/#{tracker_id}/alarms.json", opts)
+    def alarms(tracker_id)
+      get("user/#{user_id}/devices/tracker/#{tracker_id}/alarms.json")
     end
 
     # POST Alarms
@@ -59,8 +59,8 @@ module FitbitAPI
     # @param tracker_id [Integer] The ID of the tracker for which the alarm is to be deleted
     # @param alarm_id [Integer] The ID of the alarm to be deleted
 
-    def delete_alarm(tracker_id, alarm_id, opts={})
-      delete("user/#{user_id}/devices/tracker/#{tracker_id}/alarms/#{alarm_id}.json", opts)
+    def delete_alarm(tracker_id, alarm_id)
+      delete("user/#{user_id}/devices/tracker/#{tracker_id}/alarms/#{alarm_id}.json")
     end
   end
 end

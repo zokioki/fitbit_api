@@ -2,24 +2,24 @@ module FitbitAPI
   class Client
     FOOD_RESOURCES = %w(caloriesIn water)
 
-    def food_logs(date=Date.today, opts={})
-      get("user/#{user_id}/foods/log/date/#{format_date(date)}.json", opts)
+    def food_logs(date=Date.today)
+      get("user/#{user_id}/foods/log/date/#{format_date(date)}.json")
     end
 
-    def recent_foods(opts={})
-      get("user/#{user_id}/foods/log/recent.json", opts)
+    def recent_foods
+      get("user/#{user_id}/foods/log/recent.json")
     end
 
-    def frequent_foods(opts={})
-      get("user/#{user_id}/foods/log/frequent.json", opts)
+    def frequent_foods
+      get("user/#{user_id}/foods/log/frequent.json")
     end
 
-    def favorite_foods(opts={})
-      get("user/#{user_id}/foods/log/favorite.json", opts)
+    def favorite_foods
+      get("user/#{user_id}/foods/log/favorite.json")
     end
 
-    def food_goals(opts={})
-      get("user/#{user_id}/foods/log/goal.json", opts)
+    def food_goals
+      get("user/#{user_id}/foods/log/goal.json")
     end
 
     def food_time_series(resource, opts={})
@@ -40,10 +40,11 @@ module FitbitAPI
       end
 
       if period
-        result = get("user/#{user_id}/foods/log/#{resource}/date/#{format_date(end_date)}/#{period}.json", opts)
+        result = get("user/#{user_id}/foods/log/#{resource}/date/#{format_date(end_date)}/#{period}.json")
       else
-        result = get("user/#{user_id}/foods/log/#{resource}/date/#{format_date(start_date)}/#{format_date(end_date)}.json", opts)
+        result = get("user/#{user_id}/foods/log/#{resource}/date/#{format_date(start_date)}/#{format_date(end_date)}.json")
       end
+
       # remove root key from response
       result.values[0]
     end

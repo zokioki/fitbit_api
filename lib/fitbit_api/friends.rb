@@ -1,11 +1,11 @@
 module FitbitAPI
   class Client
-    def friends(opts={})
-      get("user/#{user_id}/friends.json", opts)
+    def friends
+      get("user/#{user_id}/friends.json")
     end
 
-    def friends_leaderboard(opts={})
-      get("user/#{user_id}/friends/leaderboard.json", opts)
+    def friends_leaderboard
+      get("user/#{user_id}/friends/leaderboard.json")
     end
   end
 end
