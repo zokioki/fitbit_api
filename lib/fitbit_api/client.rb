@@ -126,7 +126,7 @@ module FitbitAPI
       response = token.public_send(verb, request_path, request_options).response
       object = MultiJson.load(response.body) unless response.status == 204
 
-      process_keys!(object, opts)
+      process_keys!(object)
     end
 
     def auth_headers
@@ -141,10 +141,11 @@ module FitbitAPI
       }
     end
 
-    def process_keys!(object, opts={})
-      deep_keys_to_snake_case!(object) if (opts[:snake_case_keys] || snake_case_keys)
-      deep_symbolize_keys!(object) if (opts[:symbolize_keys] || symbolize_keys)
-      return object
+    def process_keys!(object)
+      deep_keys_to_snake_case!(object) if snake_case_keys
+      deep_symbolize_keys!(object) if symbolize_keys
+
+      object
     end
   end
 end
