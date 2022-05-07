@@ -1,3 +1,9 @@
+0.11.0
+------
+- Make `get` and `post` methods more ergonomic (can pass params & body directly instead of via nested object).
+- Allow `delete` request method to specify query params.
+- Remove per-request response payload transformations (can be set per-client).
+
 0.10.2
 ------
 - Fix docs for examples
