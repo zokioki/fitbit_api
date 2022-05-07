@@ -125,9 +125,9 @@ module FitbitAPI
       refresh_token! if auto_refresh_token && token.expired?
 
       response = token.public_send(verb, request_path, request_options).response
-      object = MultiJson.load(response.body) unless response.status == 204
+      response_body = MultiJson.load(response.body) unless response.status == 204
 
-      process_keys!(object)
+      process_keys!(response_body)
     end
 
     def auth_headers
