@@ -1,5 +1,6 @@
 0.11.0
 ------
+- Add support for subscriptions endpoints.
 - Make `get` and `post` methods more ergonomic (can pass params & body directly instead of via nested object).
 - Allow `delete` request method to specify query params.
 - Remove per-request response payload transformations (can be set per-client).
