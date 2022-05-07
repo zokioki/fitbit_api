@@ -16,7 +16,7 @@ module FitbitAPI
 
     # Adds the alarm settings to a given ID for a given device.
     #
-    #   add_alarm(123, body: { time: "07:15-08:00", recurring: true, week_days: "MONDAY,FRIDAY,SATURDAY" })
+    #   add_alarm(123, time: "07:15-08:00", recurring: true, week_days: "MONDAY,FRIDAY,SATURDAY")
     #
     # @param tracker_id [Integer] The ID of the tracker for which the alarm is created
     #
@@ -25,13 +25,13 @@ module FitbitAPI
     # @param recurring [Boolean] If false, the alarm is a single event
     # @param week_days [String] Comma separated list of days of the week on which the alarm vibrates (MONDAY,TUESDAY)
 
-    def add_alarm(tracker_id, opts={})
-      post("user/#{user_id}/devices/tracker/#{tracker_id}/alarms.json", opts)
+    def add_alarm(tracker_id, body={})
+      post("user/#{user_id}/devices/tracker/#{tracker_id}/alarms.json", body)
     end
 
     # Updates the alarm entry with a given ID for a given device.
     #
-    #   update_alarm(123, 987, body: { week_days: "TUESDAY,SUNDAY" })
+    #   update_alarm(123, 987, week_days: "TUESDAY,SUNDAY")
     #
     # @param tracker_id [Integer] The ID of the tracker for which the alarm is created
     # @param alarm_id [Integer] The ID of the alarm to be updated
@@ -45,8 +45,8 @@ module FitbitAPI
     # @param label [String] Label for alarm
     # @param vibe [String] Vibe pattern; only one value for now (DEFAULT)
 
-    def update_alarm(tracker_id, alarm_id, opts={})
-      post("user/#{user_id}/devices/tracker/#{tracker_id}/alarms/#{alarm_id}.json", opts)
+    def update_alarm(tracker_id, alarm_id, body={})
+      post("user/#{user_id}/devices/tracker/#{tracker_id}/alarms/#{alarm_id}.json", body)
     end
 
     # DELETE Alarms

@@ -60,16 +60,9 @@ module FitbitAPI
     # @param offset [Integer] The offset number of entries. Must always be 0
     # @param limit [Integer] The max of the number of entries returned (max: 20)
 
-    def activity_logs_list(opts={})
-      opts[:params] = {}
-      param_defaults = { before_date: Date.today, after_date: nil, sort: 'desc', limit: 20, offset: 0 }
-
-      # move param values from top-level opts into :params sub-hash
-      param_defaults.each do |key, default_val|
-        opts[:params][key] = opts.delete(key) || default_val
-      end
-
-      get("user/#{user_id}/activities/list.json", opts)
+    def activity_logs_list(params={})
+      default_params = { before_date: Date.today, after_date: nil, sort: 'desc', limit: 20, offset: 0 }
+      get("user/#{user_id}/activities/list.json", default_params.merge(params))
     end
 
     # Returns the details of a specific activity in the Fitbit activities database in the format requested.
@@ -151,7 +144,7 @@ module FitbitAPI
     # Creates log entry for an activity or user's private custom activity using units
     # in the unit system which corresponds to the Accept-Language header provided.
     #
-    #   log_activity(body: { activity_id: 90013, manual_calories: 300, duration_millis: 6000000 })
+    #   log_activity(activity_id: 90013, manual_calories: 300, duration_millis: 6000000)
     #
     # @param activity_id [Integer, String] The activity ID
     # @param activity_name [String] Custom activity name. Either activity ID or activity_name must be provided
@@ -162,8 +155,8 @@ module FitbitAPI
     # @param distance [Integer] Distance; required for logging directory activity
     # @param distance_unit [String] Distance measurement unit
 
-    def log_activity(opts)
-      post("user/#{user_id}/activities.json", opts)
+    def log_activity(body)
+      post("user/#{user_id}/activities.json", body)
     end
 
     # Adds the activity with the given ID to user's list of favorite activities.

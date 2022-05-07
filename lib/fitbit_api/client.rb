@@ -46,16 +46,16 @@ module FitbitAPI
       @token
     end
 
-    def get(path, opts={})
-      request(:get, path, opts)
+    def get(path, params={}, opts={})
+      request(:get, path, opts.merge(params: params))
     end
 
-    def post(path, opts={})
-      request(:post, path, opts)
+    def post(path, body={}, opts={})
+      request(:post, path, opts.merge(body: body))
     end
 
-    def delete(path, opts={})
-      request(:delete, path, opts)
+    def delete(path, params={}, opts={})
+      request(:delete, path, opts.merge(params: params))
     end
 
     private
@@ -116,6 +116,7 @@ module FitbitAPI
 
     def request(verb, path, opts={})
       request_path = "#{@api_version}/#{path}"
+      request_headers = default_request_headers.merge(opts[:headers] || {})
       request_options = opts.merge(headers: request_headers)
 
       deep_keys_to_camel_case!(request_options[:params])
@@ -133,7 +134,7 @@ module FitbitAPI
       { 'Authorization' => ('Basic ' + Base64.encode64(@client_id + ':' + @client_secret)) }
     end
 
-    def request_headers
+    def default_request_headers
       {
         'User-Agent' => "fitbit_api gem (v#{FitbitAPI::VERSION})",
         'Accept-Language' => @unit_system,
