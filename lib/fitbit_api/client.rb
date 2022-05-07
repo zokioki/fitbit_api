@@ -8,6 +8,7 @@ require 'fitbit_api/devices'
 require 'fitbit_api/food'
 require 'fitbit_api/friends'
 require 'fitbit_api/sleep'
+require 'fitbit_api/subscriptions'
 require 'fitbit_api/user'
 require 'fitbit_api/water'
 
