@@ -42,9 +42,9 @@ module FitbitAPI
       end
 
       if (start_time && end_time)
-        get("user/-/activities/heart/date/#{format_date(date)}/1d/#{detail_level}/time/#{format_time(start_time)}/#{format_time(end_time)}.json")
+        get("user/#{user_id}/activities/heart/date/#{format_date(date)}/1d/#{detail_level}/time/#{format_time(start_time)}/#{format_time(end_time)}.json")
       else
-        get("user/-/activities/heart/date/#{format_date(date)}/1d/#{detail_level}.json")
+        get("user/#{user_id}/activities/heart/date/#{format_date(date)}/1d/#{detail_level}.json")
       end
     end
   end

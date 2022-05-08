@@ -3,11 +3,11 @@ module FitbitAPI
     BODY_RESOURCES = %w(bmi fat weight)
 
     def weight_logs(date=Date.today)
-      get("user/-/body/log/weight/date/#{format_date(date)}.json")
+      get("user/#{user_id}/body/log/weight/date/#{format_date(date)}.json")
     end
 
     def body_fat_logs(date=Date.today)
-      get("user/-/body/log/fat/date/#{format_date(date)}.json")
+      get("user/#{user_id}/body/log/fat/date/#{format_date(date)}.json")
     end
 
     def body_time_series(resource, opts={})

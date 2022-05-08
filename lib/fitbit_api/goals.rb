@@ -6,13 +6,13 @@ module FitbitAPI
     # Retrieves a user's current weight goal.
 
     def weight_goal
-      get("user/-/body/log/weight/goal.json")
+      get("user/#{user_id}/body/log/weight/goal.json")
     end
 
     # Retrieves a user's current body fat percentage goal.
 
     def body_fat_goal
-      get("user/-/body/log/fat/goal.json")
+      get("user/#{user_id}/body/log/fat/goal.json")
     end
 
     # Retrieves a user's current daily activity goals.
