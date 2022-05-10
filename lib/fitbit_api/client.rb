@@ -47,16 +47,16 @@ module FitbitAPI
       @token
     end
 
-    def get(path, params={}, opts={})
-      request(:get, path, opts.merge(params: params))
+    def get(path, params={}, opts={}, &block)
+      request(:get, path, opts.merge(params: params), &block)
     end
 
-    def post(path, body={}, opts={})
-      request(:post, path, opts.merge(body: body))
+    def post(path, body={}, opts={}, &block)
+      request(:post, path, opts.merge(body: body), &block)
     end
 
-    def delete(path, params={}, opts={})
-      request(:delete, path, opts.merge(params: params))
+    def delete(path, params={}, opts={}, &block)
+      request(:delete, path, opts.merge(params: params), &block)
     end
 
     private
@@ -115,7 +115,7 @@ module FitbitAPI
       refresh_token! if @token.token.empty?
     end
 
-    def request(verb, path, opts={})
+    def request(verb, path, opts={}, &block)
       request_path = "#{@api_version}/#{path}"
       request_headers = default_request_headers.merge(opts[:headers] || {})
       request_options = opts.merge(headers: request_headers)
@@ -125,7 +125,7 @@ module FitbitAPI
 
       refresh_token! if auto_refresh_token && token.expired?
 
-      response = token.public_send(verb, request_path, request_options).response
+      response = token.public_send(verb, request_path, request_options, &block).response
       response_body = MultiJson.load(response.body) unless response.status == 204
 
       process_keys!(response_body)
