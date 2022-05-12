@@ -48,5 +48,11 @@ module FitbitAPI
       # remove root key from response
       result.values[0]
     end
+
+    # Retrieves the food locales used to search, log or create food
+
+    def food_locales
+      get("foods/locales.json")
+    end
   end
 end
