@@ -54,5 +54,11 @@ module FitbitAPI
     def food_locales
       get("foods/locales.json")
     end
+
+    # Retrieves a list of all valid Fitbit food units
+
+    def food_units
+      get("foods/units.json")
+    end
   end
 end
