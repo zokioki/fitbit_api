@@ -6,6 +6,14 @@ module FitbitAPI
       get("user/#{user_id}/foods/log/date/#{format_date(date)}.json")
     end
 
+    # Retrieves a list of public foods from the Fitbit foods database and private foods the user created
+    #
+    # @params query [String] The search query
+
+    def search_foods(params)
+      get("foods/search.json", params)
+    end
+
     def recent_foods
       get("user/#{user_id}/foods/log/recent.json")
     end
