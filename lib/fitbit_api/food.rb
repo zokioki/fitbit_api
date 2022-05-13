@@ -30,6 +30,20 @@ module FitbitAPI
       get("user/#{user_id}/foods/log/goal.json")
     end
 
+    # Creates a food log entry
+    #
+    # @params body [Hash] The POST request body
+
+    def create_food_log(body)
+      post("user/#{user_id}/foods/log.json", body)
+    end
+
+    # Adds a food with the given ID to the user's list of favorite foods
+
+    def add_favorite_food(food_id)
+      post("user/#{user_id}/foods/log/favorite/#{food_id}.json")
+    end
+
     def food_time_series(resource, opts={})
       start_date = opts[:start_date]
       end_date   = opts[:end_date] || Date.today
