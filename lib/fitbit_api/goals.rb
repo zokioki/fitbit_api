@@ -17,13 +17,13 @@ module FitbitAPI
 
     # Retrieves a user's current daily activity goals.
 
-    def daily_goals
+    def daily_activity_goals
       get("user/#{user_id}/activities/goals/daily.json")
     end
 
     # Retrieves a user's current weekly activity goals.
 
-    def weekly_goals
+    def weekly_activity_goals
       get("user/#{user_id}/activities/goals/weekly.json")
     end
 
@@ -41,7 +41,7 @@ module FitbitAPI
     # @param distance [Integer, Float] Distance goal value
     # @param steps [Integer] Steps goal value
 
-    def create_or_update_daily_goals(body={})
+    def create_or_update_daily_activity_goals(body={})
       post("user/#{user_id}/activities/goals/daily.json", body)
     end
 
@@ -56,7 +56,7 @@ module FitbitAPI
     # @param distance [Integer, Float] Distance goal value
     # @param steps [Integer] Steps goal value
 
-    def create_or_update_weekly_goals(body={})
+    def create_or_update_weekly_activity_goals(body={})
       post("user/#{user_id}/activities/goals/weekly.json", body)
     end
   end
