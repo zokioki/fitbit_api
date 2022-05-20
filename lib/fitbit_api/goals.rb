@@ -33,7 +33,7 @@ module FitbitAPI
     # Creates or updates a user's daily activity goals and returns a response using units
     # in the unit system which corresponds to the Accept-Language header provided.
     #
-    #   create_or_update_daily_goals(calories_out: 2000, active_minutes: 90, floors: 5)
+    #   create_or_update_daily_activity_goals(calories_out: 2000, active_minutes: 90, floors: 5)
     #
     # @param calories_out [Integer] Calories output goal value
     # @param active_minutes [Integer] Active minutes goal value
@@ -48,7 +48,7 @@ module FitbitAPI
     # Creates or updates a user's weekly activity goals and returns a response using units
     # in the unit system which corresponds to the Accept-Language header provided.
     #
-    #   create_or_update_weekly_goals(active_minutes: 300, floors: 20)
+    #   create_or_update_weekly_activity_goals(active_minutes: 300, floors: 20)
     #
     # @param calories_out [Integer] Calories output goal value
     # @param active_minutes [Integer] Active minutes goal value
@@ -58,6 +58,20 @@ module FitbitAPI
 
     def create_or_update_weekly_activity_goals(body={})
       post("user/#{user_id}/activities/goals/weekly.json", body)
+    end
+
+    # Creates or updates a user's weight goal.
+    #
+    # @param body [Hash] the POST request body
+    def create_or_update_weight_goal(body)
+      post("user/#{user_id}/body/log/weight/goal.json", body)
+    end
+
+    # Creates or updates a user's body fat goal.
+    #
+    # @param body [Hash] the POST request body
+    def create_or_update_body_fat_goal(body)
+      post("user/#{user_id}/body/log/fat/goal.json", body)
     end
   end
 end
