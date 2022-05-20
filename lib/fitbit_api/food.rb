@@ -26,10 +26,6 @@ module FitbitAPI
       get("user/#{user_id}/foods/log/favorite.json")
     end
 
-    def food_goals
-      get("user/#{user_id}/foods/log/goal.json")
-    end
-
     # Creates a food log entry
     #
     # @params body [Hash] The POST request body

@@ -33,6 +33,18 @@ module FitbitAPI
       get("user/#{user_id}/sleep/goal.json")
     end
 
+    # Retrieves the user's current daily calorie consumption goal and/or food plan.
+
+    def food_goals
+      get("user/#{user_id}/foods/log/goal.json")
+    end
+
+    # Retrieves a user's daily water consumption goal.
+
+    def water_goal
+      get("user/#{user_id}/foods/log/water/goal.json")
+    end
+
     # POST Goals
     # ==========
 
@@ -87,6 +99,22 @@ module FitbitAPI
 
     def create_or_update_sleep_goal(body)
       post("user/#{user_id}/sleep/goal.json", body)
+    end
+
+    # Creates or updates a user's daily calorie consumption or food plan goals.
+    #
+    # @param body [Hash] the POST request body
+
+    def create_or_update_food_goals(body)
+      post("user/#{user_id}/foods/log/goal.json", body)
+    end
+
+    # Creates or updates a user's daily water consumption goal.
+    #
+    # @param body [Hash] the POST request body
+
+    def create_or_update_water_goal(body)
+      post("user/#{user_id}/foods/log/water/goal.json", body)
     end
   end
 end
