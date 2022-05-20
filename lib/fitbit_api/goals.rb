@@ -27,6 +27,12 @@ module FitbitAPI
       get("user/#{user_id}/activities/goals/weekly.json")
     end
 
+    # Retrieves a user's current sleep goal.
+
+    def sleep_goal
+      get("user/#{user_id}/sleep/goal.json")
+    end
+
     # POST Goals
     # ==========
 
@@ -70,8 +76,17 @@ module FitbitAPI
     # Creates or updates a user's body fat goal.
     #
     # @param body [Hash] the POST request body
+
     def create_or_update_body_fat_goal(body)
       post("user/#{user_id}/body/log/fat/goal.json", body)
+    end
+
+    # Create or update a user's sleep goal.
+    #
+    # @param body [Hash] the POST request body
+
+    def create_or_update_sleep_goal(body)
+      post("user/#{user_id}/sleep/goal.json", body)
     end
   end
 end
