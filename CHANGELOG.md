@@ -10,8 +10,8 @@
 - Rename a few methods for better accuracy/clarity:
   - daily_goals -> daily_activity_goals
   - weekly_goals -> weekly_activity_goals
-  - create_or_update_daily_goals -> create_or_update_daily_activity_goals
-  - create_or_update_weekly_goals -> create_or_update_weekly_activity_goals
+  - create_or_update_daily_goals -> update_daily_activity_goals
+  - create_or_update_weekly_goals -> update_weekly_activity_goals
 
 0.11.0
 ------
