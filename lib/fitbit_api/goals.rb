@@ -51,7 +51,7 @@ module FitbitAPI
     # Creates or updates a user's daily activity goals and returns a response using units
     # in the unit system which corresponds to the Accept-Language header provided.
     #
-    #   create_or_update_daily_activity_goals(calories_out: 2000, active_minutes: 90, floors: 5)
+    #   update_daily_activity_goals(calories_out: 2000, active_minutes: 90, floors: 5)
     #
     # @param calories_out [Integer] Calories output goal value
     # @param active_minutes [Integer] Active minutes goal value
@@ -59,14 +59,14 @@ module FitbitAPI
     # @param distance [Integer, Float] Distance goal value
     # @param steps [Integer] Steps goal value
 
-    def create_or_update_daily_activity_goals(body={})
+    def update_daily_activity_goals(body={})
       post("user/#{user_id}/activities/goals/daily.json", body)
     end
 
     # Creates or updates a user's weekly activity goals and returns a response using units
     # in the unit system which corresponds to the Accept-Language header provided.
     #
-    #   create_or_update_weekly_activity_goals(active_minutes: 300, floors: 20)
+    #   update_weekly_activity_goals(active_minutes: 300, floors: 20)
     #
     # @param calories_out [Integer] Calories output goal value
     # @param active_minutes [Integer] Active minutes goal value
@@ -74,14 +74,14 @@ module FitbitAPI
     # @param distance [Integer, Float] Distance goal value
     # @param steps [Integer] Steps goal value
 
-    def create_or_update_weekly_activity_goals(body={})
+    def update_weekly_activity_goals(body={})
       post("user/#{user_id}/activities/goals/weekly.json", body)
     end
 
     # Creates or updates a user's weight goal.
     #
     # @param body [Hash] the POST request body
-    def create_or_update_weight_goal(body)
+    def update_weight_goal(body)
       post("user/#{user_id}/body/log/weight/goal.json", body)
     end
 
@@ -89,7 +89,7 @@ module FitbitAPI
     #
     # @param body [Hash] the POST request body
 
-    def create_or_update_body_fat_goal(body)
+    def update_body_fat_goal(body)
       post("user/#{user_id}/body/log/fat/goal.json", body)
     end
 
@@ -97,7 +97,7 @@ module FitbitAPI
     #
     # @param body [Hash] the POST request body
 
-    def create_or_update_sleep_goal(body)
+    def update_sleep_goal(body)
       post("user/#{user_id}/sleep/goal.json", body)
     end
 
@@ -105,7 +105,7 @@ module FitbitAPI
     #
     # @param body [Hash] the POST request body
 
-    def create_or_update_food_goals(body)
+    def update_food_goals(body)
       post("user/#{user_id}/foods/log/goal.json", body)
     end
 
@@ -113,7 +113,7 @@ module FitbitAPI
     #
     # @param body [Hash] the POST request body
 
-    def create_or_update_water_goal(body)
+    def update_water_goal(body)
       post("user/#{user_id}/foods/log/water/goal.json", body)
     end
   end
