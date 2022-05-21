@@ -11,12 +11,7 @@ module FitbitAPI
 
     ACTIVITY_INTRADAY_RESOURCES = %w(calories steps distance floors elevation)
 
-    # GET Activities
-    # ==============
-
-    # Retrieves a summary and list of a user's activities and activity log entries
-    # for a given day in the format requested using units in the unit system which
-    # corresponds to the Accept-Language header provided.
+    # Retrieves a summary and list of a user's activities and activity log entries for a given day.
     #
     # @param date [Date] The date for which to retrieve the activity data.
 
@@ -24,12 +19,14 @@ module FitbitAPI
       get("user/#{user_id}/activities/date/#{format_date(date)}.json")
     end
 
-    # Retrieves a list of a user's frequent activities in the format requested using
-    # units in the unit system which corresponds to the Accept-Language header provided.
+    # Retrieves a list of a user's frequent activities.
 
     def frequent_activities
       get("user/#{user_id}/activities/frequent.json")
     end
+
+    # Retrieves a list of a user's recent activities types logged with some details
+    # of the last activity log of that type.
 
     def recent_activities
       get("user/#{user_id}/activities/recent.json")
@@ -139,9 +136,6 @@ module FitbitAPI
       end
     end
 
-    # POST Activities
-    # ===============
-
     # Creates log entry for an activity or user's private custom activity using units
     # in the unit system which corresponds to the Accept-Language header provided.
     #
@@ -167,9 +161,6 @@ module FitbitAPI
     def add_favorite_activity(activity_id)
       post("user/#{user_id}/activities/favorite/#{activity_id}.json")
     end
-
-    # DELETE Activities
-    # =================
 
     # Deletes a user's activity log entry with the given ID.
     #

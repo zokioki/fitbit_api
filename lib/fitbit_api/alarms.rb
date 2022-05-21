@@ -1,8 +1,5 @@
 module FitbitAPI
   class Client
-    # GET Alarms
-    # ==========
-
     # Returns a list of the set alarms connected to a user's account.
     #
     # @params tracker_id [Integer] The ID of the tracker for which the data is returned
@@ -10,9 +7,6 @@ module FitbitAPI
     def alarms(tracker_id)
       get("user/#{user_id}/devices/tracker/#{tracker_id}/alarms.json")
     end
-
-    # POST Alarms
-    # ===========
 
     # Adds the alarm settings to a given ID for a given device.
     #
@@ -48,9 +42,6 @@ module FitbitAPI
     def update_alarm(tracker_id, alarm_id, body={})
       post("user/#{user_id}/devices/tracker/#{tracker_id}/alarms/#{alarm_id}.json", body)
     end
-
-    # DELETE Alarms
-    # =============
 
     # Deletes the user's device alarm entry with the given ID for a given device.
     #

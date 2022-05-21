@@ -1,8 +1,5 @@
 module FitbitAPI
   class Client
-    # GET Goals
-    # =========
-
     # Retrieves a user's current weight goal.
 
     def weight_goal
