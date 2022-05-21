@@ -14,7 +14,7 @@ module FitbitAPI
 
     # Modifies a user's profile data.
     #
-    # @params body [Hash] The POST request body
+    # @param body [Hash] The POST request body
 
     def update_profile(body)
       post("user/#{user_id}/profile.json", body)

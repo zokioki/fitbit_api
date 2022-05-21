@@ -2,7 +2,7 @@ module FitbitAPI
   class Client
     # Returns a list of the set alarms connected to a user's account.
     #
-    # @params tracker_id [Integer] The ID of the tracker for which the data is returned
+    # @param tracker_id [Integer] The ID of the tracker for which the data is returned
 
     def alarms(tracker_id)
       get("user/#{user_id}/devices/tracker/#{tracker_id}/alarms.json")

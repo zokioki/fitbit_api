@@ -7,7 +7,7 @@ module FitbitAPI
     # periods that began on the previous date. For example, if you request a Sleep Log for 2021-12-22,
     # it may return a log entry that began the previous night on 2021-12-21, but ended on 2021-12-22.
     #
-    # @params date [Date, String] The date for the sleep log to be returned in the format yyyy-MM-dd
+    # @param date [Date, String] The date for the sleep log to be returned in the format yyyy-MM-dd
 
     def sleep_logs(date=Date.today)
       get("user/#{user_id}/sleep/date/#{format_date(date)}.json")
