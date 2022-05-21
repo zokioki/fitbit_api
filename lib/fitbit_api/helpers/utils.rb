@@ -1,6 +1,5 @@
 module FitbitAPI
   class Client
-
     PERIODS = %w(1d 7d 30d 1w 1m 3m 6m 1y max).freeze
 
     def format_date(date)
@@ -79,6 +78,5 @@ module FitbitAPI
       string.gsub!(/^\w{1}/) { |word| word.downcase } if opts[:lower]
       return string
     end
-
   end
 end
