@@ -20,11 +20,13 @@ module FitbitAPI
     #
     #   sleep_logs_list(before_date: Date.parse('2021-05-24'), limit: 5)
     #
-    # @param before_date [Date] Specify when filtering entries that occured before the given date
-    # @param after_date [Date] Specify when filtering entries that occured after the given date
-    # @param sort [String] the Sort order of entries by date (asc or desc)
-    # @param offset [Integer] The offset number of entries. Must always be 0
-    # @param limit [Integer] The max of the number of entries returned (max: 100)
+    # @param params [Hash] The request parameters
+    #
+    # @option params :before_date [Date] Specify when filtering entries that occured before the given date
+    # @option params :after_date [Date] Specify when filtering entries that occured after the given date
+    # @option params :sort [String] the Sort order of entries by date (asc or desc)
+    # @option params :offset [Integer] The offset number of entries. Must always be 0
+    # @option params :limit [Integer] The max of the number of entries returned (max: 100)
 
     def sleep_logs_list(params={})
       default_params = { before_date: Date.today, after_date: nil, sort: 'desc', limit: 20, offset: 0 }

@@ -42,19 +42,18 @@ module FitbitAPI
       get("user/#{user_id}/foods/log/water/goal.json")
     end
 
-    # POST Goals
-    # ==========
-
     # Creates or updates a user's daily activity goals and returns a response using units
     # in the unit system which corresponds to the Accept-Language header provided.
     #
     #   update_daily_activity_goals(calories_out: 2000, active_minutes: 90, floors: 5)
     #
-    # @param calories_out [Integer] Calories output goal value
-    # @param active_minutes [Integer] Active minutes goal value
-    # @param floors [Integer] Floor goal value
-    # @param distance [Integer, Float] Distance goal value
-    # @param steps [Integer] Steps goal value
+    # @param body [Hash] The POST request body
+    #
+    # @option body :calories_out [Integer] Calories output goal value
+    # @option body :active_minutes [Integer] Active minutes goal value
+    # @option body :floors [Integer] Floor goal value
+    # @option body :distance [Integer, Float] Distance goal value
+    # @option body :steps [Integer] Steps goal value
 
     def update_daily_activity_goals(body={})
       post("user/#{user_id}/activities/goals/daily.json", body)
@@ -65,11 +64,13 @@ module FitbitAPI
     #
     #   update_weekly_activity_goals(active_minutes: 300, floors: 20)
     #
-    # @param calories_out [Integer] Calories output goal value
-    # @param active_minutes [Integer] Active minutes goal value
-    # @param floors [Integer] Floor goal value
-    # @param distance [Integer, Float] Distance goal value
-    # @param steps [Integer] Steps goal value
+    # @param body [Hash] The POST request body
+    #
+    # @option body :calories_out [Integer] Calories output goal value
+    # @option body :active_minutes [Integer] Active minutes goal value
+    # @option body :floors [Integer] Floor goal value
+    # @option body :distance [Integer, Float] Distance goal value
+    # @option body :steps [Integer] Steps goal value
 
     def update_weekly_activity_goals(body={})
       post("user/#{user_id}/activities/goals/weekly.json", body)
