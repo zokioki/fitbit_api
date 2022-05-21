@@ -1,3 +1,7 @@
+0.12.2
+------
+- Fix docs formatting
+
 0.12.1
 ------
 - Some docs improvements
