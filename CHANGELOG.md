@@ -1,3 +1,7 @@
+0.12.1
+------
+- Some docs improvements
+
 0.12.0
 ------
 - Expand endpont support for foods (searching foods, creating custom foods, updating/deleting logs).
