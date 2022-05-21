@@ -1,3 +1,18 @@
+0.12.0
+------
+- Expand endpont support for foods (searching foods, creating custom foods, updating/deleting logs).
+- Expand endpoint support for water logging (create, update, delete water logs).
+- Expand endpoint support for sleep (list sleep logs, create/delete sleep logs).
+- Expand endpoint support for goals (food, sleep, water goals).
+- Add endpoint support for meals.
+- Allow `get`, `post`, and `delete` methods to accept blocks.
+- Switch to Github Actions for CI.
+- Rename a few methods for better accuracy/clarity:
+  - daily_goals -> daily_activity_goals
+  - weekly_goals -> weekly_activity_goals
+  - create_or_update_daily_goals -> create_or_update_daily_activity_goals
+  - create_or_update_weekly_goals -> create_or_update_weekly_activity_goals
+
 0.11.0
 ------
 - Add support for subscriptions endpoints.
