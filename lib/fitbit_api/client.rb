@@ -48,6 +48,14 @@ module FitbitAPI
       @token
     end
 
+    def revoke_token!
+      body = { token: token.token }
+      headers = default_request_headers.merge(auth_headers)
+      response = token.post('oauth2/revoke', { headers: headers, body: body }).response
+
+      process_keys!(MultiJson.load(response.body))
+    end
+
     def get(path, params={}, opts={}, &block)
       request(:get, path, opts.merge(params: params), &block)
     end
