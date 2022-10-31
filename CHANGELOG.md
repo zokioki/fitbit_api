@@ -1,3 +1,7 @@
+0.13.0
+------
+- Add support for token revocation via `revoke_token!`.
+
 0.12.2
 ------
 - Fix docs formatting
