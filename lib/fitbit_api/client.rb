@@ -1,5 +1,6 @@
 require 'fitbit_api/base'
 require 'fitbit_api/activities'
+require 'fitbit_api/breathing_rate'
 require 'fitbit_api/heart_rate'
 require 'fitbit_api/goals'
 require 'fitbit_api/alarms'
