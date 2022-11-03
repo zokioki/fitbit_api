@@ -100,7 +100,7 @@ When initializing a `FitbitAPI::Client` instance, you're given access to a handf
 | api_version        | API version to be used when making requests (default: "1") |
 | unit_system        | The measurement unit system to use for response values (default: "en_US") |
 | locale             | The locale to use for response values (default: "en_US") |
-| scope              | A space-delimited list of permissions being requested (default: "activity nutrition profile settings sleep social weight heartrate respiratory_rate") |
+| scope              | A space-delimited list of permissions being requested (default: "activity nutrition profile settings sleep social weight heartrate respiratory_rate oxygen_saturation") |
 | snake_case_keys    | Transform response payload's keys to snake case format (default: false) |
 | symbolize_keys     | Transform response payload's keys to symbols (default: false) |
 | auto_refresh_token | Automatically refreshes the access token once expired (default: true) |
