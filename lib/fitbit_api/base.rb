@@ -15,7 +15,7 @@ module FitbitAPI
 
   define_setting :unit_system,     'en_US'
   define_setting :locale,          'en_US'
-  define_setting :scope,           'activity nutrition profile settings sleep social weight heartrate respiratory_rate oxygen_saturation'
+  define_setting :scope,           'activity nutrition profile settings sleep social weight heartrate respiratory_rate oxygen_saturation cardio_fitness'
 
   define_setting :api_version,     '1'
 
