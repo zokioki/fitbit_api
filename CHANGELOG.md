@@ -1,3 +1,12 @@
+0.14.0
+------
+- Add support for the following endpoints:
+  - Breathing Rate
+  - Oxygen Saturation (SpO2)
+  - Cardio Score (VO2 Max)
+  - Heart Rate Variability
+  - Temperature (Core & Skin)
+
 0.13.0
 ------
 - Add support for token revocation via `revoke_token!`.
