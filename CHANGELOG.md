@@ -1,3 +1,7 @@
+0.14.1
+------
+- Add documentation for several methods
+
 0.14.0
 ------
 - Add support for the following endpoints:
