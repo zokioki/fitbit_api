@@ -31,9 +31,15 @@ module FitbitAPI
       establish_token(opts)
     end
 
+    # Returns the authorize endpoint URL of the OAuth2 provider.
+
     def auth_url
       @client.auth_code.authorize_url(redirect_uri: @redirect_uri, scope: @scope)
     end
+
+    # Returns an OAuth2::AccessToken instance obtained from the given authorization code.
+    #
+    # @param auth_code [String] An authorization code
 
     def get_token(auth_code)
       @token = @client.auth_code.get_token(
@@ -45,6 +51,8 @@ module FitbitAPI
       @token
     end
 
+    # Refreshes the current Access Token.
+
     def refresh_token!
       @token = @token.refresh!(headers: auth_headers)
       @user_id ||= @token.params['user_id']
@@ -52,6 +60,8 @@ module FitbitAPI
 
       @token
     end
+
+    # Revokes the user's authorizations and all associated tokens.
 
     def revoke_token!
       body = { token: token.token }
@@ -61,13 +71,31 @@ module FitbitAPI
       process_keys!(MultiJson.load(response.body))
     end
 
+    # Performs an authorized GET request to the configured API namespace.
+    #
+    # @param path [String] The request path
+    # @param params [Hash] The query parameters
+    # @param opts [Hash] Additional request options (e.g. headers)
+
     def get(path, params={}, opts={}, &block)
       request(:get, path, opts.merge(params: params), &block)
     end
 
+    # Performs an authorized POST request to the configured API namespace.
+    #
+    # @param path [String] The request path
+    # @param body [Hash] The request body
+    # @param opts [Hash] Additional request options (e.g. headers)
+
     def post(path, body={}, opts={}, &block)
       request(:post, path, opts.merge(body: body), &block)
     end
+
+    # Performs an authorized DELETE request to the configured API namespace.
+    #
+    # @param path [String] The request path
+    # @param params [Hash] The query parameters
+    # @param opts [Hash] Additional request options (e.g. headers)
 
     def delete(path, params={}, opts={}, &block)
       request(:delete, path, opts.merge(params: params), &block)
