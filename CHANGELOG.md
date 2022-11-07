@@ -1,3 +1,7 @@
+0.14.2
+------
+- Add documentation for more methods
+
 0.14.1
 ------
 - Add documentation for several methods
