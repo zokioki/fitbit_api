@@ -34,7 +34,7 @@ module FitbitAPI
     # Returns the authorize endpoint URL of the OAuth2 provider.
 
     def auth_url
-      @client.auth_code.authorize_url(redirect_uri: @redirect_uri, scope: @scope)
+      @client.auth_code.authorize_url(redirect_uri: @redirect_uri, scope: format_scope(@scope))
     end
 
     # Returns an OAuth2::AccessToken instance obtained from the given authorization code.
