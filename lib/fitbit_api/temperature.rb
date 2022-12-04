@@ -31,8 +31,7 @@ module FitbitAPI
         result = get("user/#{user_id}/temp/core/date/#{format_date(date)}.json")
       end
 
-      # remove root key from response
-      result.values[0]
+      strip_root_key(result)
     end
 
     # Returns the skin temperature data for a given date or date range.
@@ -66,8 +65,7 @@ module FitbitAPI
         result = get("user/#{user_id}/temp/skin/date/#{format_date(date)}.json")
       end
 
-      # remove root key from response
-      result.values[0]
+      strip_root_key(result)
     end
   end
 end

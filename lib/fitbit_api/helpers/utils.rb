@@ -34,6 +34,12 @@ module FitbitAPI
       scope.is_a?(Array) ? scope.join(' ') : scope
     end
 
+    def strip_root_key(object)
+      return object unless object.is_a?(Hash) && object.keys.length == 1
+
+      object.values[0]
+    end
+
     def deep_keys_to_snake_case!(object)
       deep_transform_keys!(object) { |key| to_snake_case(key, replace_dashes: true) }
     end

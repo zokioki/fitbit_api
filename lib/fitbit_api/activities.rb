@@ -105,8 +105,7 @@ module FitbitAPI
         result = get("user/#{user_id}/activities/#{resource}/date/#{format_date(start_date)}/#{format_date(end_date)}.json")
       end
 
-      # remove root key from response
-      result.values[0]
+      strip_root_key(result)
     end
 
     def activity_intraday_time_series(resource, opts={})

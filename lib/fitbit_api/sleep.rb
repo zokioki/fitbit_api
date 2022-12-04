@@ -67,8 +67,7 @@ module FitbitAPI
         result = get("user/#{user_id}/sleep/#{resource}/date/#{format_date(start_date)}/#{format_date(end_date)}.json")
       end
 
-      # remove root key from response
-      result.values[0]
+      strip_root_key(result)
     end
   end
 end

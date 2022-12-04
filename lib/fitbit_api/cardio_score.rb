@@ -31,8 +31,7 @@ module FitbitAPI
         result = get("user/#{user_id}/cardioscore/date/#{format_date(date)}.json")
       end
 
-      # remove root key from response
-      result.values[0]
+      strip_root_key(result)
     end
   end
 end

@@ -33,8 +33,7 @@ module FitbitAPI
         result = get("user/#{user_id}/body/#{resource}/date/#{format_date(start_date)}/#{format_date(end_date)}.json")
       end
 
-      # remove root key from response
-      result.values[0]
+      strip_root_key(result)
     end
 
     def log_weight(body)
