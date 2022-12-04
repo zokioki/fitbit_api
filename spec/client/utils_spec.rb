@@ -60,6 +60,23 @@ describe FitbitAPI::Client do
     end
   end
 
+  describe '#strip_root_key' do
+    it 'returns the original argument if not a Hash' do
+      object = ['foo', 'bar', 'baz']
+      expect(client.strip_root_key object).to eq(object)
+    end
+
+    it 'returns the original argument if it is a Hash with multiple root-level keys' do
+      object = { foo: 1, bar: [2, 3, 4], baz: { biz: 5 } }
+      expect(client.strip_root_key object).to eq(object)
+    end
+
+    it 'returns the object without the root key' do
+      object = { data: { foo: 1, bar: 2, baz: 3 } }
+      expect(client.strip_root_key object).to eq(object[:data])
+    end
+  end
+
   describe '#deep_keys_to_snake_case!' do
     it 'converts keys of hash to snake case format' do
       object = { 'keyOne' => 1, 'keyTwo' => 2, 'keyThree' => 3 }
