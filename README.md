@@ -1,7 +1,7 @@
 # FitbitAPI
 
 [![Gem Version](https://img.shields.io/gem/v/fitbit_api)](https://rubygems.org/gems/fitbit_api)
-[![Test Workflow](https://img.shields.io/github/workflow/status/zokioki/fitbit_api/Test)](https://github.com/zokioki/fitbit_api/actions/workflows/test.yml)
+[![CI Workflow](https://img.shields.io/github/workflow/status/zokioki/fitbit_api/CI)](https://github.com/zokioki/fitbit_api/actions/workflows/ci.yml)
 
 FitbitAPI provides a Ruby interface to the [Fitbit Web API](https://dev.fitbit.com/reference/web-api).
 
