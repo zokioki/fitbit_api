@@ -16,6 +16,17 @@ RSpec.configure do |config|
     WebMock.reset!
   end
 
+  def build_client(options = {})
+    allow_any_instance_of(OAuth2::AccessToken).to receive(:refresh!) { |token| token }
+
+    FitbitAPI::Client.new(
+      client_id: options[:client_id] || 'ABC123',
+      client_secret: options[:client_secret] || 'xyz789',
+      refresh_token: options[:refresh_token] || 'xxxxxx',
+      user_id: options[:user_id] || '-'
+    )
+  end
+
   def stub_client_request(client, verb, path)
     stub_request(verb, "https://api.fitbit.com/#{client.api_version}/#{path}")
   end

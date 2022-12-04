@@ -1,0 +1,37 @@
+{
+  "categories": [
+    {
+      "activities": [
+        {
+          "accessLevel": "PUBLIC",
+          "activityLevels": [
+            {
+              "id": 3016,
+              "maxSpeedMPH": -1,
+              "mets": 8.5,
+              "minSpeedMPH": -1,
+              "name": "6 - 8 inch step"
+            },
+            {
+              "id": 3017,
+              "maxSpeedMPH": -1,
+              "mets": 10,
+              "minSpeedMPH": -1,
+              "name": "10 - 12 inch step"
+            }
+          ],
+          "hasSpeed": false,
+          "id": 90004,
+          "name": "Aerobic step"
+        },
+        {
+          "accessLevel": "PUBLIC",
+          "hasSpeed": false,
+          "id": 3015,
+          "mets": 6.5,
+          "name": "Aerobic, general"
+        }
+      ]
+    }
+  ]
+}
