@@ -2,6 +2,7 @@
 
 lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+
 require 'fitbit_api/version'
 
 Gem::Specification.new do |spec|
@@ -12,6 +13,12 @@ Gem::Specification.new do |spec|
   spec.summary       = 'A Ruby interface to the Fitbit Web API.'
   spec.homepage      = 'https://github.com/zokioki/fitbit_api'
   spec.license       = 'MIT'
+
+  spec.metadata      = {
+    'homepage_uri' => spec.homepage,
+    'source_code_uri' => spec.homepage,
+    'rubygems_mfa_required' => 'true'
+  }
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(bin|test|spec|features)/}) }
   spec.bindir        = 'exe'
