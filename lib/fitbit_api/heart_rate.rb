@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FitbitAPI
   class Client
     def heart_rate_time_series(opts = {})

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FitbitAPI
   class Client
     PERIODS = %w[1d 7d 30d 1w 1m 3m 6m 1y max].freeze
@@ -64,7 +66,7 @@ module FitbitAPI
     def deep_transform_keys!(object, &block)
       case object
       when Hash
-        object.keys.each do |key|
+        object.each_key do |key|
           value = object.delete(key)
           object[yield(key)] = deep_transform_keys!(value, &block)
         end
@@ -93,7 +95,7 @@ module FitbitAPI
       end
 
       string = word.to_s.split('_').collect(&:capitalize).join
-      string.gsub!(/^\w{1}/) { |word| word.downcase } if opts[:lower]
+      string.gsub!(/^\w{1}/, &:downcase) if opts[:lower]
       string
     end
   end

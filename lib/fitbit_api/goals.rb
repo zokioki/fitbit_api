@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FitbitAPI
   class Client
     # Retrieves a user's current weight goal.

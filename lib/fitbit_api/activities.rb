@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FitbitAPI
   class Client
     ACTIVITY_RESOURCES = %w[calories caloriesBMR steps distance floors elevation
@@ -6,9 +8,9 @@ module FitbitAPI
                             tracker/steps tracker/distance tracker/floors
                             tracker/elevation tracker/minutesSedentary
                             tracker/minutesLightlyActive tracker/minutesFairlyActive
-                            tracker/minutesVeryActive tracker/activityCalories]
+                            tracker/minutesVeryActive tracker/activityCalories].freeze
 
-    ACTIVITY_INTRADAY_RESOURCES = %w[calories steps distance floors elevation]
+    ACTIVITY_INTRADAY_RESOURCES = %w[calories steps distance floors elevation].freeze
 
     # Retrieves a summary and list of a user's activities and activity log entries for a given day.
     #

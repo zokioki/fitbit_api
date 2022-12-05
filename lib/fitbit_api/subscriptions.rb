@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FitbitAPI
   class Client
     # Retrieves a list of subscriptions created by your application for a specific user.

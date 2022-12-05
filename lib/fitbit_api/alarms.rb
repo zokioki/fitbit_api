@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FitbitAPI
   class Client
     # Returns a list of the set alarms connected to a user's account.

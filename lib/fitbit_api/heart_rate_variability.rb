@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FitbitAPI
   class Client
     # Returns the heart rate variability data for a given date or date range.

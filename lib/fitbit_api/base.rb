@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'fitbit_api/helpers/configuration'
 require 'fitbit_api/helpers/utils'
 require 'fitbit_api/helpers/exceptions'

@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 module FitbitAPI
   class Client
     SLEEP_RESOURCES = %w[startTime timeInBed minutesAsleep awakeningsCount
-                         minutesAwake minutesToFallAsleep minutesAfterWakeup efficiency]
+                         minutesAwake minutesToFallAsleep minutesAfterWakeup efficiency].freeze
 
     # Returns a list of a user's sleep log entries for a given date. The data returned can include sleep
     # periods that began on the previous date. For example, if you request a Sleep Log for 2021-12-22,

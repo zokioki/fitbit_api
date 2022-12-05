@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'fitbit_api/base'
 require 'fitbit_api/activities'
 require 'fitbit_api/breathing_rate'
@@ -175,7 +177,7 @@ module FitbitAPI
     end
 
     def auth_headers
-      { 'Authorization' => ('Basic ' + Base64.encode64(@client_id + ':' + @client_secret)) }
+      { 'Authorization' => "Basic #{Base64.encode64("#{@client_id}:#{@client_secret}")}" }
     end
 
     def default_request_headers

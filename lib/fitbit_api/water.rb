@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FitbitAPI
   class Client
     # Retrieves a summary and list of a user's water log entries for a given day

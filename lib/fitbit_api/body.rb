@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module FitbitAPI
   class Client
-    BODY_RESOURCES = %w[bmi fat weight]
+    BODY_RESOURCES = %w[bmi fat weight].freeze
 
     def weight_logs(date = Date.today)
       get("user/#{user_id}/body/log/weight/date/#{format_date(date)}.json")

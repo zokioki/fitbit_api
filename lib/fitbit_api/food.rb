@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 module FitbitAPI
   class Client
-    FOOD_RESOURCES = %w[caloriesIn water]
+    FOOD_RESOURCES = %w[caloriesIn water].freeze
 
     def food_logs(date = Date.today)
       get("user/#{user_id}/foods/log/date/#{format_date(date)}.json")
