@@ -100,11 +100,12 @@ module FitbitAPI
               "Invalid period: \"#{period}\". Please provide one of the following: #{PERIODS}."
       end
 
-      result = if period
-                 get("user/#{user_id}/foods/log/#{resource}/date/#{format_date(end_date)}/#{period}.json")
-               else
-                 get("user/#{user_id}/foods/log/#{resource}/date/#{format_date(start_date)}/#{format_date(end_date)}.json")
-               end
+      path = if period
+               "user/#{user_id}/foods/log/#{resource}/date/#{format_date(end_date)}/#{period}.json"
+             else
+               "user/#{user_id}/foods/log/#{resource}/date/#{format_date(start_date)}/#{format_date(end_date)}.json"
+             end
+      result = get(path)
 
       strip_root_key(result)
     end
