@@ -42,11 +42,10 @@ module FitbitAPI
         raise FitbitAPI::InvalidArgumentError, 'Both start_time and end_time are required if time is being specified.'
       end
 
-      if start_time && end_time
-        get("user/#{user_id}/activities/heart/date/#{format_date(date)}/1d/#{detail_level}/time/#{format_time(start_time)}/#{format_time(end_time)}.json")
-      else
-        get("user/#{user_id}/activities/heart/date/#{format_date(date)}/1d/#{detail_level}.json")
-      end
+      path = "user/#{user_id}/activities/heart/date/#{format_date(date)}/1d/#{detail_level}"
+      path += "/time/#{format_time(start_time)}/#{format_time(end_time)}" if start_time && end_time
+
+      get("#{path}.json")
     end
   end
 end
