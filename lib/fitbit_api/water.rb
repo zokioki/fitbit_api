@@ -4,7 +4,7 @@ module FitbitAPI
     #
     # @param date [Date] The date for which entries are to be returned
 
-    def water_logs(date=Date.today)
+    def water_logs(date = Date.today)
       get("user/#{user_id}/foods/log/water/date/#{format_date(date)}.json")
     end
 

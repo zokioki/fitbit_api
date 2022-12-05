@@ -1,7 +1,7 @@
 module FitbitAPI
   class Client
-    SLEEP_RESOURCES = %w(startTime timeInBed minutesAsleep awakeningsCount
-                         minutesAwake minutesToFallAsleep minutesAfterWakeup efficiency)
+    SLEEP_RESOURCES = %w[startTime timeInBed minutesAsleep awakeningsCount
+                         minutesAwake minutesToFallAsleep minutesAfterWakeup efficiency]
 
     # Returns a list of a user's sleep log entries for a given date. The data returned can include sleep
     # periods that began on the previous date. For example, if you request a Sleep Log for 2021-12-22,
@@ -9,7 +9,7 @@ module FitbitAPI
     #
     # @param date [Date, String] The date for the sleep log to be returned in the format yyyy-MM-dd
 
-    def sleep_logs(date=Date.today)
+    def sleep_logs(date = Date.today)
       get("user/#{user_id}/sleep/date/#{format_date(date)}.json")
     end
 
@@ -28,7 +28,7 @@ module FitbitAPI
     # @option params :offset [Integer] The offset number of entries. Must always be 0
     # @option params :limit [Integer] The max of the number of entries returned (max: 100)
 
-    def sleep_logs_list(params={})
+    def sleep_logs_list(params = {})
       default_params = { before_date: Date.today, after_date: nil, sort: 'desc', limit: 20, offset: 0 }
       get("user/#{user_id}/sleep/list.json", default_params.merge(params))
     end
@@ -44,28 +44,28 @@ module FitbitAPI
       delete("user/#{user_id}/sleep/#{sleep_log_id}.json")
     end
 
-    def sleep_time_series(resource, opts={})
+    def sleep_time_series(resource, opts = {})
       start_date = opts[:start_date]
       end_date   = opts[:end_date] || Date.today
       period     = opts[:period]
 
       unless SLEEP_RESOURCES.include?(resource)
-        raise FitbitAPI::InvalidArgumentError, "Invalid resource: \"#{resource}\". Please provide one of the following: #{SLEEP_RESOURCES}."
+        raise FitbitAPI::InvalidArgumentError,
+              "Invalid resource: \"#{resource}\". Please provide one of the following: #{SLEEP_RESOURCES}."
       end
 
-      if [period, start_date].none?
-        raise FitbitAPI::InvalidArgumentError, 'A start_date or period is required.'
-      end
+      raise FitbitAPI::InvalidArgumentError, 'A start_date or period is required.' if [period, start_date].none?
 
       if period && !PERIODS.include?(period)
-        raise FitbitAPI::InvalidArgumentError, "Invalid period: \"#{period}\". Please provide one of the following: #{PERIODS}."
+        raise FitbitAPI::InvalidArgumentError,
+              "Invalid period: \"#{period}\". Please provide one of the following: #{PERIODS}."
       end
 
-      if period
-        result = get("user/#{user_id}/sleep/#{resource}/date/#{format_date(end_date)}/#{period}.json")
-      else
-        result = get("user/#{user_id}/sleep/#{resource}/date/#{format_date(start_date)}/#{format_date(end_date)}.json")
-      end
+      result = if period
+                 get("user/#{user_id}/sleep/#{resource}/date/#{format_date(end_date)}/#{period}.json")
+               else
+                 get("user/#{user_id}/sleep/#{resource}/date/#{format_date(start_date)}/#{format_date(end_date)}.json")
+               end
 
       strip_root_key(result)
     end

@@ -55,7 +55,7 @@ module FitbitAPI
     # @option body :distance [Integer, Float] Distance goal value
     # @option body :steps [Integer] Steps goal value
 
-    def update_daily_activity_goals(body={})
+    def update_daily_activity_goals(body = {})
       post("user/#{user_id}/activities/goals/daily.json", body)
     end
 
@@ -72,7 +72,7 @@ module FitbitAPI
     # @option body :distance [Integer, Float] Distance goal value
     # @option body :steps [Integer] Steps goal value
 
-    def update_weekly_activity_goals(body={})
+    def update_weekly_activity_goals(body = {})
       post("user/#{user_id}/activities/goals/weekly.json", body)
     end
 

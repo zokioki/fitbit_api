@@ -1,37 +1,37 @@
 module FitbitAPI
   class Client
-    BODY_RESOURCES = %w(bmi fat weight)
+    BODY_RESOURCES = %w[bmi fat weight]
 
-    def weight_logs(date=Date.today)
+    def weight_logs(date = Date.today)
       get("user/#{user_id}/body/log/weight/date/#{format_date(date)}.json")
     end
 
-    def body_fat_logs(date=Date.today)
+    def body_fat_logs(date = Date.today)
       get("user/#{user_id}/body/log/fat/date/#{format_date(date)}.json")
     end
 
-    def body_time_series(resource, opts={})
+    def body_time_series(resource, opts = {})
       start_date = opts[:start_date]
       end_date   = opts[:end_date] || Date.today
       period     = opts[:period]
 
       unless BODY_RESOURCES.include?(resource)
-        raise FitbitAPI::InvalidArgumentError, "Invalid resource: \"#{resource}\". Please provide one of the following: #{BODY_RESOURCES}."
+        raise FitbitAPI::InvalidArgumentError,
+              "Invalid resource: \"#{resource}\". Please provide one of the following: #{BODY_RESOURCES}."
       end
 
-      if [period, start_date].none?
-        raise FitbitAPI::InvalidArgumentError, 'A start_date or period is required.'
-      end
+      raise FitbitAPI::InvalidArgumentError, 'A start_date or period is required.' if [period, start_date].none?
 
       if period && !PERIODS.include?(period)
-        raise FitbitAPI::InvalidArgumentError, "Invalid period: \"#{period}\". Please provide one of the following: #{PERIODS}."
+        raise FitbitAPI::InvalidArgumentError,
+              "Invalid period: \"#{period}\". Please provide one of the following: #{PERIODS}."
       end
 
-      if period
-        result = get("user/#{user_id}/body/#{resource}/date/#{format_date(end_date)}/#{period}.json")
-      else
-        result = get("user/#{user_id}/body/#{resource}/date/#{format_date(start_date)}/#{format_date(end_date)}.json")
-      end
+      result = if period
+                 get("user/#{user_id}/body/#{resource}/date/#{format_date(end_date)}/#{period}.json")
+               else
+                 get("user/#{user_id}/body/#{resource}/date/#{format_date(start_date)}/#{format_date(end_date)}.json")
+               end
 
       strip_root_key(result)
     end

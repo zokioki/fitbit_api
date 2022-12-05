@@ -1,4 +1,4 @@
-$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+$LOAD_PATH.unshift File.expand_path('../lib', __dir__)
 
 require 'webmock/rspec'
 require 'fitbit_api'
@@ -36,6 +36,6 @@ RSpec.configure do |config|
   end
 
   def fixture_path
-    File.expand_path('../fixtures', __FILE__)
+    File.expand_path('fixtures', __dir__)
   end
 end

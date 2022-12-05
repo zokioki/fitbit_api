@@ -24,7 +24,7 @@ module FitbitAPI
                   :snake_case_keys, :symbolize_keys, :auto_refresh_token, :on_token_refresh
     attr_reader   :token, :user_id
 
-    def initialize(opts={})
+    def initialize(opts = {})
       validate_args(opts)
       assign_attrs(opts)
       set_client
@@ -77,7 +77,7 @@ module FitbitAPI
     # @param params [Hash] The query parameters
     # @param opts [Hash] Additional request options (e.g. headers)
 
-    def get(path, params={}, opts={}, &block)
+    def get(path, params = {}, opts = {}, &block)
       request(:get, path, opts.merge(params: params), &block)
     end
 
@@ -87,7 +87,7 @@ module FitbitAPI
     # @param body [Hash] The request body
     # @param opts [Hash] Additional request options (e.g. headers)
 
-    def post(path, body={}, opts={}, &block)
+    def post(path, body = {}, opts = {}, &block)
       request(:post, path, opts.merge(body: body), &block)
     end
 
@@ -97,7 +97,7 @@ module FitbitAPI
     # @param params [Hash] The query parameters
     # @param opts [Hash] Additional request options (e.g. headers)
 
-    def delete(path, params={}, opts={}, &block)
+    def delete(path, params = {}, opts = {}, &block)
       request(:delete, path, opts.merge(params: params), &block)
     end
 
@@ -112,6 +112,7 @@ module FitbitAPI
       end
 
       return if missing_args.empty?
+
       raise FitbitAPI::InvalidArgumentError,
             "Required arguments: #{missing_args.join(', ')}"
     end
@@ -157,7 +158,7 @@ module FitbitAPI
       refresh_token! if @token.token.empty?
     end
 
-    def request(verb, path, opts={}, &block)
+    def request(verb, path, opts = {}, &block)
       request_path = "#{@api_version}/#{path}"
       request_headers = default_request_headers.merge(opts[:headers] || {})
       request_options = opts.merge(headers: request_headers)

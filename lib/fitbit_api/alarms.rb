@@ -20,7 +20,7 @@ module FitbitAPI
     # @option body :recurring [Boolean] If false, the alarm is a single event
     # @option body :week_days [String] Comma separated list of days of the week on which the alarm vibrates (MONDAY,TUESDAY)
 
-    def add_alarm(tracker_id, body={})
+    def add_alarm(tracker_id, body = {})
       post("user/#{user_id}/devices/tracker/#{tracker_id}/alarms.json", body)
     end
 
@@ -41,7 +41,7 @@ module FitbitAPI
     # @option body :label [String] Label for alarm
     # @option body :vibe [String] Vibe pattern; only one value for now (DEFAULT)
 
-    def update_alarm(tracker_id, alarm_id, body={})
+    def update_alarm(tracker_id, alarm_id, body = {})
       post("user/#{user_id}/devices/tracker/#{tracker_id}/alarms/#{alarm_id}.json", body)
     end
 

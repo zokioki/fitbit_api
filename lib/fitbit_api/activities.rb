@@ -1,21 +1,20 @@
 module FitbitAPI
   class Client
-
-    ACTIVITY_RESOURCES = %w(calories caloriesBMR steps distance floors elevation
+    ACTIVITY_RESOURCES = %w[calories caloriesBMR steps distance floors elevation
                             minutesSedentary minutesLightlyActive minutesFairlyActive
                             minutesVeryActive activityCalories tracker/calories
                             tracker/steps tracker/distance tracker/floors
                             tracker/elevation tracker/minutesSedentary
                             tracker/minutesLightlyActive tracker/minutesFairlyActive
-                            tracker/minutesVeryActive tracker/activityCalories)
+                            tracker/minutesVeryActive tracker/activityCalories]
 
-    ACTIVITY_INTRADAY_RESOURCES = %w(calories steps distance floors elevation)
+    ACTIVITY_INTRADAY_RESOURCES = %w[calories steps distance floors elevation]
 
     # Retrieves a summary and list of a user's activities and activity log entries for a given day.
     #
     # @param date [Date] The date for which to retrieve the activity data.
 
-    def daily_activity_summary(date=Date.today)
+    def daily_activity_summary(date = Date.today)
       get("user/#{user_id}/activities/date/#{format_date(date)}.json")
     end
 
@@ -59,7 +58,7 @@ module FitbitAPI
     # @option params :offset [Integer] The offset number of entries. Must always be 0
     # @option params :limit [Integer] The max of the number of entries returned (max: 20)
 
-    def activity_logs_list(params={})
+    def activity_logs_list(params = {})
       default_params = { before_date: Date.today, after_date: nil, sort: 'desc', limit: 20, offset: 0 }
       get("user/#{user_id}/activities/list.json", default_params.merge(params))
     end
@@ -82,40 +81,41 @@ module FitbitAPI
       get("user/#{user_id}/activities.json")
     end
 
-    def activity_time_series(resource, opts={})
+    def activity_time_series(resource, opts = {})
       start_date = opts[:start_date]
       end_date   = opts[:end_date] || Date.today
       period     = opts[:period]
 
       unless ACTIVITY_RESOURCES.include?(resource)
-        raise FitbitAPI::InvalidArgumentError, "Invalid resource: \"#{resource}\". Please provide one of the following: #{ACTIVITY_RESOURCES}."
+        raise FitbitAPI::InvalidArgumentError,
+              "Invalid resource: \"#{resource}\". Please provide one of the following: #{ACTIVITY_RESOURCES}."
       end
 
-      if [start_date, period].none?
-        raise FitbitAPI::InvalidArgumentError, 'A start_date or period is required.'
-      end
+      raise FitbitAPI::InvalidArgumentError, 'A start_date or period is required.' if [start_date, period].none?
 
       if period && !PERIODS.include?(period)
-        raise FitbitAPI::InvalidArgumentError, "Invalid period: \"#{period}\". Please provide one of the following: #{PERIODS}."
+        raise FitbitAPI::InvalidArgumentError,
+              "Invalid period: \"#{period}\". Please provide one of the following: #{PERIODS}."
       end
 
-      if period
-        result = get("user/#{user_id}/activities/#{resource}/date/#{format_date(end_date)}/#{period}.json")
-      else
-        result = get("user/#{user_id}/activities/#{resource}/date/#{format_date(start_date)}/#{format_date(end_date)}.json")
-      end
+      result = if period
+                 get("user/#{user_id}/activities/#{resource}/date/#{format_date(end_date)}/#{period}.json")
+               else
+                 get("user/#{user_id}/activities/#{resource}/date/#{format_date(start_date)}/#{format_date(end_date)}.json")
+               end
 
       strip_root_key(result)
     end
 
-    def activity_intraday_time_series(resource, opts={})
+    def activity_intraday_time_series(resource, opts = {})
       date         = opts[:date] || Date.today
       detail_level = opts[:detail_level]
       start_time   = opts[:start_time]
       end_time     = opts[:end_time]
 
       unless ACTIVITY_INTRADAY_RESOURCES.include?(resource)
-        raise FitbitAPI::InvalidArgumentError, "Invalid resource: \"#{resource}\". Please provide one of the following: #{ACTIVITY_RESOURCES}."
+        raise FitbitAPI::InvalidArgumentError,
+              "Invalid resource: \"#{resource}\". Please provide one of the following: #{ACTIVITY_RESOURCES}."
       end
 
       if [date, detail_level].any?(&:nil?)
@@ -123,14 +123,15 @@ module FitbitAPI
       end
 
       unless %(1min 15min).include? detail_level
-        raise FitbitAPI::InvalidArgumentError, "Invalid detail_level: \"#{detail_level}\". Please provide one of the following: \"1min\" or \"15min\"."
+        raise FitbitAPI::InvalidArgumentError,
+              "Invalid detail_level: \"#{detail_level}\". Please provide one of the following: \"1min\" or \"15min\"."
       end
 
       if (start_time || end_time) && !(start_time && end_time)
         raise FitbitAPI::InvalidArgumentError, 'Both start_time and end_time are required if time is being specified.'
       end
 
-      if (start_time && end_time)
+      if start_time && end_time
         get("user/#{user_id}/activities/#{resource}/date/#{format_date(date)}/1d/#{detail_level}/time/#{format_time(start_time)}/#{format_time(end_time)}.json")
       else
         get("user/#{user_id}/activities/#{resource}/date/#{format_date(date)}/1d/#{detail_level}.json")

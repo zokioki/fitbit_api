@@ -1,8 +1,8 @@
 module FitbitAPI
   class Client
-    FOOD_RESOURCES = %w(caloriesIn water)
+    FOOD_RESOURCES = %w[caloriesIn water]
 
-    def food_logs(date=Date.today)
+    def food_logs(date = Date.today)
       get("user/#{user_id}/foods/log/date/#{format_date(date)}.json")
     end
 
@@ -11,7 +11,7 @@ module FitbitAPI
     # @param query [String] The search query
 
     def search_foods(params)
-      get("foods/search.json", params)
+      get('foods/search.json', params)
     end
 
     def recent_foods
@@ -81,28 +81,28 @@ module FitbitAPI
       delete("user/#{user_id}/foods/log/favorite/#{food_id}.json")
     end
 
-    def food_time_series(resource, opts={})
+    def food_time_series(resource, opts = {})
       start_date = opts[:start_date]
       end_date   = opts[:end_date] || Date.today
       period     = opts[:period]
 
       unless FOOD_RESOURCES.include?(resource)
-        raise FitbitAPI::InvalidArgumentError, "Invalid resource: \"#{resource}\". Please provide one of the following: #{FOOD_RESOURCES}."
+        raise FitbitAPI::InvalidArgumentError,
+              "Invalid resource: \"#{resource}\". Please provide one of the following: #{FOOD_RESOURCES}."
       end
 
-      if [period, start_date].none?
-        raise FitbitAPI::InvalidArgumentError, 'A start_date or period is required.'
-      end
+      raise FitbitAPI::InvalidArgumentError, 'A start_date or period is required.' if [period, start_date].none?
 
       if period && !PERIODS.include?(period)
-        raise FitbitAPI::InvalidArgumentError, "Invalid period: \"#{period}\". Please provide one of the following: #{PERIODS}."
+        raise FitbitAPI::InvalidArgumentError,
+              "Invalid period: \"#{period}\". Please provide one of the following: #{PERIODS}."
       end
 
-      if period
-        result = get("user/#{user_id}/foods/log/#{resource}/date/#{format_date(end_date)}/#{period}.json")
-      else
-        result = get("user/#{user_id}/foods/log/#{resource}/date/#{format_date(start_date)}/#{format_date(end_date)}.json")
-      end
+      result = if period
+                 get("user/#{user_id}/foods/log/#{resource}/date/#{format_date(end_date)}/#{period}.json")
+               else
+                 get("user/#{user_id}/foods/log/#{resource}/date/#{format_date(start_date)}/#{format_date(end_date)}.json")
+               end
 
       strip_root_key(result)
     end
@@ -110,13 +110,13 @@ module FitbitAPI
     # Retrieves the food locales used to search, log or create food
 
     def food_locales
-      get("foods/locales.json")
+      get('foods/locales.json')
     end
 
     # Retrieves a list of all valid Fitbit food units
 
     def food_units
-      get("foods/units.json")
+      get('foods/units.json')
     end
   end
 end
