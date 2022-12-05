@@ -14,8 +14,8 @@ module FitbitAPI
 
     # Creates a subscription to notify the application when a user has new data available.
     #
-    # @param collection_path [String] Collection of data to retrieve notifications
     # @param subscription_id [Integer] The unique ID of the subscription created by the API client application
+    # @param collection_path [String] Collection of data to retrieve notifications
 
     def create_subscription(subscription_id, collection_path = nil)
       post("#{subscriptions_path(collection_path)}/#{subscription_id}.json")
@@ -23,8 +23,8 @@ module FitbitAPI
 
     # Deletes a subscription for a specific user.
     #
-    # @param collection_path [String] Collection of data to retrieve notifications
     # @param subscription_id [Integer] The unique ID of the subscription created by the API client application
+    # @param collection_path [String] Collection of data to retrieve notifications
 
     def delete_subscription(subscription_id, collection_path = nil)
       delete("#{subscriptions_path(collection_path)}/#{subscription_id}.json")
