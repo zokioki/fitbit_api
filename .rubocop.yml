@@ -1,0 +1,24 @@
+AllCops:
+  TargetRubyVersion: 2.6
+
+Gemspec/RequiredRubyVersion:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+Metrics/MethodLength:
+  Max: 40
+
+Metrics/BlockLength:
+  Exclude:
+    - '**/*_spec.rb'
