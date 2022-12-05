@@ -17,7 +17,7 @@ module FitbitAPI
     # @param collection_path [String] Collection of data to retrieve notifications
     # @param subscription_id [Integer] The unique ID of the subscription created by the API client application
 
-    def create_subscription(collection_path = nil, subscription_id)
+    def create_subscription(subscription_id, collection_path = nil)
       post("#{subscriptions_path(collection_path)}/#{subscription_id}.json")
     end
 
@@ -26,7 +26,7 @@ module FitbitAPI
     # @param collection_path [String] Collection of data to retrieve notifications
     # @param subscription_id [Integer] The unique ID of the subscription created by the API client application
 
-    def delete_subscription(collection_path = nil, subscription_id)
+    def delete_subscription(subscription_id, collection_path = nil)
       delete("#{subscriptions_path(collection_path)}/#{subscription_id}.json")
     end
 
