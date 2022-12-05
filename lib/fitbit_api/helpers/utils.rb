@@ -66,7 +66,8 @@ module FitbitAPI
     def deep_transform_keys!(object, &block)
       case object
       when Hash
-        object.each_key do |key|
+        keys = object.keys
+        keys.each do |key|
           value = object.delete(key)
           object[yield(key)] = deep_transform_keys!(value, &block)
         end
