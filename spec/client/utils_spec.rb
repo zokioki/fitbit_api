@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe FitbitAPI::Client do
+RSpec.describe FitbitAPI::Client do
   let(:client) do
     FitbitAPI::Client.new(client_id: 'ABC123', client_secret: 'xyz789')
   end

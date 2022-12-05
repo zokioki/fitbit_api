@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe FitbitAPI::Client do
+RSpec.describe FitbitAPI::Client do
   let(:client) { build_client }
 
   describe '#daily_activity_summary' do

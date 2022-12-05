@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe FitbitAPI do
+RSpec.describe FitbitAPI do
   it 'has a version number' do
     expect(FitbitAPI::VERSION).not_to be nil
   end
