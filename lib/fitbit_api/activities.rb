@@ -149,7 +149,7 @@ module FitbitAPI
     #
     # @option body :activity_id [Integer, String] The activity ID
     # @option body :activity_name [String] Custom activity name. Either activity ID or activity_name must be provided
-    # @option body :manual_calories [Integer] Calories burned, specified manually. Required with activity_name, otherwise optional
+    # @option body :manual_calories [Integer] Calories burned, specified manually. Required if activity_name is given
     # @option body :start_time [String] Activity start time; formatted in HH:mm:ss
     # @option body :duration_millis [Integer] Duration in milliseconds
     # @option body :date [String] Log entry date; formatted in yyyy-MM-dd

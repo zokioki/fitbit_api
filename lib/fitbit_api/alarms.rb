@@ -20,7 +20,7 @@ module FitbitAPI
     # @option body :time [String] Time of day that the alarm vibrates with a UTC timezone offset, e.g. 07:15-08:00
     # @option body :enabled [Boolean] If false, alarm does not vibrate until enabled is set to true
     # @option body :recurring [Boolean] If false, the alarm is a single event
-    # @option body :week_days [String] Comma separated list of days of the week on which the alarm vibrates (MONDAY,TUESDAY)
+    # @option body :week_days [String] Comma separated list of days on which the alarm vibrates (e.g. MONDAY,TUESDAY)
 
     def add_alarm(tracker_id, body = {})
       post("user/#{user_id}/devices/tracker/#{tracker_id}/alarms.json", body)
@@ -37,7 +37,7 @@ module FitbitAPI
     # @option body :time [String] Time of day that the alarm vibrates with a UTC timezone offset, e.g. 07:15-08:00
     # @option body :enabled [Boolean] If false, alarm does not vibrate until enabled is set to true
     # @option body :recurring [Boolean] If false, the alarm is a single event
-    # @option body :week_days [String] Comma separated list of days of the week on which the alarm vibrates (MONDAY,TUESDAY)
+    # @option body :week_days [String] Comma separated list of days on which the alarm vibrates (e.g. MONDAY,TUESDAY)
     # @option body :snooze_length [Integer] Minutes between alarms
     # @option body :snooze_count [Integer] Maximum snooze count
     # @option body :label [String] Label for alarm
