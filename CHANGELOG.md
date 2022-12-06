@@ -1,3 +1,13 @@
+0.15.0
+------
+- The following methods now take a subscription_id as the first argument:
+  - create_subscription
+  - delete_subscription
+- Fix scope param handling for `auth_url`
+- Refactor configuration logic
+- Improve endpoint request specs
+- Format code with Rubocop
+
 0.14.2
 ------
 - Add documentation for more methods
