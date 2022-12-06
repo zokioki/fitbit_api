@@ -15,8 +15,9 @@ Gem::Specification.new do |spec|
   spec.license       = 'MIT'
 
   spec.metadata      = {
-    'homepage_uri' => spec.homepage,
     'source_code_uri' => spec.homepage,
+    'changelog_uri' => "#{spec.homepage}/blob/v#{FitbitAPI::VERSION}/CHANGELOG.md",
+    'documentation_uri' => "https://www.rubydoc.info/gems/fitbit_api/#{FitbitAPI::VERSION}",
     'rubygems_mfa_required' => 'true'
   }
 
