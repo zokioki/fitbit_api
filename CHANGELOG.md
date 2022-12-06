@@ -1,3 +1,7 @@
+0.15.1
+------
+- Improve gemspec metadata
+
 0.15.0
 ------
 - The following methods now take a subscription_id as the first argument:
