@@ -95,16 +95,16 @@ client.log_activity activity_id: 12345, durationMillis: '683300'
 
 When initializing a `FitbitAPI::Client` instance, you're given access to a handful of options:
 
-| option             | description                  |
-| ------------------ | -----------------------------|
-| api_version        | API version to be used when making requests (default: "1") |
-| unit_system        | The measurement unit system to use for response values (default: "en_US") |
-| locale             | The locale to use for response values (default: "en_US") |
-| scope              | A space-delimited list of permissions being requested (default: "activity nutrition profile settings sleep social weight heartrate respiratory_rate oxygen_saturation cardio_fitness temperature") |
-| snake_case_keys    | Transform response payload's keys to snake case format (default: false) |
-| symbolize_keys     | Transform response payload's keys to symbols (default: false) |
-| auto_refresh_token | Automatically refreshes the access token once expired (default: true) |
-| on_token_refresh   | A callback to be invoked whenever the access token is refreshed (default: nil) |
+| Option             | Description                  | Default        |
+| ------------------ | ---------------------------- | -------------- |
+| api_version        | API version to be used when making requests | `"1"` |
+| unit_system        | The measurement unit system to use for response values | `"en_US"` |
+| locale             | The locale to use for response values | `"en_US"` |
+| scope              | A list of permissions being requested (array or space-delimited string) | `%w[activity nutrition profile settings sleep social weight heartrate respiratory_rate oxygen_saturation cardio_fitness temperature]` |
+| snake_case_keys    | Transform response payload's keys to snake case format | `false` |
+| symbolize_keys     | Transform response payload's keys to symbols | `false` |
+| auto_refresh_token | Automatically refreshes the access token once expired | `true` |
+| on_token_refresh   | A callback to be invoked whenever the access token is refreshed | `nil` |
 
 If using this library in Rails, you can configure these options globally in an initializer:
 
