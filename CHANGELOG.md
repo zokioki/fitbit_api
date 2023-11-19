@@ -1,3 +1,7 @@
+0.15.2
+------
+- Reduce build size
+
 0.15.1
 ------
 - Improve gemspec metadata
