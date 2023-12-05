@@ -71,5 +71,26 @@ module FitbitAPI
 
       strip_root_key(result)
     end
+
+    def sleep_logs_by_date_range(opts = {})
+      start_date = opts[:start_date]
+      end_date   = opts[:end_date] || Date.today
+      period     = opts[:period]
+
+      raise FitbitAPI::InvalidArgumentError, 'A start_date or period is required.' if [period, start_date].none?
+
+      if period && !PERIODS.include?(period)
+        raise FitbitAPI::InvalidArgumentError,
+              "Invalid period: \"#{period}\". Please provide one of the following: #{PERIODS}."
+      end
+
+      result = if period
+                 get("user/#{user_id}/sleep/date/#{format_date(end_date)}/#{period}.json")
+               else
+                 get("user/#{user_id}/sleep/date/#{format_date(start_date)}/#{format_date(end_date)}.json")
+               end
+
+      strip_root_key(result)
+    end
   end
 end
