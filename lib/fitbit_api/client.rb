@@ -177,7 +177,7 @@ module FitbitAPI
     end
 
     def auth_headers
-      { 'Authorization' => "Basic #{Base64.encode64("#{@client_id}:#{@client_secret}")}" }
+      { 'Authorization' => "Basic #{Base64.strict_encode64("#{@client_id}:#{@client_secret}")}" }
     end
 
     def default_request_headers
