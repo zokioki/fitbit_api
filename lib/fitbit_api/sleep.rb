@@ -15,6 +15,25 @@ module FitbitAPI
       get("user/#{user_id}/sleep/date/#{format_date(date)}.json")
     end
 
+    # Returns a list of a user's sleep log entries for a given date range. The data returned for either date
+    # can include a sleep period that ended that date but began on the previous date. For example, if you
+    # request a Sleep Log between 2021-12-22 and 2021-12-26, it may return log entries that span 2021-12-21
+    # and 2021-12-22, as well as 2021-12-25 and 2021-12-26.
+    #
+    # @param opts [Hash] The request options
+    #
+    # @option opts :start_date [Date] The start of the date range
+    # @option opts :end_date [Date] The end of the date range
+
+    def sleep_logs_by_date_range(opts = {})
+      start_date = opts[:start_date]
+      end_date = opts[:end_date]
+
+      raise FitbitAPI::InvalidArgumentError, 'A start_date and end_date are required.' unless start_date && end_date
+
+      get("user/#{user_id}/sleep/date/#{format_date(start_date)}/#{format_date(end_date)}.json")
+    end
+
     # Returns a list of a user's sleep log entries before or after a given date, and specifying offset,
     # limit and sort order. The data returned for different dates can include sleep periods that began
     # on the previous date. For example, a sleep log entry for 2018-10-21 may have ended that day but
