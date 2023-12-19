@@ -1,3 +1,7 @@
+0.15.3
+------
+- Use strict encoding for auth tokens
+
 0.15.2
 ------
 - Reduce build size
