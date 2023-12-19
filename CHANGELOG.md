@@ -1,3 +1,7 @@
+0.16.0
+------
+- Add Sleep Log by Date Range endpoint support
+
 0.15.3
 ------
 - Use strict encoding for auth tokens
