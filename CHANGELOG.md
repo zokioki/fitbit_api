@@ -1,6 +1,9 @@
+0.17.1
+------
+- Some internal cleanup
+
 0.17.0
 ------
-
 - Add ECG endpoint support
 - Add Active Zone Minutes endpoint support
 
