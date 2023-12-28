@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'fitbit_api/base'
+require 'fitbit_api/active_zone_minutes'
 require 'fitbit_api/activities'
 require 'fitbit_api/breathing_rate'
 require 'fitbit_api/cardio_score'
