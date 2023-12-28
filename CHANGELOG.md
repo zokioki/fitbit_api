@@ -1,3 +1,9 @@
+0.17.0
+------
+
+- Add ECG endpoint support
+- Add Active Zone Minutes endpoint support
+
 0.16.0
 ------
 - Add Sleep Log by Date Range endpoint support
