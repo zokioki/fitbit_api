@@ -28,7 +28,10 @@ module FitbitAPI
       result = if period
                  get("user/#{user_id}/activities/active-zone-minutes/date/#{format_date(end_date)}/#{period}.json")
                else
-                 get("user/#{user_id}/activities/active-zone-minutes/date/#{format_date(start_date)}/#{format_date(end_date)}.json")
+                 get(
+                   "user/#{user_id}/activities/active-zone-minutes/date/" \
+                   "#{format_date(start_date)}/#{format_date(end_date)}.json"
+                 )
                end
 
       strip_root_key(result)
@@ -53,9 +56,11 @@ module FitbitAPI
         raise FitbitAPI::InvalidArgumentError, 'A date and detail_level are required.'
       end
 
-      unless %(1min 5min 15min).include? detail_level
+      detail_levels = %(1min 5min 15min)
+
+      unless detail_levels.include? detail_level
         raise FitbitAPI::InvalidArgumentError,
-              "Invalid detail_level: \"#{detail_level}\". Please provide one of the following: \"1min\", \"5min\" or \"15min\"."
+              "Invalid detail_level: \"#{detail_level}\". Please provide one of the following: #{detail_levels}."
       end
 
       if (start_time || end_time) && !(start_time && end_time)
