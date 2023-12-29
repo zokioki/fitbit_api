@@ -16,7 +16,7 @@ module FitbitAPI
         end
       else
         raise FitbitAPI::InvalidArgumentError,
-              "Invalid type [#{date.class}] - provide a Date/Time/DateTime or a String(yyyy-MM-dd format)."
+              "Invalid type [#{date.class}] - provide a Date, Time, DateTime, or a String in yyyy-MM-dd format."
       end
     end
 
@@ -32,7 +32,7 @@ module FitbitAPI
 
       else
         raise FitbitAPI::InvalidArgumentError,
-              "Invalid type [#{time.class}] - provide a Time/DateTime or a String(HH:mm format)."
+              "Invalid type [#{time.class}] - provide a Time, DateTime, or a String in HH:mm format."
       end
     end
 
