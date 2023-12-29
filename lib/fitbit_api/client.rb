@@ -71,8 +71,9 @@ module FitbitAPI
       body = { token: token.token }
       headers = default_request_headers.merge(auth_headers)
       response = token.post('oauth2/revoke', { headers: headers, body: body }).response
+      response_body = JSON.parse(response.body) unless response.body.empty?
 
-      process_keys!(JSON.parse(response.body))
+      process_keys!(response_body)
     end
 
     # Performs an authorized GET request to the configured API namespace.
