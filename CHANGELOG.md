@@ -1,6 +1,6 @@
 UNRELEASED
 -----
-- BREAKING: Bump `oauth2` dependency to v2.0
+- BREAKING: Upgrade `oauth2` dependency to v2.0
 - BREAKING: Minimum required Ruby version 2.7.0
 - Fix response parsing error for `revoke_token!`
 
