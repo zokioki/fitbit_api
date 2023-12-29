@@ -1,4 +1,4 @@
-UNRELEASED
+1.0.0
 -----
 - BREAKING: Upgrade `oauth2` dependency to v2.0
 - BREAKING: Minimum required Ruby version 2.7.0
