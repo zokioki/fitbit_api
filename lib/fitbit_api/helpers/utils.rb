@@ -29,7 +29,6 @@ module FitbitAPI
         end
 
         time
-
       else
         raise FitbitAPI::InvalidArgumentError,
               "Invalid type [#{time.class}] - provide a Time, DateTime, or a String in HH:mm format."
