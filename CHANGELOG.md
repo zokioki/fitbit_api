@@ -2,6 +2,7 @@ UNRELEASED
 -----
 - BREAKING: Upgrade `oauth2` dependency to v2.0
 - BREAKING: Minimum required Ruby version 2.7.0
+- BREAKING: Make utility methods private (e.g. `format_date`)
 - Fix response parsing error for `revoke_token!`
 
 0.17.1
