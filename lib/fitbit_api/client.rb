@@ -72,7 +72,7 @@ module FitbitAPI
       headers = default_request_headers.merge(auth_headers)
       response = token.post('oauth2/revoke', { headers: headers, body: body }).response
 
-      process_keys!(MultiJson.load(response.body))
+      process_keys!(JSON.parse(response.body))
     end
 
     # Performs an authorized GET request to the configured API namespace.
@@ -173,7 +173,7 @@ module FitbitAPI
       refresh_token! if auto_refresh_token && token.expired?
 
       response = token.public_send(verb, request_path, request_options, &block).response
-      response_body = MultiJson.load(response.body) unless response.status == 204
+      response_body = JSON.parse(response.body) unless response.status == 204
 
       process_keys!(response_body)
     end

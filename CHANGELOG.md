@@ -1,3 +1,7 @@
+UNRELEASED
+-----
+- BREAKING: Bump `oauth2` dependency to v2.0
+
 0.17.1
 ------
 - Some internal cleanup
