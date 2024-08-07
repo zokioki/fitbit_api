@@ -50,7 +50,7 @@ module FitbitAPI
     # @option params :limit [Integer] The max of the number of entries returned (max: 100)
 
     def sleep_logs_list(params = {})
-      default_params = { before_date: Date.today, after_date: nil, sort: 'desc', limit: 20, offset: 0 }
+      default_params = { before_date: Date.today, sort: 'desc', limit: 20, offset: 0 }
       get("user/#{user_id}/sleep/list.json", default_params.merge(params))
     end
 

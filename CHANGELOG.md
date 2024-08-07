@@ -1,3 +1,11 @@
+1.0.1
+-----
+- Remove unused values from default params for the following:
+  - activity_logs_list
+  - ecg_logs_list
+  - sleep_logs_list
+- Fixes bad request errors for `activity_logs_list` endpoint.
+
 1.0.0
 -----
 - BREAKING: Upgrade `oauth2` dependency to v2.0
