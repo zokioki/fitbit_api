@@ -16,7 +16,7 @@ module FitbitAPI
     # @option params :limit [Integer] The max of the number of entries returned (max: 10)
 
     def ecg_logs_list(params = {})
-      default_params = { before_date: Date.today, after_date: nil, sort: 'desc', limit: 10, offset: 0 }
+      default_params = { before_date: Date.today, sort: 'desc', limit: 10, offset: 0 }
       get("user/#{user_id}/ecg/list.json", default_params.merge(params))
     end
   end
