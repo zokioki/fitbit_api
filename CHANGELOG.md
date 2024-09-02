@@ -1,3 +1,7 @@
+1.1.0
+-----
+- Add Irregular Rhythm Notifications (IRN) endpoint support
+
 1.0.1
 -----
 - Remove unused values from default params for the following:
