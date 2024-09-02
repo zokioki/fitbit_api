@@ -19,7 +19,7 @@ module FitbitAPI
   define_setting :locale,          'en_US'
   define_setting :scope,           %w[activity nutrition profile settings sleep social weight
                                       heartrate respiratory_rate oxygen_saturation cardio_fitness
-                                      temperature electrocardiogram]
+                                      temperature electrocardiogram irregular_rhythm_notifications]
 
   define_setting :api_version,     '1'
 
